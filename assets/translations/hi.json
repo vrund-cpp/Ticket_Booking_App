@@ -1,0 +1,13 @@
+{
+  "language": "भाषा",
+  "select_language": "अपनी पसंदीदा भाषा चुनें",
+  "english": "अंग्रेज़ी",
+  "hindi": "हिंदी",
+  "login": "लॉग इन करें",
+  "register": "पंजीकरण करें",
+  "email": "ईमेल",
+  "password": "पासवर्ड",
+  "name": "नाम",
+  "already_have_account": "पहले से खाता है?",
+  "dont_have_account": "कोई खाता नहीं है?"
+}
