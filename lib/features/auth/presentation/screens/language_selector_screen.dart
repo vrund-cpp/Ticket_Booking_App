@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageSelectorScreen extends StatefulWidget {
   const LanguageSelectorScreen({super.key});
@@ -10,112 +10,36 @@ class LanguageSelectorScreen extends StatefulWidget {
 }
 
 class _LanguageSelectorScreenState extends State<LanguageSelectorScreen> {
-  Locale _selectedLocale = const Locale('en');
+  String _selectedLang = 'en';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 🟠 Logo Image (Add your logo in assets/images/logo.png)
-            Image.asset(
-              'assets/images/logo.png',
-              height: 120,
-            ),
-
-            const SizedBox(height: 40),
-
-            // 🔵 Language Label
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'select_language'.tr(),
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
-                ),
-              ),
-            ),
-
+            Image.asset('assets/images/company_logo.png', height: 100),
+            const SizedBox(height: 20),
+            const Text('Select Language'),
             const SizedBox(height: 10),
-
-            // 🌍 Language Dropdown
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.deepPurple),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<Locale>(
-                  value: _selectedLocale,
-                  icon: const Icon(Icons.arrow_drop_down, color: Colors.deepPurple),
-                  isExpanded: true,
-                  items: const [
-                    DropdownMenuItem(
-                      value: Locale('en'),
-                      child: Row(
-                        children: [
-                          Icon(Icons.language, color: Colors.deepPurple),
-                          SizedBox(width: 8),
-                          Text('English'),
-                        ],
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: Locale('hi'),
-                      child: Row(
-                        children: [
-                          Icon(Icons.language, color: Colors.deepPurple),
-                          SizedBox(width: 8),
-                          Text('हिन्दी'),
-                        ],
-                      ),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        _selectedLocale = value;
-                      });
-                    }
-                  },
-                ),
-              ),
+            DropdownButton<String>(
+              value: _selectedLang,
+              items: const [
+                DropdownMenuItem(value: 'en', child: Text('English')),
+                DropdownMenuItem(value: 'hi', child: Text('हिंदी')),
+              ],
+              onChanged: (value) => setState(() => _selectedLang = value!),
             ),
-
-            const SizedBox(height: 30),
-
-            // 🔘 Continue Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  context.setLocale(_selectedLocale);
-                  context.go('/login');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                ),
-                child: const Text(
-                  'CONTINUE',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('isLanguageSelected', true);
+                await prefs.setString('languageCode', _selectedLang);
+                context.go('/login');
+              },
+              child: const Text('CONTINUE'),
             ),
           ],
         ),
