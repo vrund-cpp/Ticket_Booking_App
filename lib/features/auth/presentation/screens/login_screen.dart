@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ticket_booking_app/core/services/api_service.dart';
+import 'package:ticket_booking_app/generated/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,48 +11,55 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _inputController = TextEditingController();
+  final TextEditingController _emailPhoneCtrl = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  bool _isLoading = false;
 
-  void _requestPin() {
-    if (_formKey.currentState!.validate()) {
-      final input = _inputController.text.trim();
-      // TODO: Replace with backend/API call
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('PIN requested for: $input'),
-          backgroundColor: Colors.deepPurple,
-        ),
-      );
+  Future<void> requestOTP() async {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _isLoading = true);
 
-      // Navigate to OTP or next screen if implemented
+    try {
+      final success = await ApiService.requestOtp(_emailPhoneCtrl.text);
+
+      if (success) {
+        context.go('/otp', extra: _emailPhoneCtrl.text);
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to send OTP. Please try again.'),
+          ),
+        );
+      }
+    } catch (e) {
+      print(e);
     }
-  }
 
-  @override
-  void dispose() {
-    _inputController.dispose();
-    super.dispose();
+    setState(() => _isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F3F8),
+      backgroundColor: const Color(0xFFE7ECFD),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
-                  blurRadius: 12,
-                  offset: Offset(0, 6),
-                )
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
+                ),
               ],
             ),
             child: Form(
@@ -60,89 +68,100 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'sign_in'.tr(), // From localization file
+                    loc.signIn.toUpperCase(),
                     style: const TextStyle(
-                      fontSize: 26,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF2D0C57),
+                      color: Color(0xFF240E86),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   Text(
-                    'sign_in_description'.tr(),
-                    style: const TextStyle(fontSize: 15, color: Colors.grey),
+                    loc.enterPhoneOrEmail,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black54,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 25),
-                  const CircleAvatar(
-                    backgroundColor: Color(0xFFF2F3F8),
-                    radius: 30,
-                    child: Icon(Icons.smartphone, size: 36, color: Color(0xFF2D0C57)),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFF5F7FE),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      'assets/images/mobile_icon.png',
+                      height: 70,
+                      width: 70,
+                    ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 24),
                   TextFormField(
-                    controller: _inputController,
-                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailPhoneCtrl,
                     decoration: InputDecoration(
-                      hintText: 'mobile_or_email'.tr(),
-                      border: const UnderlineInputBorder(),
+                      hintText: loc.phoneOrEmail,
+                      hintStyle: const TextStyle(color: Colors.black45),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'field_required'.tr();
+                      if (value == null || value.isEmpty) {
+                        return loc.enterValidEmailOrPhone;
                       }
-                      // Add more validation if needed
+                      final emailPattern = RegExp(
+                          r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}$');
+                      final phonePattern = RegExp(r'^\d{10}$');
+                      if (!emailPattern.hasMatch(value) &&
+                          !phonePattern.hasMatch(value)) {
+                        return loc.enterValidEmailOrPhone;
+                      }
                       return null;
                     },
                   ),
-                  const SizedBox(height: 30),
-                  GestureDetector(
-                    onTap: _requestPin,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF5E17EB), Color(0xFF7636EC)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: _isLoading ? null : requestOTP,
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24)),
+                        padding: const EdgeInsets.all(12),
+                        backgroundColor: const Color(0xFF240E86),
+                        foregroundColor: Colors.white,
                       ),
-                      child: Center(
-                        child: Text(
-                          'request_pin'.tr(),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
+                      child: _isLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            )
+                          : Text(loc.requestPin),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {
-                      context.go('/register');
-                    },
-                    child: Text.rich(
-                      TextSpan(
-                        text: "${'no_account'.tr()} ",
-                        style: const TextStyle(fontSize: 14),
+                  const SizedBox(height: 12),
+                  TextButton(
+                    onPressed: () => context.push('/signup'),
+                    child: RichText(
+                      text: TextSpan(
+                        text: loc.dontHaveAccount,
+                        style: const TextStyle(color: Colors.black54),
                         children: [
                           TextSpan(
-                            text: 'sign_up'.tr(),
+                            text: ' ${loc.signUp}',
                             style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF5E17EB),
-                            ),
+                                color: Color(0xFF240E86),
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

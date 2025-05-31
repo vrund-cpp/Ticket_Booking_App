@@ -1,66 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ticket_booking_app/core/services/api_service.dart';
+import 'package:ticket_booking_app/generated/app_localizations.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _mobileController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _mobileCtrl = TextEditingController();
+  bool _loading = false;
 
-  bool _obscurePassword = true;
+  Future<void> submitSignup() async {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _loading = true);
+    debugPrint('➡️ Sending signup request...');
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      final name = _nameController.text.trim();
-      final email = _emailController.text.trim();
-      final mobile = _mobileController.text.trim();
-      final password = _passwordController.text.trim();
-
-      // TODO: Send to backend or service
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registered: $name')),
+    try {
+      final success = await ApiService.signup(
+        _nameCtrl.text,
+        _emailCtrl.text,
+        _mobileCtrl.text,
       );
 
-      // Navigate or store token after success
+      if (success) {
+        if (!mounted) return;
+        context.go('/otp', extra: _emailCtrl.text);
+      }
+    } catch (e) {
+      debugPrint('❌ Signup error: $e');
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Signup Failed'),
+          content: Text(e.toString().replaceFirst('Exception: ', '')),
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _loading = false);
     }
   }
 
   @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _mobileController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F3F8),
+      backgroundColor: const Color(0xFFE6F0FA), // Light blue background
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
               boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 12,
-                  offset: Offset(0, 6),
-                )
+                BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3))
               ],
             ),
             child: Form(
@@ -68,153 +70,113 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Text(loc.signUp,
+                      style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1E008A))),
+                  const SizedBox(height: 8),
                   Text(
-                    'register'.tr(),
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2D0C57),
-                    ),
+                    loc.signupSubtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14, color: Colors.black54),
                   ),
                   const SizedBox(height: 20),
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: const Color(0xFF1E008A).withOpacity(0.1),
+                    child: Image.asset(
+                      'assets/images/mobile_icon.png',
+                      width: 70,
+                      height: 70,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
 
                   // Full Name
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      hintText: 'full_name'.tr(),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'field_required'.tr();
-                      }
-                      return null;
+                  _buildField(_nameCtrl, 'Full Name'),
+                  const SizedBox(height: 12),
+
+                  // Email ID
+                  _buildField(
+                    _emailCtrl,
+                    loc.emailId,
+                    validator: (val) {
+                      if (val == null || val.isEmpty) return loc.emailRequired;
+                      final emailRegex = RegExp(r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$');
+                      return emailRegex.hasMatch(val) ? null : loc.invalidEmail;
                     },
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 12),
 
-                  // Email
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      hintText: 'email'.tr(),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'field_required'.tr();
-                      }
-                      if (!value.contains('@')) {
-                        return 'invalid_email'.tr();
-                      }
-                      return null;
+                  // Mobile Number
+                  _buildField(
+                    _mobileCtrl,
+                    loc.mobileNumber,
+                    keyboard: TextInputType.phone,
+                    validator: (val) {
+                      if (val == null || val.isEmpty) return loc.mobileRequired;
+                      final phoneRegex = RegExp(r'^\d{10}$');
+                      return phoneRegex.hasMatch(val) ? null : loc.invalidMobile;
                     },
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 24),
 
-                  // Mobile
-                  TextFormField(
-                    controller: _mobileController,
-                    decoration: InputDecoration(
-                      hintText: 'mobile'.tr(),
-                    ),
-                    keyboardType: TextInputType.phone,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'field_required'.tr();
-                      }
-                      if (value.length < 10) {
-                        return 'invalid_mobile'.tr();
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 15),
-
-                  // Password
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: _obscurePassword,
-                    decoration: InputDecoration(
-                      hintText: 'password'.tr(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.deepPurple,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
+                  // Request PIN button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: _loading ? null : submitSignup,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1E008A),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
+                      child: _loading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : Text(loc.requestPin, style: TextStyle(color: Colors.white)),
                     ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'field_required'.tr();
-                      }
-                      if (value.length < 6) {
-                        return 'password_too_short'.tr();
-                      }
-                      return null;
-                    },
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 16),
 
-                  // Register Button
-                  GestureDetector(
-                    onTap: _submitForm,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF5E17EB), Color(0xFF7636EC)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'register'.tr(),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                          ),
-                        ),
+                  // Already have an account?
+                  TextButton(
+                    onPressed: () => context.go('/login'),
+                    child: Text(
+                      loc.alreadyHaveAccount,
+                      style: const TextStyle(
+                        color: Color(0xFF1E008A),
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // Already have an account
-                  GestureDetector(
-                    onTap: () => context.go('/login'),
-                    child: Text.rich(
-                      TextSpan(
-                        text: "${'already_account'.tr()} ",
-                        style: const TextStyle(fontSize: 14),
-                        children: [
-                          TextSpan(
-                            text: 'sign_in'.tr(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF5E17EB),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildField(
+    TextEditingController ctrl,
+    String hint, {
+    TextInputType? keyboard,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: ctrl,
+      keyboardType: keyboard,
+      validator: validator ??
+          (val) => val == null || val.isEmpty ? 'This field is required' : null,
+      decoration: InputDecoration(
+        hintText: hint,
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }

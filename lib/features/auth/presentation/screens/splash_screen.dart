@@ -13,23 +13,45 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () async {
-      final prefs = await SharedPreferences.getInstance();
-      final selected = prefs.getBool('isLanguageSelected') ?? false;
+    Future.delayed(const Duration(seconds: 3), _navigateNext);
+  }
+
+  Future<void> _navigateNext() async {
+    final prefs = await SharedPreferences.getInstance();
+    final selected = prefs.getBool('isLanguageSelected') ?? false;
+    if (mounted) {
       if (selected) {
         context.go('/login');
       } else {
         context.go('/language');
       }
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.indigo,
+      backgroundColor: Color(0xFF1A007E), // Exact background from image
       body: Center(
-        child: Image(image: AssetImage('assets/images/logo.png'), height: 200),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image(
+              image: AssetImage('assets/images/logo.png'),
+              height: 180, // matched more closely to screenshot
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Ticket Booking System',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
