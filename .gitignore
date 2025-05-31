@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+ticket_booking_backend/node_modules
+# Keep environment variables out of version control
+ticket_booking_backend/.env
+
+ticket_booking_backend/src/generated/prisma
