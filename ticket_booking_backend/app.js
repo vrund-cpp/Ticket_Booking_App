@@ -5,7 +5,8 @@ require('dotenv').config();
 
 const app = express();
 
-const { exec } = require('child_process');
+
+// const { exec } = require('child_process');
 
 // app.get('/push-schema', async (req, res) => {
 //   exec('npx prisma db push', (err, stdout, stderr) => {
@@ -30,7 +31,17 @@ const { exec } = require('child_process');
 
 app.use(cors());
 app.use(express.json());
-
 app.use('/api', authRoutes);
+
+// ✅ Add this test route to check DB connection
+app.get('/push-schema', async (req, res) => {
+  try {
+    await prisma.$connect();
+    res.send('✅ Connected to DB and Prisma is working');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('❌ Error connecting to DB');
+  }
+});
 
 module.exports = app;
