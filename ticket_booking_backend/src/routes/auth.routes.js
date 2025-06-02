@@ -1,5 +1,4 @@
 const express = require('express');
-const app = reqire('app');
 const router = express.Router();
 const authController = require('../controllers/auth.controller');
 const { otpLimiter } = require('../middleware/rateLimiter');
