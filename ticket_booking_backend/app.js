@@ -4,6 +4,8 @@ const authRoutes = require('./src/routes/auth.routes.js');
 require('dotenv').config();
 
 const app = express();
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 
 // const { exec } = require('child_process');
