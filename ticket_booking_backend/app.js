@@ -7,6 +7,8 @@ const app = express();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+app.set("trust proxy", 1); // trust first proxy
+
 
 // const { exec } = require('child_process');
 

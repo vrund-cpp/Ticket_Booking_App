@@ -2,6 +2,8 @@ const app = require('./app');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+app.set("trust proxy", 1); // trust first proxy
+
 const PORT = process.env.PORT || 3000;
 (async () => {
   try {

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.76.220:3000/api'; // Replace with your IP
+  static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com/api'; // Replace with your IP
   static const storage = FlutterSecureStorage();
 
   static Future<bool> requestOtp(String identifier) async {

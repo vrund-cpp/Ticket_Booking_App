@@ -1,5 +1,7 @@
 const rateLimit = require('express-rate-limit');
 
+app.set("trust proxy", 1); // trust first proxy
+
 const otpLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
   max: 3,
