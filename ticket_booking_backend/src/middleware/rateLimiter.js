@@ -1,3 +1,5 @@
+const express = require("express");
+const app = express();
 const rateLimit = require('express-rate-limit');
 
 app.set("trust proxy", 1); // trust first proxy
