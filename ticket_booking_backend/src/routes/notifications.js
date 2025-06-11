@@ -23,10 +23,10 @@ const ctrl = require('../controllers/notificationController.js');
 // Example: GET /api/notifications/unread-count/eeaac5d6-7cf3-4446-bb41-3cea762d7633
 
 // GET unread count (protected)
-router.get('/count' , ctrl.getUnreadCount);
-router.get('/', ctrl.getUserNotifications);
-router.put('/mark-read/:id',ctrl.markNotificationRead);
-router.post('/mark-all-read/:userId',ctrl.markAllNotificationsRead);
+router.get('/count' , auth ,ctrl.getUnreadCount);
+router.get('/', auth ,ctrl.getUserNotifications);
+router.put('/mark-read/:id', auth ,ctrl.markNotificationRead);
+router.post('/mark-all-read/:userId', auth ,ctrl.markAllNotificationsRead);
 
 // Example: PATCH /api/notifications/mark-read/42
 
