@@ -213,7 +213,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ApiService {
   //  static const String baseUrl = 'http://192.168.76.220:3000/api';
-// static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com/api'; // Replace with your IP
+static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com/api'; // Replace with your IP
 
   // static String get _host {
     // if (Platform.isAndroid) {
@@ -228,7 +228,7 @@ class ApiService {
     // }
   // }
 
-  static String get baseUrl => 'http://192.168.75.220:3000/api';
+  // static String get baseUrl => 'http://192.168.75.220:3000/api';
    
    static const storage = FlutterSecureStorage();
 

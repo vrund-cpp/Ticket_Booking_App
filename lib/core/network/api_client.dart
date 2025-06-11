@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class ApiClient {
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.75.220:3000/api', // change if using real device
+      baseUrl:'https://ticket-booking-app-backend-0zhj.onrender.com/api', // change if using real device
       connectTimeout: const Duration(seconds: 10),
     ),
   );
