@@ -1,10 +1,14 @@
+// ticket_booking_app\ticket_booking_backend\src\controllers\authController.js
+
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const { isValidEmail, isValidMobile } = require('../utils/validators');
 const { sendEmail } = require('../services/email.service');
 const { generateOtp, saveOtp, verifyOtp } = require('../services/otp.service');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
 
-exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   const { name, email, mobile } = req.body;
 
   if (!isValidEmail(email) || !isValidMobile(mobile)) {
@@ -39,7 +43,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.requestOtp = async (req, res) => {
+const requestOtp = async (req, res) => {
   const { identifier } = req.body || {};
   if (!identifier) return res.status(400).json({ message: 'Identifier is required' });
 
@@ -57,7 +61,7 @@ exports.requestOtp = async (req, res) => {
   return res.status(200).json({ message: 'OTP sent' });
 };
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   const { email } = req.body;
 
   try {
@@ -75,27 +79,71 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.verifyOtp = async (req, res) => {
+const verifyOtpctrl = async (req, res) => {
   const { identifier, otp } = req.body || {};
   if (!identifier || !otp) {
     return res.status(400).json({ message: 'Identifier and OTP are required' });
   }
 
+
   try {
-    const isValid = await verifyOtp(identifier, otp);
+    const isValid = await verifyOtp(identifier.trim(), otp.trim());
     if (!isValid) {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
-
     await prisma.user.updateMany({
-      where: {
-        OR: [{ email: identifier }, { mobile: identifier }]
-      },
+      where: { OR: [{ email: identifier }, { mobile: identifier }] },
       data: { verified: true }
     });
 
-    res.status(200).json({ message: "Verified successfully" });
+// fetch the user so we can sign their id
+    const user = await prisma.user.findFirst({
+      where: { OR: [{ email: identifier }, { mobile: identifier }] }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found after verification' });
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { verified: true },
+    });
+
+    // await prisma.user.updateMany({
+    //   where: {
+    //     OR: [{ email: identifier }, { mobile: identifier }]
+    //   },
+    //   data: { verified: true }
+    // });
+
+
+    // issue JWT
+    // const payload = { userId: user.id };
+    const payload = { userId: user.id };
+    const token = jwt.sign(
+      payload,
+      JWT_SECRET  ,
+      { expiresIn: '7d' }
+    );
+
+    // Optional: delete OTPs for security
+    // await prisma.oTPRequest.deleteMany({ where: { identifier } });
+
+    res.status(200).json({ message: "Verified successfully", token });
+
+
+
+    
+    // res.status(200).json({ message: "Verified successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+module.exports={
+  signup,
+  login,
+  verifyOtpctrl,
+  requestOtp,
 };

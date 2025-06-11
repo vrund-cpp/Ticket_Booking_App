@@ -8,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  mobile    String   @unique
-  verified  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id             String         @id @default(uuid())
+  name           String
+  email          String         @unique
+  mobile         String         @unique
+  verified       Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @default(now())
+  notifications  Notification[]
 }
 
 model OTPRequest {
@@ -23,4 +24,49 @@ model OTPRequest {
   hashedOtp  String
   createdAt  DateTime @default(now())
   expiresAt  DateTime
+}
+
+model Movie {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String   @default("No description available.")
+  imageUrl      String
+  releaseDate   DateTime?
+  createdAt     DateTime @default(now())
+}
+
+model Attraction {
+  id           Int      @id @default(autoincrement())
+  title        String?  // No default, better left optional
+  imageUrl     String?  // Optional in case image is not available yet
+  description  String  @default("No description available.")
+  createdAt    DateTime @default(now())
+}
+
+model Outreach {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String?   // Let user input details when available
+  imageUrl      String
+  Startdate     DateTime? 
+  Enddate       DateTime? 
+  createdAt     DateTime @default(now())
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  summary     String?
+  date        DateTime?      @default(now())
+  createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  userId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

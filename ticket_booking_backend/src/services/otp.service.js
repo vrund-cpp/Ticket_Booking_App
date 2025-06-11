@@ -1,3 +1,5 @@
+// ticket_booking_app\ticket_booking_backend\src\services\otp.service.js
+
 const crypto = require('crypto');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
@@ -21,15 +23,21 @@ async function saveOtp(identifier, otp) {
 
 async function verifyOtp(identifier, otp) {
   const hashed = hashOtp(otp);
+
   const record = await prisma.oTPRequest.findFirst({
     where: {
       identifier,
       hashedOtp: hashed,
       expiresAt: { gt: new Date() },
     },
+    orderBy: { createdAt: 'desc' },
   });
 
   return Boolean(record);
+  // if (!record) return false;
+
+  // return record.hashedOtp === hashed;
+
 }
 
 module.exports = { generateOtp, hashOtp, saveOtp, verifyOtp };

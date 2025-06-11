@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const authRoutes = require('./src/routes/auth.routes.js');
+const authRoutes = require('./src/routes/auth.js');
 require('dotenv').config();
 
 const app = express();
@@ -35,7 +35,20 @@ app.set("trust proxy", 1); // trust first proxy
 
 app.use(cors());
 app.use(express.json());
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
+
+const moviesRoutes = require('./src/routes/movies');
+const outreachRoutes = require('./src/routes/outreach'); 
+const attractionsRoutes = require('./src/routes/attractions');
+const newsRoutes = require('./src/routes/news');
+const notificationsRoutes = require('./src/routes/notifications');
+
+
+app.use('api/movies', moviesRoutes);
+app.use('api/outreach', outreachRoutes);
+app.use('api/attractions', attractionsRoutes);
+app.use('api/news', newsRoutes);
+app.use('api/notifications', notificationsRoutes);
 
 // ✅ Add this test route to check DB connection
 app.get('/push-schema', async (req, res) => {

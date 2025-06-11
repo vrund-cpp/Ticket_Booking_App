@@ -1,3 +1,5 @@
+// ticket_booking_backend\src\services\email.service.js
+
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -12,8 +14,8 @@ async function sendEmail(to, otp) {
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to,
-    subject: 'Your OTP Code',
-    text: `Your OTP is: ${otp}. It will expire in 5 minutes.`,
+    subject: 'Your OTP Code For Ticket Booking App',
+    text: `Your OTP is: ${otp}. It will expire in 1 minute.`,
   });
 }
 

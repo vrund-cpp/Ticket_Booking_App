@@ -1,3 +1,5 @@
+// lib\features\auth\screens\signup_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
@@ -87,8 +89,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     backgroundColor: const Color(0xFF1E008A).withOpacity(0.1),
                     child: Image.asset(
                       'assets/images/mobile_icon.png',
-                      width: 70,
-                      height: 70,
+                      width: 85,
+                      height: 85,
                       fit: BoxFit.contain,
                     ),
                   ),

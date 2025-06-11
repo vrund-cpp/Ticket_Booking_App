@@ -1,7 +1,11 @@
+// lib\features\auth\screens\login_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+// import 'package:ticket_booking_app/core/services/auth_service.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
 import 'package:ticket_booking_app/generated/app_localizations.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,24 +24,37 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      final success = await ApiService.requestOtp(_emailPhoneCtrl.text);
+      final success = await ApiService.login(_emailPhoneCtrl.text);
 
       if (success) {
-        context.go('/otp', extra: _emailPhoneCtrl.text);
+        context.go('/otp', extra: _emailPhoneCtrl.text.trim());
       } else {
-        showDialog(
+        await showDialog(
           context: context,
           builder: (_) => AlertDialog(
             title: const Text('Error'),
             content: const Text('Failed to send OTP. Please try again.'),
+                      actions: [
+              TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+            ],
           ),
         );
       }
     } catch (e) {
-      print(e);
+      debugPrint('❌ Login error: $e');
+      await showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.toString()),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+          ],
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
-
-    setState(() => _isLoading = false);
   }
 
   @override
