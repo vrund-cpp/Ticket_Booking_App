@@ -1,7 +1,7 @@
 const express = require('express');
 const prisma = require('../utils/db.js');
 const router = express.Router();
-const authMiddleware = require('../middleware')
+const authMiddleware = require('../middleware/auth.middleware.js')
 
 const outreachController = require('../controllers/outreachController.js');
 
