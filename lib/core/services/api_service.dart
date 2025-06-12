@@ -213,8 +213,8 @@ import '../../models/notification_item.dart';
 
 
 class ApiService {
-  //  static const String baseUrl = 'http://192.168.75.220:3000/api';
-static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com/api'; // Replace with your IP
+  //  static const String baseUrl = 'http://192.168.68.220:3000/api';
+static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com'; // Replace with your IP
 
   // static String get _host {
     // if (Platform.isAndroid) {
@@ -233,12 +233,21 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
    
   //  static const _storage = FlutterSecureStorage();
 
-  static const _jsonHeaders = {
-    'Content-Type': 'application/json'
+  static const Map<String, String> _jsonHeaders = {
+    'Content-Type': 'application/json',
   };
 
+  /// Helper: attaches Bearer header if available
+  static Future<Map<String,String>> _authHeaders() async {
+    final token = await AuthService.getToken();
+    return {
+      ..._jsonHeaders,
+      if (token != null) 'Authorization': 'Bearer $token',
+    };
+  }
+
   static Future<bool> requestOtp(String identifier) async {
-    final uri = Uri.parse('$baseUrl/auth/request-otp');
+    final uri = Uri.parse('$baseUrl/api/auth/request-otp');
     final resp = await http.post(uri,
       headers: _jsonHeaders,
       body: jsonEncode({'identifier': identifier}),
@@ -249,7 +258,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   static Future<bool> signup(String name, String email, String mobile) async {
     
     try{
-    final uri = Uri.parse('$baseUrl/auth/signup');
+    final uri = Uri.parse('$baseUrl/api/auth/signup');
     final resp = await http.post(uri,
       headers: _jsonHeaders,
       body: jsonEncode({'name': name.trim(), 'email': email.trim(), 'mobile': mobile.trim()}),
@@ -275,7 +284,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
 /// Sends an OTP to an existing user (by email or mobile).
   /// Returns true if the server responded 200.
   static Future<bool> login(String identifier) async {
-    final uri = Uri.parse('$baseUrl/auth/login');
+    final uri = Uri.parse('$baseUrl/api/auth/login');
     final resp = await http.post(uri,
       headers: _jsonHeaders,
       body: jsonEncode({'email': identifier.trim()}),
@@ -290,7 +299,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<bool> verifyOtp(String identifier, String otp) async {
-    final uri = Uri.parse('$baseUrl/auth/verify-otp');
+    final uri = Uri.parse('$baseUrl/api/auth/verify-otp');
     
     try{
     final resp = await http.post(uri,
@@ -331,19 +340,20 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
 // static Future<String?> getToken() async => await _storage.read(key: 'jwt'); // ✅ Must match saveToken()
 // static Future<void> logout() async => await _storage.deleteAll(); // ✅ Optional improvement below
 
-  /// Helper: attaches Bearer header if available
-  static Future<Map<String,String>> _authHeaders() async {
-    final token = await AuthService.getToken();
-    return {
-      'Content-Type': 'application/json',
-      if (token != null) 'Authorization': 'Bearer $token',
-    };
-  }
+
 
   static Future<List<Movie>> fetchLatestMovies() async {
-    final resp = await http.get(Uri.parse('$baseUrl/movies/latest'),
-      headers: await _authHeaders(),
-    );
+    final uri = Uri.parse('$baseUrl/api/movies/latest');
+    final headers = await _authHeaders();
+    print('🛠 [fetchLatestMovies] GET $uri');
+    print('🛠 Headers: $headers');
+    // final resp = await http.get(Uri.parse('$baseUrl/movies/latest'),
+    //   headers: await _authHeaders(),
+    // );
+    final resp = await http.get(uri, headers: headers);
+    print('🛠 StatusCode: ${resp.statusCode}');
+    print('🛠 Body: ${resp.body}');
+
     if (resp.statusCode == 200) {
       final data = jsonDecode(resp.body) as List;
       return data.map((e) => Movie.fromJson(e)).toList();
@@ -352,7 +362,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<Movie>> fetchAllMovies() async {
-    final resp = await http.get(Uri.parse('$baseUrl/movies'),
+    final resp = await http.get(Uri.parse('$baseUrl/api/movies'),
       headers: await _authHeaders(),
     );
     if (resp.statusCode == 200) {
@@ -363,7 +373,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<Outreach>> fetchLatestOutreach() async {
-    final resp = await http.get(Uri.parse('$baseUrl/outreach/latest'),
+    final resp = await http.get(Uri.parse('$baseUrl/api/outreach/latest'),
       headers: await _authHeaders(),
     );
     if (resp.statusCode == 200) {
@@ -374,9 +384,16 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<Outreach>> fetchAllOutreach() async {
-    final resp = await http.get(Uri.parse('$baseUrl/outreach'),
-      headers: await _authHeaders(),
-    );
+    final uri = Uri.parse('$baseUrl/api/outreach');
+    final headers = await _authHeaders();
+    print('🛠 [fetchAllOutreach] GET $uri');
+    print('🛠 Headers: $headers');
+    // final resp = await http.get(Uri.parse('$baseUrl/outreach'),
+    //   headers: await _authHeaders(),
+    // );
+    final resp = await http.get(uri, headers: headers);
+    print('🛠 StatusCode: ${resp.statusCode}');
+    print('🛠 Body: ${resp.body}');
     if (resp.statusCode == 200) {
       final data = jsonDecode(resp.body) as List;
       return data.map((e) => Outreach.fromJson(e)).toList();
@@ -385,7 +402,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<Attraction>> fetchLatestAttractions() async {
-    final resp = await http.get(Uri.parse('$baseUrl/attractions/latest'),
+    final resp = await http.get(Uri.parse('$baseUrl/api/attractions/latest'),
       headers: await _authHeaders(),
     );
     if (resp.statusCode == 200) {
@@ -396,7 +413,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<Attraction>> fetchAllAttractions() async {
-    final resp = await http.get(Uri.parse('$baseUrl/attractions'),
+    final resp = await http.get(Uri.parse('$baseUrl/api/attractions'),
       headers: await _authHeaders(),
     );
     if (resp.statusCode == 200) {
@@ -407,7 +424,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<News>> fetchLatestNews() async {
-    final resp = await http.get(Uri.parse('$baseUrl/news/latest'),
+    final resp = await http.get(Uri.parse('$baseUrl/api/news/latest'),
       headers: await _authHeaders(),
     );
     if (resp.statusCode == 200) {
@@ -418,7 +435,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<News>> fetchAllNews() async {
-    final resp = await http.get(Uri.parse('$baseUrl/news'),
+    final resp = await http.get(Uri.parse('$baseUrl/api/news'),
       headers: await _authHeaders(),
     );
     if (resp.statusCode == 200) {
@@ -428,10 +445,18 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
     throw Exception('Failed to fetch all news');
   }
 
-  static Future<int> getUnreadCount(String userId) async {
-    final resp = await http.get(Uri.parse('$baseUrl/notifications/count'),
-      headers: await _authHeaders(),
-    );
+    static Future<int> getUnreadCount(String userId) async {
+    final uri = Uri.parse('$baseUrl/api/notifications/count');
+    final headers = await _authHeaders();
+
+    print('🛠 [getUnreadCount] GET $uri');
+    print('🛠 Headers: $headers');
+
+    final resp = await http.get(uri, headers: headers);
+
+    print('🛠 StatusCode: ${resp.statusCode}');
+    print('🛠 Body: ${resp.body}');
+
     if (resp.statusCode == 200) {
       final body = jsonDecode(resp.body) as Map<String, dynamic>;
       return body['count'] as int;
@@ -440,9 +465,17 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<List<NotificationItem>> getUserNotifications() async {
-    final resp = await http.get(Uri.parse('$baseUrl/notifications'),
-      headers: await _authHeaders(),
-    );
+    final uri = Uri.parse('$baseUrl/api/notifications');
+    final headers = await _authHeaders();
+
+    print('🛠 [getUserNotifications] GET $uri');
+    print('🛠 Headers: $headers');
+
+    final resp = await http.get(uri, headers: headers);
+
+    print('🛠 StatusCode: ${resp.statusCode}');
+    print('🛠 Body: ${resp.body}');
+
     if (resp.statusCode == 200) {
       final data = jsonDecode(resp.body) as List;
       return data.map((e) => NotificationItem.fromJson(e)).toList();
@@ -451,23 +484,39 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
   }
 
   static Future<void> markAllNotificationsRead() async {
-    final resp = await http.post(Uri.parse('$baseUrl/notifications/mark-all-read'),
-      headers: await _authHeaders(),
-    );
+    final uri = Uri.parse('$baseUrl/api/notifications/mark-all-read');
+    final headers = await _authHeaders();
+
+    print('🛠 [markAllNotificationsRead] POST $uri');
+    print('🛠 Headers: $headers');
+
+    final resp = await http.post(uri, headers: headers);
+
+    print('🛠 StatusCode: ${resp.statusCode}');
+    print('🛠 Body: ${resp.body}');
+
     if (resp.statusCode != 200) {
       throw Exception('Failed to mark notifications read');
     }
   }
 
-static Future<void> markNotificationRead(int id) async {
-  final resp = await http.put(
-    Uri.parse('$baseUrl/notifications/mark-read/$id'),
-    headers: await _authHeaders(),
-  );
-  if (resp.statusCode != 200) {
-    throw Exception('Failed to mark notification as read');
+  static Future<void> markNotificationRead(int id) async {
+    final uri = Uri.parse('$baseUrl/api/notifications/mark-read/$id');
+    final headers = await _authHeaders();
+
+    print('🛠 [markNotificationRead] PUT $uri');
+    print('🛠 Headers: $headers');
+
+    final resp = await http.put(uri, headers: headers);
+
+    print('🛠 StatusCode: ${resp.statusCode}');
+    print('🛠 Body: ${resp.body}');
+
+    if (resp.statusCode != 200) {
+      throw Exception('Failed to mark notification as read');
+    }
   }
-}
+
 
   
 }

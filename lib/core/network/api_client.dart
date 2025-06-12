@@ -4,7 +4,7 @@ class ApiClient {
   final Dio dio = Dio(
     BaseOptions(
       baseUrl:'https://ticket-booking-app-backend-0zhj.onrender.com/api', // change if using real device
-      // baseUrl:'http://192.168.75.220:3000/api',
+      // baseUrl:'http://192.168.68.220:3000/api',
       connectTimeout: const Duration(seconds: 10),
     ),
   );
