@@ -6,7 +6,8 @@ const authMiddleware = (req, res, next) => {
   if (!auth || !auth.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Missing token' });
   }
-  const token = auth.slice(7);
+  // const token = auth.slice(7);
+  const token = auth.split(' ')[1];
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = payload.userId;

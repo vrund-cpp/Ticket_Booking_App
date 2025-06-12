@@ -32,8 +32,7 @@ app.set("trust proxy", 1); // trust first proxy
 //     res.send('Schema pushed successfully:\n' + stdout);
 //   });
 // });
-
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 

@@ -1,42 +1,3 @@
-// // lib/core/services/auth_service.dart
-
-// import 'dart:convert';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-// import 'package:http/http.dart' as http;
-// import '../../utils/jwt_utils.dart';
-
-// class AuthService {
-//   static const String _baseUrl = 'http://192.168.66.220:3000/api';
-//   static final FlutterSecureStorage storage = FlutterSecureStorage();
-
-//   /// Login and store JWT + userId
-//   static Future<bool> login(String identifier) async {
-//     final res = await http.post(
-//       Uri.parse('$_baseUrl/auth/login'),
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({'identifier': identifier}),
-//     );
-//     if (res.statusCode != 200) return false;
-//     final body = jsonDecode(res.body) as Map<String, dynamic>;
-//     final token = body['token'] as String;
-//     await storage.write(key: 'jwt', value: token);
-//     final payload = JwtUtils.parseJwt(token);
-//     await storage.write(key: 'userId', value: payload['userId'].toString());
-//     return true;
-//   }
-
-//   /// Retrieve stored JWT
-//   static Future<String?> getJwt() => storage.read(key: 'jwt');
-
-//   /// Retrieve stored userId
-//   static Future<String?> getUserId() => storage.read(key: 'userId');
-
-//   /// Clear credentials
-//   static Future<void> logout() async {
-//     await storage.delete(key: 'jwt');
-//     await storage.delete(key: 'userId');
-//   }
-// }
 // File: lib/core/services/auth_service.dart
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -60,6 +21,9 @@ class AuthService {
   static Future<String?> getUserId() => _storage.read(key: 'userId');
 
   /// Clear everything (for logout)
-  static Future<void> clearAll() => _storage.deleteAll();
+  static Future<void> clearAll() async{
+    await _storage.delete(key: 'jwt');
+    await _storage.delete(key: 'userId');
+  }
 }
 

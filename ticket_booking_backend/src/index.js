@@ -33,11 +33,16 @@ app.use('/api/notifications', notificationsRoutes);
 
 // Global Error Handler
 // app.use(errorHandler);
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: 'Server error' });
+});
+
 
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => res.send('🟢 Backend running'));
-app.use((req, res) => res.status(404).json({ error: 'Not found' }));
+// app.use((req, res) => res.status(404).json({ error: 'Not found' }));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://0.0.0.0:${PORT}`);

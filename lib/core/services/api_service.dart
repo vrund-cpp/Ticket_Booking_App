@@ -209,10 +209,11 @@ import '../../models/outreach.dart';
 import '../../models/attraction.dart';
 import '../../models/news.dart';
 import '../../models/notification_item.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 
 class ApiService {
-  //  static const String baseUrl = 'http://192.168.76.220:3000/api';
+  //  static const String baseUrl = 'http://192.168.75.220:3000/api';
 static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com/api'; // Replace with your IP
 
   // static String get _host {
@@ -230,7 +231,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
 
   // static String get baseUrl => 'http://192.168.75.220:3000/api';
    
-   static const storage = FlutterSecureStorage();
+  //  static const _storage = FlutterSecureStorage();
 
   static const _jsonHeaders = {
     'Content-Type': 'application/json'
@@ -290,36 +291,51 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
 
   static Future<bool> verifyOtp(String identifier, String otp) async {
     final uri = Uri.parse('$baseUrl/auth/verify-otp');
+    
+    try{
     final resp = await http.post(uri,
       headers: _jsonHeaders,
       body: jsonEncode({'identifier': identifier.trim(), 'otp': otp.trim()}),
     );
+
     if (resp.statusCode != 200){ 
       final b = resp.body;
+
       if (b.startsWith('<!DOCTYPE')) {
         throw Exception('Server returned HTML on OTP verify—check URL');
       }
+
       final map = jsonDecode(b) as Map<String, dynamic>;
       throw Exception(map['message'] ?? 'Invalid or expired OTP');
     }
 
     final map = jsonDecode(resp.body) as Map<String, dynamic>;
     final token = map['token'] as String;
+    if (token.isEmpty) {
+      throw Exception('❌ Token not received from server');
+    }
+
     final payload = Jwt.parseJwt(token);
     final userId = payload['userId'].toString();
+
     await AuthService.saveToken(token);
     await AuthService.saveUserId(userId);
     return true;
+  } catch (e) {
+    // print('❌ OTP verification error: $e');
+    rethrow;
   }
+}
 
-  static Future<String?> getToken() async => await storage.read(key: 'jwt_token');
-  static Future<void> logout() async => await storage.deleteAll();
+
+// static Future<String?> getToken() async => await _storage.read(key: 'jwt'); // ✅ Must match saveToken()
+// static Future<void> logout() async => await _storage.deleteAll(); // ✅ Optional improvement below
 
   /// Helper: attaches Bearer header if available
   static Future<Map<String,String>> _authHeaders() async {
     final token = await AuthService.getToken();
     return {
-      ..._jsonHeaders,
+      'Content-Type': 'application/json',
       if (token != null) 'Authorization': 'Bearer $token',
     };
   }
@@ -453,6 +469,6 @@ static Future<void> markNotificationRead(int id) async {
   }
 }
 
-
+  
 }
 
