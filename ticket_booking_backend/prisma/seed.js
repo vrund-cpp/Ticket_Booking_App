@@ -98,6 +98,7 @@ async function main() {
         title: 'Musical fountain',
         description: 'Gain the beautiful Experience',
         imageUrl: 'https://images.unsplash.com/photo-1735615479490-237b941e996a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8aVVJc25WdGpCMFl8fGVufDB8fHx8fA%3D%3D',
+        releaseDate: new Date('2025-03-10'),        
         timeSlot: '12:00 AM',
         duration: 50,
         format: 'D2',
