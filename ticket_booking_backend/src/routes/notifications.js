@@ -25,7 +25,7 @@ const ctrl = require('../controllers/notificationController.js');
 router.get('/count' ,ctrl.getUnreadCount);
 router.get('/' ,ctrl.getUserNotifications);
 router.put('/mark-read/:id', ctrl.markNotificationRead);
-router.post('/mark-all-read/:userId' ,ctrl.markAllNotificationsRead);
+router.post('/mark-all-read' ,ctrl.markAllNotificationsRead);
 
 // Example: PATCH /api/notifications/mark-read/42
 

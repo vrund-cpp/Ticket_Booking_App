@@ -1,27 +1,98 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ticket_booking_app/core/constants/colors.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
 import '../../../models/movie.dart';
 import '../../../widgets/movie_card.dart';
 
 class MoviesListScreen extends StatefulWidget {
-  const MoviesListScreen({super.key});
+  final String userId;
+
+  const MoviesListScreen({super.key,required this.userId});
   @override
   _MoviesListScreenState createState() => _MoviesListScreenState();
 }
 
 class _MoviesListScreenState extends State<MoviesListScreen> {
   late Future<List<Movie>> _futureAllMovies;
+  late Future<int> _notifCountFuture;
 
   @override
   void initState() {
     super.initState();
     _futureAllMovies = ApiService.fetchAllMovies();
+    _notifCountFuture = ApiService.getUnreadCount(); 
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('All Movies')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.purpleDark,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.pop(),
+        ),
+        title: Text(
+          'allMovies'.tr(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: GestureDetector(
+              onTap: () async {
+                await context.push('/notifications', extra: widget.userId);
+                if (!mounted) return;
+                setState(() {
+    _notifCountFuture = ApiService.getUnreadCount();
+  });
+              },
+              child: Stack(
+                children: [
+                  const Icon(Icons.notifications, color: Colors.white, size: 24),
+                  FutureBuilder<int>(
+                    future: _notifCountFuture,
+                    builder: (ctx, snap) {
+                      if (snap.hasData && snap.data! > 0) {
+                  return Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      width: 16,
+                      height: 16,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${snap.data}', // You can replace this with dynamic count if needed
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                      }
+                      return const SizedBox();
+                    },
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
       body: FutureBuilder<List<Movie>>(
         future: _futureAllMovies,
         builder: (ctx, snap) {
@@ -40,7 +111,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: SizedBox(
                   height: 140,
-                  child: MovieCard(movie: movies[i])),
+                  child: MovieCard(movie: movies[i], userId: widget.userId)),
                   );
             }
               );
@@ -49,12 +120,3 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
           );
         }
   }
-
-  // because our MovieCard widget constructor expects a Movie model,
-  // you can either change it to accept the fields directly, or:
-//   Widget movieCard({required String imageUrl, required String title, required String description, required DateTime releaseDate}) {
-//     return MovieCard(movie: Movie(
-//       id: 0, title: title, description: description, imageUrl: imageUrl, releaseDate: releaseDate
-//     ));
-//   }
-// }

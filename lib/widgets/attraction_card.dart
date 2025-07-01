@@ -39,7 +39,7 @@ class AttractionCard extends StatelessWidget {
                 height: 100,
                 color: Colors.grey[300],
                 child: Image.network(
-                  attraction.imageUrl,
+                  attraction.imageUrl ?? '',
                   fit: BoxFit.cover,
                   // width: 120,
                   // height: 100,
@@ -68,3 +68,4 @@ class AttractionCard extends StatelessWidget {
     );
   }
 }
+

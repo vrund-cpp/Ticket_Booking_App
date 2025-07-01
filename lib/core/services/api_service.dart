@@ -1,220 +1,25 @@
-// import 'dart:convert';
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-// import 'package:ticket_booking_app/core/services/auth_service.dart';
-// import '../../models/movie.dart';
-// import '../../models/outreach.dart';
-// import '../../models/attraction.dart';
-// import '../../models/news.dart';
-// import '../../models/notification_item.dart';
-// import 'package:jwt_decode/jwt_decode.dart';
-
-
-// class ApiService {
-//   static const String baseUrl = 'http://192.168.66.220:3000/api';
-//   // static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com/api'; // Replace with your IP
-//   static const storage = FlutterSecureStorage();
-
-//   static Future<bool> requestOtp(String identifier) async {
-    
-//     final uri = Uri.parse('$baseUrl/auth/request-otp');
-
-//     final res = await http.post(
-//       uri,
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({'identifier': identifier}),
-//     );
-//     if (res.statusCode == 200) {
-//       return true;
-//     }
-//     return false;
-//   }
-
-//   static Future<bool> signup(String name, String email, String mobile) async {
-//     try {
-//       final uri = Uri.parse('$baseUrl/auth/signup');
-//       final res = await http.post(
-//         uri,
-//         headers: {'Content-Type': 'application/json'},
-//         body: jsonEncode({'name': name, 'email': email, 'mobile': mobile}),
-//       );
-
-//       debugPrint('📡 Signup API response: ${res.statusCode} ${res.body}');
-
-//       final body = jsonDecode(res.body) as Map<String, dynamic>;
-
-//       if (res.statusCode == 200) return true;
-
-//       final msg = body['message'] as String? ?? 'Unknown error';
-//       throw Exception(msg);
-//     } catch (e) {
-//       debugPrint('❌ API error: $e');
-//       rethrow; // let Flutter UI handle this
-//     }
-//   }
-
-//   static Future<bool> verifyOtp(String identifier, String otp) async {
-    
-//     final uri = Uri.parse('$baseUrl/auth/verify-otp');
-    
-//     final res = await http.post(
-//       uri,
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({'identifier': identifier, 'otp': otp}),
-//     );
-
-//     if (res.statusCode != 200)return false; 
-//       // 🔐 Store token in secure storage
-//       final body = jsonDecode(res.body) as Map<String, dynamic>;
-//       final token = body['token'] as String;
-//       final payload = Jwt.parseJwt(token);
-//       final userId = payload['userId'].toString();
-
-//       await AuthService.storage.write(key:'jwt', value:token);
-//       await AuthService.storage.write(key:'userId', value:userId);
-//       return true;
-//   }
-//   /// Fetch latest 5 movies
-//   static Future<List<Movie>> fetchLatestMovies() async {
-//     final response = await http.get(Uri.parse('$baseUrl/movies/latest'));
-//     if (response.statusCode == 200) {
-//       final List jsonData = json.decode(response.body);
-//       return jsonData.map((item) => Movie.fromJson(item)).toList();
-//     } else {
-//       throw Exception('Failed to fetch latest movies');
-//     }
-//   }
-
-// /// fetch All movies
-//   static Future<List<Movie>> fetchAllMovies() async {
-//     final resp = await http.get(Uri.parse('$baseUrl/movies'));
-//     if (resp.statusCode==200) {
-//       final data = jsonDecode(resp.body) as List;
-//       return data.map((e)=>Movie.fromJson(e)).toList();
-//     }
-//     throw Exception('Failed');
-//   }
-
-//   /// Fetch latest 5 outreach programs
-//   static Future<List<Outreach>> fetchLatestOutreach() async {
-//     final response = await http.get(Uri.parse('$baseUrl/outreach/latest'));
-//     if (response.statusCode == 200) {
-//       final List jsonData = json.decode(response.body);
-//       return jsonData.map((item) => Outreach.fromJson(item)).toList();
-//     } else {
-//       throw Exception('Failed to fetch latest outreach programs');
-//     }
-//   }
-
-//   /// Fetch All outreach programs
-//   static Future<List<Outreach>> fetchAllOutreach() async {
-//     final resp = await http.get(Uri.parse('$baseUrl/outreach'));
-//     if (resp.statusCode==200) {
-//       final data = jsonDecode(resp.body) as List;
-//       return data.map((e)=>Outreach.fromJson(e)).toList();
-//     }
-//     throw Exception('Failed');
-//   }
-
-//   /// Fetch latest 5 attractions
-//   static Future<List<Attraction>> fetchLatestAttractions() async {
-//     final response = await http.get(
-//       Uri.parse('$baseUrl/attractions/latest'),
-//     );
-//     if (response.statusCode == 200) {
-//       final List jsonData = json.decode(response.body);
-//       return jsonData.map((item) => Attraction.fromJson(item)).toList();
-//     } else {
-//       throw Exception('Failed to fetch latest attractions');
-//     }
-//   }
-
-//   /// Fetch All Attractions
-//     static Future<List<Attraction>> fetchAllAttractions() async {
-//     final resp = await http.get(Uri.parse('$baseUrl/api/attractions'));
-//     if (resp.statusCode==200) {
-//       final data = jsonDecode(resp.body) as List;
-//       return data.map((e)=>Attraction.fromJson(e)).toList();
-//     }
-//     throw Exception('Failed');
-//   }
-
-//   /// Fetch latest 5 news items
-//   static Future<List<News>> fetchLatestNews() async {
-//     final response = await http.get(Uri.parse('$baseUrl/api/news/latest'));
-//     if (response.statusCode == 200) {
-//       final List jsonData = json.decode(response.body);
-//       return jsonData.map((item) => News.fromJson(item)).toList();
-//     } else {
-//       throw Exception('Failed to fetch latest news');
-//     }
-//   }
-
-//   /// Fetch all news
-//   static Future<List<News>> fetchAllNews() async {
-//     final resp = await http.get(Uri.parse('$baseUrl/news'));
-//     if (resp.statusCode==200) {
-//       final data = jsonDecode(resp.body) as List;
-//       return data.map((e)=>News.fromJson(e)).toList();
-//     }
-//     throw Exception('Failed');
-//   }
-
-//   static Future<int> getUnreadCount() async {
-//     final token = await AuthService.getJwt();
-//     final resp = await http.get(
-//       Uri.parse('$baseUrl/notifications/count'),
-//       headers: { 'Authorization':'Bearer $token' },
-//     );
-//     if (resp.statusCode==200) {
-//       return jsonDecode(resp.body)['count'] as int;
-//     }
-//     throw Exception('Failed');
-//   }
-
-//   static Future<List<NotificationItem>> getUserNotifications() async {
-//     final token = await AuthService.getJwt();
-//     final resp = await http.get(
-//       Uri.parse('$baseUrl/notifications'),
-//       headers: { 'Authorization':'Bearer $token' },
-//     );
-//     if (resp.statusCode==200) {
-//       final data = jsonDecode(resp.body) as List;
-//       return data.map((e)=>NotificationItem.fromJson(e)).toList();
-//     }
-//     throw Exception('Failed');
-//   }
-
-//   static Future<void> markAllNotificationsRead() async {
-//     final token = await AuthService.getJwt();
-//     final resp = await http.post(
-//       Uri.parse('$baseUrl/notifications/mark-read'),
-//       headers: { 'Authorization':'Bearer $token' },
-//     );
-//     if (resp.statusCode!=200) throw Exception('Failed');
-//   }
-// }
-
 // File: lib/core/services/api_service.dart
 
 import 'dart:convert';
-// import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decode/jwt_decode.dart';
+import 'package:ticket_booking_app/models/booking_history.dart';
+import 'package:ticket_booking_app/models/user.dart';
+import 'package:ticket_booking_app/providers/booking_cart_provider.dart';
 import 'auth_service.dart';
 import '../../models/movie.dart';
 import '../../models/outreach.dart';
 import '../../models/attraction.dart';
 import '../../models/news.dart';
 import '../../models/notification_item.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
+import '../../models/entry_ticket.dart';
+import '../../models/parking_option.dart';
+import '../../models/booking_summary.dart';
 
 class ApiService {
-  //  static const String baseUrl = 'http://192.168.68.220:3000/api';
-static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com'; // Replace with your IP
+   static const String baseUrl = 'http://192.168.144.220:3000';
+// static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com'; // Replace with your IP
 
   // static String get _host {
     // if (Platform.isAndroid) {
@@ -229,8 +34,6 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
     // }
   // }
 
-  // static String get baseUrl => 'http://192.168.75.220:3000/api';
-   
   //  static const _storage = FlutterSecureStorage();
 
   static const Map<String, String> _jsonHeaders = {
@@ -283,19 +86,25 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
 
 /// Sends an OTP to an existing user (by email or mobile).
   /// Returns true if the server responded 200.
-  static Future<bool> login(String identifier) async {
+  static Future<bool> login(String input) async {
+    try{
     final uri = Uri.parse('$baseUrl/api/auth/login');
     final resp = await http.post(uri,
       headers: _jsonHeaders,
-      body: jsonEncode({'email': identifier.trim()}),
+      body: jsonEncode({'email': input.trim()}),
     );
+
     if (resp.statusCode == 200) {
       return true;
     } else {
       debugPrint('❌ Login API error: ${resp.statusCode} ${resp.body}');
-    final map = jsonDecode(resp.body) as Map<String, dynamic>;
+    final map = jsonDecode(resp.body);
     throw Exception(map['message'] ?? 'Login failed');
     }
+  }catch (e) {
+    debugPrint('❌ API error: $e');
+    rethrow;
+  }
   }
 
   static Future<bool> verifyOtp(String identifier, String otp) async {
@@ -445,7 +254,7 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
     throw Exception('Failed to fetch all news');
   }
 
-    static Future<int> getUnreadCount(String userId) async {
+    static Future<int> getUnreadCount() async {
     final uri = Uri.parse('$baseUrl/api/notifications/count');
     final headers = await _authHeaders();
 
@@ -517,7 +326,183 @@ static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.
     }
   }
 
+static Future<List<EntryTicket>> fetchEntryTickets() async {
+    final uri = Uri.parse('$baseUrl/api/entry-tickets');
+    final headers = await _authHeaders();
+    
+    final res = await http.get(uri, headers: headers);
 
+    if (res.statusCode == 200) {
+      final List<dynamic> jsonList = jsonDecode(res.body);
+      return jsonList.map((e) => EntryTicket.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load entry tickets');
+    }
+  }
+
+static Future<List<ParkingOption>> fetchParkingOptions() async {
+    final uri = Uri.parse('$baseUrl/api/parking-options');
+    final headers = await _authHeaders();
+
+    final res = await http.get(uri,headers: headers);
+
+    if (res.statusCode == 200) {
+      final List<dynamic> jsonList = jsonDecode(res.body);
+      return jsonList.map((e) => ParkingOption.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load parking options');
+    }
+  }
+
+
+static Future<List<Attraction>> fetchAttractions() async {
+    final uri = Uri.parse('$baseUrl/api/attractions');
+    final headers = await _authHeaders();
+    
+    final res = await http.get(uri,headers: headers);
+    
+    
+    if (res.statusCode == 200) {
+      final List<dynamic> jsonList = jsonDecode(res.body);
+      return jsonList.map((e) => Attraction.fromJson(e)).toList();
+    } else {
+      debugPrint("Error fetching attractions: ${res.body}");
+      throw Exception('Failed to load attractions');
+    }
+  }
+
+static Future<List<Movie>> fetchMovies() async {
+    final uri = Uri.parse('$baseUrl/api/movies');
+    final headers = await _authHeaders();
+    
+    final res = await http.get(uri,headers: headers);
   
+    if (res.statusCode == 200) {
+      final List<dynamic> jsonList = jsonDecode(res.body);
+      return jsonList.map((e) => Movie.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
+
+static Future<BookingSummary> getBookingSummary(String userId) async {
+  final response = await http.get(Uri.parse('$baseUrl/api/booking/summary/$userId'));
+  if (response.statusCode == 200) {
+    return BookingSummary.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to fetch booking summary');
+  }
 }
 
+// static Future<bool> submitBooking(String userId, Map<String, dynamic> data) async {
+//   final response = await http.post(Uri.parse('$baseUrl/api/booking/$userId'),
+//     headers: {'Content-Type': 'application/json'},
+//     body: jsonEncode(data),
+//   );
+//   return response.statusCode == 200;
+// }
+
+static Future<String?> createBooking(String userId, BookingCartProvider cart) async {
+  try{
+  final url = Uri.parse('$baseUrl/api/bookings');
+  final body = {
+    'userId': userId,
+    'entryTickets': cart.selectedEntryTickets
+        .map((e) => {'id': e.id, 'count': e.count ,'pricePerUnit': e.price}).toList(),
+    'parking': cart.selectedParking
+        .map((p) => {'id': p.id, 'count': p.count ,'pricePerUnit': p.price}).toList(),
+    'attractions': cart.selectedAttractions.map((a) => a.id).toList(),
+    'movies': cart.selectedMovies.map((m) => m.id).toList(),
+    'attractionVisitorSlots': cart.selectedAttractionVisitorSlots.map((s) => {
+      'id': s.attractionId,
+      'count': s.count,
+      'pricePerUnit': s.price,
+    }).toList(),
+    'movieVisitorSlots': cart.selectedMovieVisitorSlots.map((s) => {
+      'id': s.attractionId,
+      'count': s.count,
+      'pricePerUnit': s.price,
+    }).toList(),
+    'total': cart.overallTotalAmount,
+  };
+
+  final response = await http.post(
+    url,
+    headers: await _authHeaders(),
+    body: jsonEncode(body),
+  );
+
+if (response.statusCode == 201) {
+final data = jsonDecode(response.body);
+return data['bookingId'];
+} else{
+debugPrint('❌ Booking failed. Status: ${response.statusCode}, Body: ${response.body}');
+  return null;
+}
+} catch (e) {
+    debugPrint('❌ Exception in createBooking: $e');
+    return null;
+  }
+}
+
+// static Future<bool> confirmBooking(String bookingId) async {
+// final url = Uri.parse('$baseUrl/api/bookings/$bookingId/confirm');
+// final response = await http.patch(url);
+
+// return response.statusCode == 200;
+// }
+
+static Future<bool> createPayment(String userId, String bookingId, double amount, String method) async {
+  final url = Uri.parse('$baseUrl/api/payments');
+  final body = {
+    'userId': userId,
+    'bookingId': bookingId,
+    'amount': amount,
+    'method': method,
+  };
+
+  final response = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(body),
+  );
+
+  return response.statusCode == 201;
+}
+
+static Future<Map<String, dynamic>> getProfile() async {
+final headers = await _authHeaders();
+print('📡 Fetching profile from backend...');
+final resp = await http.get(Uri.parse('$baseUrl/api/profile'), headers: headers);
+  print('📬 Response status: ${resp.statusCode}');
+  print('📦 Response body: ${resp.body}');
+final map = jsonDecode(resp.body);
+return {
+'user': User.fromJson(map['user']),
+'bookings': (map['bookings'] as List).map((e) => BookingHistory.fromJson(e)).toList(),
+};
+}
+
+static Future<bool> updateProfile(String name, String email, String mobile) async {
+try{
+final headers = await _authHeaders();
+final response = await http.put(
+Uri.parse('$baseUrl/api/profile'),
+headers: headers,
+body: jsonEncode({'name': name, 'email': email, 'mobile': mobile}),
+);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      debugPrint('❌ Update failed: ${response.statusCode} - ${response.body}');
+      return false;
+    }
+  }catch (e) {
+    debugPrint('❌ Exception during updateProfile: $e');
+    return false;
+  }
+}
+
+}
+  

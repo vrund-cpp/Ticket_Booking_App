@@ -13,12 +13,12 @@ const getLatestMovies = async (req, res, next) => {
   }
 }
 
-const getAllMovies = async (req, res, next) => {
+const getAllMovies = async (req, res) => {
   try {
-    const movies = await prisma.movie.findMany({ orderBy: { releaseDate: 'desc' } });
+    const movies = await prisma.movie.findMany();
     res.json(movies);
   } catch (err) {
-    next(err);
+    res.status(500).json({ error: 'Failed to fetch movies' });
   }
 };
 

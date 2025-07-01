@@ -9,4 +9,5 @@ router.get('/latest',outreachController.getLatestOutreachs);
 // GET /api/outreach → all
 router.get('/',outreachController.getAllOutreachs);
 
+
 module.exports = router;

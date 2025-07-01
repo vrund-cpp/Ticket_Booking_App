@@ -1,34 +1,39 @@
 // lib/widgets/movie_card.dart
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../models/movie.dart';
 
 /// A card for a single movie in the “Movies” carousel.
 class MovieCard extends StatelessWidget {
   final Movie movie;
+  final String userId;
 
-  const MovieCard({super.key, required this.movie});
+  const MovieCard({super.key, required this.movie,required this.userId});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return GestureDetector(
+    onTap: () {
+      context.push('/movie-details', extra: {
+  'movie': movie,
+  'userId': userId,
+}); // 👈 pass movie object
+    },
+    child: Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Stack(
-          children: [
-            // Background image
-            Container(
+        child: Container(
               width: 220,
               height: 120,
               color: Colors.grey[300],
-              child: Image.network(
+              child: Stack(
+fit: StackFit.expand, // ensures all children take full size
+              children: [Image.network(
                 movie.imageUrl,
                 fit: BoxFit.cover,
-                width: 220,
-                height: 120,
               ),
-            ),
 
             // Black gradient overlay at bottom half
             Positioned(
@@ -71,20 +76,22 @@ class MovieCard extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     movie.description,
-                    maxLines: 2,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    ),
     );
   }
 }

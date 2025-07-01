@@ -1,9 +1,9 @@
 // lib\features\auth\screens\signup_screen.dart
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
-import 'package:ticket_booking_app/generated/app_localizations.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -40,7 +40,7 @@ class _SignupScreenState extends State<SignupScreen> {
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: const Text('Signup Failed'),
+          title:  Text('signUpFailed'.tr()),
           content: Text(e.toString().replaceFirst('Exception: ', '')),
         ),
       );
@@ -51,7 +51,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: const Color(0xFFE6F0FA), // Light blue background
@@ -72,14 +71,14 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(loc.signUp,
+                  Text('signUp'.tr(),
                       style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1E008A))),
                   const SizedBox(height: 8),
                   Text(
-                    loc.signupSubtitle,
+                    'signupSubtitle'.tr(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 14, color: Colors.black54),
                   ),
@@ -103,11 +102,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   // Email ID
                   _buildField(
                     _emailCtrl,
-                    loc.emailId,
+                    'emailId'.tr(),
                     validator: (val) {
-                      if (val == null || val.isEmpty) return loc.emailRequired;
+                      if (val == null || val.isEmpty) return 'emailRequired'.tr();
                       final emailRegex = RegExp(r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$');
-                      return emailRegex.hasMatch(val) ? null : loc.invalidEmail;
+                      return emailRegex.hasMatch(val) ? null : 'invalidEmail'.tr();
                     },
                   ),
                   const SizedBox(height: 12),
@@ -115,12 +114,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   // Mobile Number
                   _buildField(
                     _mobileCtrl,
-                    loc.mobileNumber,
+                    'mobileNumber'.tr(),
                     keyboard: TextInputType.phone,
                     validator: (val) {
-                      if (val == null || val.isEmpty) return loc.mobileRequired;
+                      if (val == null || val.isEmpty) return 'mobileRequired'.tr();
                       final phoneRegex = RegExp(r'^\d{10}$');
-                      return phoneRegex.hasMatch(val) ? null : loc.invalidMobile;
+                      return phoneRegex.hasMatch(val) ? null : 'invalidMobile'.tr();
                     },
                   ),
                   const SizedBox(height: 24),
@@ -137,7 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       child: _loading
                           ? const CircularProgressIndicator(color: Colors.white)
-                          : Text(loc.requestPin, style: TextStyle(color: Colors.white)),
+                          : Text('requestPin'.tr(), style: TextStyle(color: Colors.white)),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -146,7 +145,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextButton(
                     onPressed: () => context.go('/login'),
                     child: Text(
-                      loc.alreadyHaveAccount,
+                      'alreadyHaveAccount'.tr(),
                       style: const TextStyle(
                         color: Color(0xFF1E008A),
                         decoration: TextDecoration.underline,

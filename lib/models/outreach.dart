@@ -33,20 +33,3 @@ class Outreach {
 }
 
 
-// class OutreachModel {
-//   final int id;
-//   final String title;
-//   final String imageUrl;
-//   final DateTime startDate;
-
-//   OutreachModel({required this.id, required this.title, required this.imageUrl, required this.startDate});
-
-//   factory OutreachModel.fromJson(Map<String, dynamic> json) {
-//     return OutreachModel(
-//       id: json['id'],
-//       title: json['title'],
-//       imageUrl: json['imageUrl'],
-//       startDate: json['startDate'],
-//     );
-//   }
-// }

@@ -8,4 +8,5 @@ router.get('/latest' ,newsController.getNews);
 // GET /api/news → all
 router.get('/' ,newsController.getAllNews);
 
+
 module.exports = router;

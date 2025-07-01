@@ -2,10 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-// import 'package:ticket_booking_app/core/services/auth_service.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
-import 'package:ticket_booking_app/generated/app_localizations.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,10 +30,11 @@ class _LoginScreenState extends State<LoginScreen> {
         await showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            title: const Text('Error'),
-            content: const Text('Failed to send OTP. Please try again.'),
+            title:  Text('error'.tr()),
+            content:  Text('otpSendFailed'.tr()),
                       actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+              TextButton(onPressed: () => context.pop(), child: Text('ok'.tr())
+              ),
             ],
           ),
         );
@@ -45,10 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
       await showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: const Text('Error'),
+          title:  Text('error'.tr()),
           content: Text(e.toString()),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+            TextButton(onPressed: () => Navigator.pop(context), child:  Text('ok'.tr())),
           ],
         ),
       );
@@ -59,7 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: const Color(0xFFE7ECFD),
@@ -85,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    loc.signIn.toUpperCase(),
+                    'signIn'.tr().toUpperCase(),
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -94,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    loc.enterPhoneOrEmail,
+                    'enterPhoneOrEmail'.tr(),
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -118,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _emailPhoneCtrl,
                     decoration: InputDecoration(
-                      hintText: loc.phoneOrEmail,
+                      hintText: 'phoneOrEmail'.tr(),
                       hintStyle: const TextStyle(color: Colors.black45),
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
@@ -128,14 +126,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return loc.enterValidEmailOrPhone;
+                        return 'enterValidEmailOrPhone'.tr();
                       }
                       final emailPattern = RegExp(
                           r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}$');
                       final phonePattern = RegExp(r'^\d{10}$');
                       if (!emailPattern.hasMatch(value) &&
                           !phonePattern.hasMatch(value)) {
-                        return loc.enterValidEmailOrPhone;
+                        return 'enterValidEmailOrPhone'.tr();
                       }
                       return null;
                     },
@@ -158,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.white,
                               strokeWidth: 2,
                             )
-                          : Text(loc.requestPin),
+                          : Text('requestPin'.tr()),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -166,11 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () => context.push('/signup'),
                     child: RichText(
                       text: TextSpan(
-                        text: loc.dontHaveAccount,
+                        text: 'dontHaveAccount'.tr(),
                         style: const TextStyle(color: Colors.black54),
                         children: [
                           TextSpan(
-                            text: ' ${loc.signUp}',
+                            text: ' ${'signUp'.tr()}',
                             style: const TextStyle(
                                 color: Color(0xFF240E86),
                                 fontWeight: FontWeight.bold),

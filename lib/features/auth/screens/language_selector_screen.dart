@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ticket_booking_app/generated/app_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LanguageSelectorScreen extends StatefulWidget {
   const LanguageSelectorScreen({super.key});
@@ -23,6 +23,9 @@ class _LanguageSelectorScreenState extends State<LanguageSelectorScreen> {
     await prefs.setBool('isLanguageSelected', true);
     await prefs.setString('languageCode', selectedLang);
 
+    // Set locale for easy_localization
+    await context.setLocale(Locale(selectedLang));
+
     context.go('/login');
   }
 
@@ -41,7 +44,7 @@ class _LanguageSelectorScreenState extends State<LanguageSelectorScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  AppLocalizations.of(context)!.selectLanguage,
+                  'selectLanguage'.tr(),
                   style: const TextStyle(
                     fontSize: 16,
                     color: Color(0xFF1E008A),
@@ -63,7 +66,12 @@ class _LanguageSelectorScreenState extends State<LanguageSelectorScreen> {
                   );
                 }).toList(),
                 onChanged: (value) {
-                  setState(() => selectedLang = value!);
+
+                    if (value != null) {
+                    setState(() {
+                      selectedLang = value;
+                    });
+                  }
                 },
               ),
               const SizedBox(height: 40),
@@ -76,7 +84,7 @@ class _LanguageSelectorScreenState extends State<LanguageSelectorScreen> {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: _continue,
-                  child: Text(AppLocalizations.of(context)!.continueLabel),
+                  child: Text('continueLabel'.tr()),
                 ),
               )
             ],

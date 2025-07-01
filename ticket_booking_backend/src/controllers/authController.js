@@ -63,10 +63,12 @@ const requestOtp = async (req, res) => {
 
 const login = async (req, res) => {
   const { email } = req.body;
+  console.log('📩 Received email:', email);  // 👈 Log incoming email
 
   try {
     const user = await prisma.user.findUnique({ where: { email } });
-
+    console.log('👤 Fetched user:', user);  // 👈 Log result of Prisma query
+    
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const otp = generateOtp();
@@ -75,6 +77,7 @@ const login = async (req, res) => {
 
     res.status(200).json({ message: "OTP sent" });
   } catch (error) {
+    console.error('💥 Login error:', error);
     res.status(500).json({ error: error.message });
   }
 };

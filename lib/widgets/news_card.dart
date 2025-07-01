@@ -1,5 +1,6 @@
 // lib/widgets/news_card.dart
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../models/news.dart';
 
@@ -32,7 +33,9 @@ class NewsCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                news.summary ?? 'No summary available',
+                (news.summary != null && news.summary!.trim().isNotEmpty)
+      ? news.summary!
+      : 'noSummaryAvailable'.tr(),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
@@ -52,7 +55,7 @@ class NewsCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    news.date != null ? _formatDate(news.date!) : 'No date',
+                    news.date != null ? _formatDate(news.date!) : 'noDate'.tr(),
                     style: const TextStyle(
                       color: Color(0xFF757575),
                       fontSize: 12,

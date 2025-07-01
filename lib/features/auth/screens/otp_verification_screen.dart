@@ -1,10 +1,10 @@
 // lib\features\auth\screens\otp_verification_screen.dart
 
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
-import 'package:ticket_booking_app/generated/app_localizations.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
   const OTPVerificationScreen({super.key});
@@ -19,7 +19,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     final _focusNodes = List.generate(4, (_) => FocusNode());
   
   bool _loading = false;
-  late final String userIdentifier;
+  String? userIdentifier;
   int _secondsRemaining = 60;
 
   @override
@@ -51,32 +51,28 @@ Future<void> submitOTP(String code) async {
 
   setState(() => _loading = true);
 
-  final success = await ApiService.verifyOtp(userIdentifier.trim(), code.trim());
+  final success = await ApiService.verifyOtp(userIdentifier!, code.trim());
 
   setState(() => _loading = false);
 
   if (success) {
     context.go('/dashboard', extra: userIdentifier);
   } else {
-    final loc = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text(loc.invalidOtp),
-        content: Text(loc.enterCorrectOtp),
+        title: Text('invalidOtp'.tr()),
+        content: Text('enterCorrectOtp'.tr()),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
+            child: Text('ok'.tr()),
           ),
         ],
       ),
     );
   }
 }
-  // String getCombinedOTP() {
-  //   return otpControllers.map((controller) => controller.text.trim()).join();
-  // }
 
 
   Widget _buildField(int i) {
@@ -106,7 +102,6 @@ Future<void> submitOTP(String code) async {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8FF),
@@ -122,7 +117,7 @@ Future<void> submitOTP(String code) async {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                loc.enterPin,
+                'enterPin'.tr(),
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -131,7 +126,7 @@ Future<void> submitOTP(String code) async {
               ),
               const SizedBox(height: 12),
               Text(
-                loc.enterPinSubtitle,
+                'enterPinSubtitle'.tr(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 14, color: Colors.grey),
               ),
@@ -139,7 +134,7 @@ Future<void> submitOTP(String code) async {
               const Icon(Icons.lock, size: 40, color: Color(0xFF2C007F)),
               const SizedBox(height: 12),
               Text(
-                loc.enterHere,
+                'enterHere'.tr(),
                 style: const TextStyle(fontSize: 14, color: Colors.black),
               ),
               const SizedBox(height: 20),
@@ -169,7 +164,7 @@ Future<void> submitOTP(String code) async {
                   child: _loading
                       ? const CircularProgressIndicator(color: Colors.white)
                       : Text(
-                          loc.submit,
+                          'submit'.tr(),
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),

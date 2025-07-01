@@ -6,8 +6,9 @@ const prisma = new PrismaClient();
 // GET /api/notifications/:userId
 const getUserNotifications = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const list = await prisma.notification.findMany({
-      where: { userId:req.userId  },
+      where: { userId },
       orderBy: { createdAt: 'desc' },
     });
     res.json(list);
@@ -21,7 +22,8 @@ const getUserNotifications = async (req, res, next) => {
 // GET /api/notifications/unread-count/:userId
 const getUnreadCount = async (req, res, next) => {
   try {
-    const userId  = req.userId;
+    const userId = req.user.id;
+
     const count = await prisma.notification.count({
       where: { userId, isRead: false },
     });
@@ -53,10 +55,10 @@ const markNotificationRead = async (req, res) => {
   }
 };
 
-// PATCH /api/notifications/mark-all-read/:userId
+// POST /api/notifications/mark-all-read
 const markAllNotificationsRead = async (req, res, next) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     await prisma.notification.updateMany({
       where: { userId, isRead: false },
       data: { isRead: true },

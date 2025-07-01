@@ -16,7 +16,7 @@ class News {
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
       id: json['id'] as int,
-      summary: json['sumarry'] as String?,
+      summary: json['summary'] as String?,
       date: json['date'] != null ? DateTime.tryParse(json['date']) : null,
       createdAt: DateTime.parse(json['createdAt']),
     );

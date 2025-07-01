@@ -1,8 +1,12 @@
 // lib/screens/dashboard_screen.dart
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
+import 'package:ticket_booking_app/providers/profile_provider.dart';
+import 'package:ticket_booking_app/widgets/custom_drawer.dart';
 // import 'package:ticket_booking_app/core/services/auth_service.dart';
 // import 'package:ticket_booking_app/core/services/notification_service.dart';
 import '../../../core/constants/colors.dart';
@@ -46,7 +50,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _outreachFuture = ApiService.fetchLatestOutreach();
     _attractionsFuture = ApiService.fetchLatestAttractions();
     _newsFuture = ApiService.fetchLatestNews();
-    _notifCountFuture = ApiService.getUnreadCount(widget.userId);
+    _notifCountFuture = ApiService.getUnreadCount();
+    
+Future.microtask(() async {
+  print('👀 Fetching profile...');
+  await context.read<ProfileProvider>().fetchProfileData();
+  print('✅ Profile loaded');
+});
 
     _moviePageController.addListener(() {
       final next = _moviePageController.page!.round();
@@ -68,7 +78,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // 1. Purple AppBar with Hamburger & Notification
-      drawer: const Drawer(child: SizedBox()),
+      drawer: CustomDrawer(userId: widget.userId),
       appBar: AppBar(
         backgroundColor: AppColors.purpleDark,
         elevation: 0,
@@ -78,8 +88,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onPressed:()=>Scaffold.of(ctx).openDrawer(),
           ),
         ),
-        title: const Text(
-          'Dashboard',
+        title:  Text(
+          'Dashboard'.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -92,8 +102,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: GestureDetector(
               onTap: () async {
                 await context.push('/notifications', extra: widget.userId);
+  if (!mounted) return;
   setState(() {
-    _notifCountFuture = ApiService.getUnreadCount(widget.userId);
+    _notifCountFuture = ApiService.getUnreadCount();
   });
               },
               child: Stack(
@@ -175,10 +186,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Title: "Quick Booking"
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 16.0, bottom: 12.0),
             child: Text(
-              'Quick Booking',
+              'quickBooking'.tr(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -198,37 +209,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     QuickBookingItem(
                       icon: Icons.confirmation_number_outlined,
-                      label: 'ENTRY TICKET',
+                      label: 'entryTicket'.tr(),
                       circleColor: AppColors.accentOrange,
-                      onTap: () {
-                        // TODO: Navigate to Entry Ticket
+                      onTap: () async {
+                        await context.push('/entry-tickets/booking', extra: widget.userId);
                       },
                     ),
                     const SizedBox(width: 32),
                     QuickBookingItem(
                       icon: Icons.local_parking,
-                      label: 'PARKING',
+                      label: 'PARKING'.tr(),
                       circleColor: AppColors.cyanAccent,
-                      onTap: () {
-                        // TODO: Navigate to Parking
+                      onTap: () async {
+                        await context.push('/parking-options/booking', extra: widget.userId);
                       },
                     ),
                     const SizedBox(width: 32),
                     QuickBookingItem(
                       icon: Icons.rocket_launch,
-                      label: 'ATTRACTIONS',
+                      label: 'ATTRACTIONS'.tr(),
                       circleColor: Colors.purple,
-                      onTap: () {
-                        // TODO: Navigate to Attractions
+                      onTap: () async {
+                        await context.push('/attractions/booking', extra: widget.userId);
                       },
                     ),
                     const SizedBox(width: 32),
                     QuickBookingItem(
                       icon: Icons.movie_creation_outlined,
-                      label: 'MOVIES',
+                      label: 'Movies'.tr(),
                       circleColor: AppColors.accentOrange,
-                      onTap: () {
-                        // TODO: Navigate to Movies
+                      onTap: () async {
+                        await context.push('/movies/booking', extra: widget.userId);
                       },
                     ),
                   ],
@@ -275,8 +286,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                const Text(
-                  'Movies',
+                 Text(
+                  'Movies'.tr(),
                   style: TextStyle(
                     color: AppColors.purpleDark,
                     fontSize: 16,
@@ -296,9 +307,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () => context.push('/movies'),
-                  child: const Text(
-                    'See All',
+                  onPressed: () => context.push('/movies', extra: widget.userId),
+                  child:  Text(
+                    'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -325,7 +336,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 160,
                   child: Center(
                     child: Text(
-                      'Error loading movies',
+                      'errorLoadingMovies'.tr(),
                       style: TextStyle(color: Colors.red[700]),
                     ),
                   ),
@@ -342,7 +353,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         itemCount: count,
                         padEnds: false,
                         itemBuilder: (context, index) {
-                          return MovieCard(movie: movies[index]);
+                          return MovieCard(movie: movies[index], userId: widget.userId);
                         },
                       ),
                     ),
@@ -388,8 +399,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                const Text(
-                  'Outreach Programs',
+                 Text(
+                  'outreachPrograms'.tr(),
                   style: TextStyle(
                     color: AppColors.purpleDark,
                     fontSize: 16,
@@ -409,9 +420,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () => context.push('/outreach'),
-                  child: const Text(
-                    'See All',
+                  onPressed: () => context.push('/outreach', extra: widget.userId),
+                  child:  Text(
+                    'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -438,7 +449,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 200,
                   child: Center(
                     child: Text(
-                      'Error loading outreach',
+                      'errorLoadingOutreach'.tr(),
                       style: TextStyle(color: Colors.red[700]),
                     ),
                   ),
@@ -486,8 +497,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                const Text(
-                  'Attractions',
+                 Text(
+                  'Attractions'.tr(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -507,9 +518,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () =>context.push('/attractions'),
-                  child: const Text(
-                    'See All',
+                  onPressed: () =>context.push('/attractions',extra: widget.userId),
+                  child:  Text(
+                    'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -536,7 +547,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 180,
                   child: Center(
                     child: Text(
-                      'Error loading attractions',
+                      'errorLoadingAttractions'.tr(),
                       style: TextStyle(color: Colors.red[700]),
                     ),
                   ),
@@ -577,8 +588,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                const Text(
-                  'Latest News',
+                 Text(
+                  'latestNews'.tr(),
                   style: TextStyle(
                     color: AppColors.purpleDark,
                     fontSize: 16,
@@ -598,9 +609,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () =>context.push('/news'),
-                  child: const Text(
-                    'See All',
+                  onPressed: () =>context.push('/news', extra: widget.userId),
+                  child:  Text(
+                    'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -627,7 +638,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 130,
                   child: Center(
                     child: Text(
-                      'Error loading news',
+                      'errorLoadingNews'.tr(),
                       style: TextStyle(color: Colors.red[700]),
                     ),
                   ),
@@ -653,595 +664,3 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// import 'package:ticket_booking_app/core/constants/colors.dart';
-// import 'package:ticket_booking_app/features/quickbooking/providers/quickbooking_provider.dart';
-// import 'package:ticket_booking_app/features/quickbooking/model/quick_booking_item.dart';
-// import 'package:ticket_booking_app/features/home/presentation/widgets/quickbooking_carousel.dart';
-// import 'package:ticket_booking_app/features/home/presentation/widgets/section_header.dart';
-// import 'package:ticket_booking_app/core/services/dashboard_service.dart';
-// import 'package:ticket_booking_app/features/movies/presentation/model/movie_item.dart';
-// import 'package:ticket_booking_app/features/movies/presentation/screens/see_all_movies_screen.dart';
-// import 'package:ticket_booking_app/features/notification/presentation/providers/notification_provider.dart';
-// import 'package:ticket_booking_app/features/attractions/presentation/model/attraction_item.dart';
-// import 'package:ticket_booking_app/features/outreach/presentation/model/outreach_item.dart';
-// import 'package:ticket_booking_app/features/news/presentation/model/news_item.dart';
-
-// class DashboardScreen extends ConsumerStatefulWidget {
-//   const DashboardScreen({Key? key}): super(key:key);
-
-//   @override
-//   ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
-// }
-
-// class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-//   late Future<List<MovieModel>> _moviesFuture;
-//   late Future<List<OutreachModel>> _outreachFuture;
-//   late Future<List<AttractionModel>> _attractionFuture;
-//   late Future<List<NewsItem>> _newsFuture;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _moviesFuture = DashboardService.fetchMoviesLatest();
-//     _outreachFuture = DashboardService.fetchOutreachLatest();
-//     _attractionFuture = DashboardService.fetchAttractionsLatest();
-//     _newsFuture = DashboardService.fetchNewsLatest();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final unreadCount = ref.watch(unreadNotificationCountProvider);
-//     final quickBookingAsync = ref.watch(quickBookingProvider);
-
-//     return Scaffold(
-//       backgroundColor: AppColors.backgroundPurple,
-//       appBar: AppBar(
-//         backgroundColor: AppColors.backgroundPurple,
-//         elevation: 0,
-//         title: const Text('Dashboard',
-//             style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-//         actions: [
-//           Stack(
-//             children: [
-//               IconButton(
-//                 icon: const Icon(Icons.notifications, color: Colors.white),
-//                 onPressed: () => Navigator.pushNamed(context, '/notifications'),
-//               ),
-//               if (unreadCount.asData?.value != null && unreadCount.asData!.value > 0)
-//                 Positioned(
-//                   top: 8,
-//                   right: 8,
-//                   child: Container(
-//                     padding: const EdgeInsets.all(4),
-//                     decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-//                     child: Text(
-//                       '${unreadCount.asData!.value}',
-//                       style: const TextStyle(color: Colors.white, fontSize: 10),
-//                     ),
-//                   ),
-//                 ),
-//             ],
-//           )
-//         ],
-//       ),
-//       body: SafeArea(
-//         child: ListView(
-//           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-//           children: [
-//             // Quick Booking Section
-//             const Text('Quick Booking',
-//                 style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
-//             const SizedBox(height: 12),
-//             SizedBox(
-//               height: 110,
-//               child: quickBookingAsync.when(
-//                 loading: () => const Center(child: CircularProgressIndicator()),
-//                 error: (_, __) => const Center(child: Text('Error loading quick booking', style: TextStyle(color: Colors.red))),
-//                 data: (items) {
-//                   if (items.isEmpty) {
-//                     return const Center(
-//                         child: Text('No booking options', style: TextStyle(color: Colors.white)));
-//                   }
-//                   return ListView.separated(
-//                     scrollDirection: Axis.horizontal,
-//                     itemCount: items.length,
-//                     separatorBuilder: (_, __) => const SizedBox(width: 12),
-//                     itemBuilder: (context, index) {
-//                       final qb = items[index];
-//                       return QuickBookingCarousel(
-//                         title: qb.title,
-//                         icon: Icons.confirmation_num,
-//                         onTap: () {
-//                           // Navigate to specific booking flow based on qb.type
-//                           switch (qb.type.toLowerCase()) {
-//                             case 'entry':
-//                               Navigator.pushNamed(context, '/booking-entry');
-//                               break;
-//                             case 'parking':
-//                               Navigator.pushNamed(context, '/booking-parking');
-//                               break;
-//                             case 'attraction':
-//                               Navigator.pushNamed(context, '/booking-attraction');
-//                               break;
-//                             case 'movie':
-//                               Navigator.pushNamed(context, '/booking-movie');
-//                               break;
-//                             default:
-//                               break;
-//                           }
-//                         },
-//                         colorHex: qb.colorHex,
-//                       );
-//                     },
-//                   );
-//                 },
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-//             // Movies Section
-//             SectionHeader(
-//               title: "Movies",
-//               onSeeAll: () => Navigator.pushNamed(context, '/see-all-movies'),
-//             ),
-//             Container(
-//               height: 180,
-//               decoration: BoxDecoration(color: Colors.black87, borderRadius: BorderRadius.circular(8)),
-//               child: _buildHorizontalFutureSection<MovieModel>(
-//                 future: _moviesFuture,
-//                 itemBuilder: (movie) => Column(
-//                   children: [
-//                     ClipRRect(
-//                       borderRadius: BorderRadius.circular(12),
-//                       child: Image.network(movie.imageUrl, height: 120, width: 100, fit: BoxFit.cover),
-//                     ),
-//                     const SizedBox(height: 6),
-//                     Text(movie.title, style: const TextStyle(color: Colors.white, fontSize: 12)),
-//                   ],
-//                 ),
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-//             // Outreach Programs Section
-//             SectionHeader(
-//               title: "Outreach Programs",
-//               onSeeAll: () => Navigator.pushNamed(context, '/see-all-outreach'),
-//             ),
-//             Container(
-//               height: 160,
-//               decoration: BoxDecoration(color: AppColors.lightBlue, borderRadius: BorderRadius.circular(8)),
-//               child: _buildHorizontalFutureSection<OutreachModel>(
-//                 future: _outreachFuture,
-//                 itemBuilder: (program) => Column(
-//                   children: [
-//                     ClipRRect(
-//                       borderRadius: BorderRadius.circular(12),
-//                       child: Image.network(program.imageUrl, height: 100, width: 100, fit: BoxFit.cover),
-//                     ),
-//                     const SizedBox(height: 6),
-//                     Text(program.title, style: const TextStyle(color: Colors.black, fontSize: 12)),
-//                   ],
-//                 ),
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-//             // Attractions Section
-//             Container(
-//               padding: const EdgeInsets.all(12),
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(12),
-//                 gradient: LinearGradient(
-//                   colors: [Colors.deepPurple.shade400, Colors.blue.shade300],
-//                   begin: Alignment.topLeft,
-//                   end: Alignment.bottomRight,
-//                 ),
-//               ),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   SectionHeader(
-//                     title: "Attractions",
-//                     onSeeAll: () => Navigator.pushNamed(context, '/see-all-attractions'),
-//                   ),
-//                   _buildHorizontalFutureSection<AttractionModel>(
-//                     future: _attractionFuture,
-//                     itemBuilder: (attraction) => Column(
-//                       children: [
-//                         ClipRRect(
-//                           borderRadius: BorderRadius.circular(12),
-//                           child: Image.network(attraction.imageUrl, height: 100, width: 100, fit: BoxFit.cover),
-//                         ),
-//                         const SizedBox(height: 6),
-//                         Text(attraction.title, style: const TextStyle(color: Colors.white, fontSize: 12)),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-//             // Latest News Section
-//             Container(
-//               width: double.infinity,
-//               decoration: BoxDecoration(color: AppColors.offWhite, borderRadius: BorderRadius.circular(8)),
-//               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   SectionHeader(
-//                     title: "Latest News",
-//                     onSeeAll: () => Navigator.pushNamed(context, '/see-all-news'),
-//                   ),
-//                   _buildVerticalFutureSection<NewsItem>(
-//                     future: _newsFuture,
-//                     itemBuilder: (news) => ListTile(
-//                       leading: ClipRRect(
-//                         borderRadius: BorderRadius.circular(8),
-//                         child: Image.network(news.imageUrl, width: 60, height: 60, fit: BoxFit.cover),
-//                       ),
-//                       title: Text(news.title, style: const TextStyle(color: Colors.black)),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   Widget _buildSectionHeader(String title, VoidCallback onTap) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Text(title, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600)),
-//           TextButton(
-//             onPressed: onTap,
-//             style: TextButton.styleFrom(backgroundColor: AppColors.yellow),
-//             child: const Text("See All", style: TextStyle(color: Colors.black)),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _buildHorizontalFutureSection<T>({
-//     required Future<List<T>> future,
-//     required Widget Function(T) itemBuilder,
-//   }) {
-//     return FutureBuilder<List<T>>(
-//       future: future,
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else if (snapshot.hasError) {
-//           return const Center(child: Text("Error loading data", style: TextStyle(color: Colors.red)));
-//         } else {
-//           final data = snapshot.data!;
-//           if (data.isEmpty) {
-//             return const Center(child: Text("No items found", style: TextStyle(color: Colors.white)));
-//           }
-//           return ListView.separated(
-//             scrollDirection: Axis.horizontal,
-//             itemCount: data.length,
-//             separatorBuilder: (_, __) => const SizedBox(width: 12),
-//             itemBuilder: (context, index) {
-//               return itemBuilder(data[index]);
-//             },
-//           );
-//         }
-//       },
-//     );
-//   }
-
-//   Widget _buildVerticalFutureSection<T>({
-//     required Future<List<T>> future,
-//     required Widget Function(T) itemBuilder,
-//   }) {
-//     return FutureBuilder<List<T>>(
-//       future: future,
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else if (snapshot.hasError) {
-//           return const Center(child: Text("Error loading data", style: TextStyle(color: Colors.red)));
-//         } else {
-//           final data = snapshot.data!;
-//           if (data.isEmpty) {
-//             return const Center(child: Text("No items found", style: TextStyle(color: Colors.black)));
-//           }
-//           return Column(
-//             children: data.map((item) => itemBuilder(item)).toList(),
-//           );
-//         }
-//       },
-//     );
-//   }
-// }
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// import 'package:ticket_booking_app/core/constants/colors.dart';
-// import 'package:ticket_booking_app/features/home/presentation/widgets/quickbooking_carousel.dart';
-// import 'package:ticket_booking_app/features/home/presentation/widgets/section_header.dart';
-// import 'package:ticket_booking_app/features/notification/presentation/providers/notification_provider.dart';
-// import 'package:ticket_booking_app/features/movies/presentation/screens/see_all_movies_screen.dart';
-// import 'package:ticket_booking_app/features/attractions/presentation/model/attraction_model.dart';
-// import 'package:ticket_booking_app/features/news/presentation/model/news_item.dart';
-// import 'package:ticket_booking_app/features/outreach/presentation/model/outreach_model.dart';
-// import 'package:ticket_booking_app/features/movies/presentation/model/movie_model.dart';
-// import 'package:ticket_booking_app/core/services/dashboard_service.dart';
-
-// class DashboardScreen extends ConsumerStatefulWidget {
-//   const DashboardScreen({super.key});
-
-//   @override
-//   ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
-// }
-
-// class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-//   late Future<List<MovieModel>> _moviesFuture;
-//   late Future<List<OutreachModel>> _outreachFuture;
-//   late Future<List<Attraction>> _attractionFuture;
-//   late Future<List<NewsItem>> _newsFuture;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _moviesFuture = DashboardService.fetchMovies();
-//     _outreachFuture = DashboardService.fetchOutreach();
-//     _attractionFuture = DashboardService.fetchAttractions();
-//     _newsFuture = DashboardService.fetchNews();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final unreadCount = ref.watch(unreadNotificationCountProvider);
-
-//     return Scaffold(
-//       backgroundColor: AppColors.backgroundPurple,
-//       appBar: AppBar(
-//         backgroundColor: AppColors.backgroundPurple,
-//         elevation: 0,
-//         title: const Text('Dashboard',
-//             style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-//         actions: [
-//           Stack(
-//             children: [
-//               IconButton(
-//                 icon: const Icon(Icons.notifications, color: Colors.white),
-//                 onPressed: () => Navigator.pushNamed(context, '/notifications'),
-//               ),
-//               if (unreadCount > 0)
-//                 Positioned(
-//                   top: 8,
-//                   right: 8,
-//                   child: Container(
-//                     padding: const EdgeInsets.all(4),
-//                     decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-//                     child: Text(
-//                       '$unreadCount',
-//                       style: const TextStyle(color: Colors.white, fontSize: 10),
-//                     ),
-//                   ),
-//                 )
-//             ],
-//           )
-//         ],
-//       ),
-//       body: SafeArea(
-//         child: ListView(
-//           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-//           children: [
-
-//             const Text('Quick Booking',
-//                 style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
-//             const SizedBox(height: 12),
-
-//             SizedBox(
-//               height: 110,
-//               child: ListView(
-//                 scrollDirection: Axis.horizontal,
-//                 children: [
-//                   QuickBookingCarousel(
-//                     title: "Entry Ticket",
-//                     icon: Icons.confirmation_num,
-//                     onTap: () {},
-//                   ),
-//                   QuickBookingCarousel(
-//                     title: "Parking",
-//                     icon: Icons.local_parking,
-//                     onTap: () {},
-//                   ),
-//                   QuickBookingCarousel(
-//                     title: "Attractions",
-//                     icon: Icons.place,
-//                     onTap: () {},
-//                   ),
-//                   QuickBookingCarousel(
-//                     title: "Movie Booking",
-//                     icon: Icons.movie,
-//                     onTap: () {},
-//                   ),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-
-//             _buildSectionHeader("Movies", () {
-//               Navigator.push(context, MaterialPageRoute(builder: (_) => const SeeAllMoviesScreen()));
-//             }),
-//             _buildHorizontalFutureSection<MovieModel>(
-//               future: _moviesFuture,
-//               height: 180,
-//               backgroundColor: Colors.black,
-//               itemBuilder: (movie) => Column(
-//                 children: [
-//                   Image.network(movie.imageUrl, height: 120, width: 100, fit: BoxFit.cover),
-//                   const SizedBox(height: 6),
-//                   Text(movie.title, style: const TextStyle(color: Colors.white, fontSize: 12)),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-
-//             _buildSectionHeader("Outreach Programs", () {
-//               Navigator.pushNamed(context, '/see-all-outreach');
-//             }),
-//             _buildHorizontalFutureSection<OutreachModel>(
-//               future: _outreachFuture,
-//               height: 160,
-//               backgroundColor: Colors.black87,
-//               itemBuilder: (program) => Column(
-//                 children: [
-//                   Image.network(program.imageUrl, height: 100, width: 100, fit: BoxFit.cover),
-//                   const SizedBox(height: 6),
-//                   Text(program.title, style: const TextStyle(color: Colors.white, fontSize: 12)),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-
-//             Container(
-//               padding: const EdgeInsets.all(12),
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(12),
-//                 gradient: LinearGradient(
-//                   colors: [Colors.deepPurple.shade400, Colors.blue.shade300],
-//                   begin: Alignment.topLeft,
-//                   end: Alignment.bottomRight,
-//                 ),
-//               ),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   _buildSectionHeader("Attractions", () {
-//                     Navigator.pushNamed(context, '/see-all-attractions');
-//                   }),
-//                   _buildHorizontalFutureSection<Attraction>(
-//                     future: _attractionFuture,
-//                     height: 160,
-//                     backgroundColor: Colors.transparent,
-//                     itemBuilder: (attraction) => Column(
-//                       children: [
-//                         Image.network(attraction.imageUrl, height: 100, width: 100, fit: BoxFit.cover),
-//                         const SizedBox(height: 6),
-//                         Text(attraction.title, style: const TextStyle(color: Colors.white, fontSize: 12)),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-
-//             SectionHeader(
-//               title: "Latest News",
-//               onSeeAll: () {
-//                 Navigator.pushNamed(context, '/see-all-news');
-//               },
-//             ),
-
-//             FutureBuilder<List<NewsItem>>(
-//               future: _newsFuture,
-//               builder: (context, snapshot) {
-//                 if (snapshot.connectionState == ConnectionState.waiting) {
-//                   return const Center(child: CircularProgressIndicator());
-//                 } else if (snapshot.hasError) {
-//                   return const Text("Error loading news", style: TextStyle(color: Colors.red));
-//                 } else {
-//                   final news = snapshot.data!;
-//                   return Column(
-//                     children: news
-//                         .map(
-//                           (item) => ListTile(
-//                             leading: Image.network(item.imageUrl, width: 60, height: 60, fit: BoxFit.cover),
-//                             title: Text(item.title, style: const TextStyle(color: Colors.white)),
-//                           ),
-//                         )
-//                         .toList(),
-//                   );
-//                 }
-//               },
-//             ),
-
-//             const SizedBox(height: 24),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   Widget _buildSectionHeader(String title, VoidCallback onTap) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Text(title, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600)),
-//           TextButton(
-//             onPressed: onTap,
-//             child: const Text("See All", style: TextStyle(color: Colors.yellow)),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _buildHorizontalFutureSection<T>({
-//     required Future<List<T>> future,
-//     required double height,
-//     required Widget Function(T) itemBuilder,
-//     Color backgroundColor = Colors.transparent,
-//   }) {
-//     return Container(
-//       height: height,
-//       color: backgroundColor,
-//       child: FutureBuilder<List<T>>(
-//         future: future,
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return const Center(child: CircularProgressIndicator());
-//           } else if (snapshot.hasError) {
-//             return const Center(child: Text("Error loading data", style: TextStyle(color: Colors.red)));
-//           } else {
-//             final data = snapshot.data!;
-//             return ListView.builder(
-//               scrollDirection: Axis.horizontal,
-//               itemCount: data.length,
-//               itemBuilder: (context, index) {
-//                 return Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: itemBuilder(data[index]),
-//                 );
-//               },
-//             );
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }

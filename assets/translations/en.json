@@ -1,9 +1,0 @@
-{
-  "sign_in": "SIGN IN",
-  "sign_in_description": "Please enter mobile number or\nemail id for verification",
-  "mobile_or_email": "Mobile Number or Email id",
-  "request_pin": "Request PIN",
-  "no_account": "Don't have an account?",
-  "sign_up": "Sign Up",
-  "field_required": "This field is required"
-}
