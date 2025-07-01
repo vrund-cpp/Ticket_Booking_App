@@ -10,3 +10,6 @@ npx prisma migrate resolve --applied 20250622143015_init || true
 
 echo "🚀 Deploying migrations..."
 npx prisma migrate deploy
+
+echo "🌱 Seeding the database..."
+npx prisma db seed
