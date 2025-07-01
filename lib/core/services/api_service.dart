@@ -18,8 +18,8 @@ import '../../models/parking_option.dart';
 import '../../models/booking_summary.dart';
 
 class ApiService {
-   static const String baseUrl = 'http://192.168.144.220:3000';
-// static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com'; // Replace with your IP
+  //  static const String baseUrl = 'http://192.168.144.220:3000';
+static const String baseUrl = 'https://ticket-booking-app-backend-0zhj.onrender.com'; // Replace with your IP
 
   // static String get _host {
     // if (Platform.isAndroid) {
