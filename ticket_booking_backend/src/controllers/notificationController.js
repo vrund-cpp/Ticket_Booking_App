@@ -14,8 +14,8 @@ const getUserNotifications = async (req, res, next) => {
     res.json(list);
   } catch (err) {
     // next(err);
-      console.error(err);
-      res.status(500).json({ error: 'Failed to fetch notifications' });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch notifications' });
   }
 };
 
@@ -29,8 +29,8 @@ const getUnreadCount = async (req, res, next) => {
     });
     res.json({ count });
   } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to find unread count' });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to find unread count' });
   }
 };
 

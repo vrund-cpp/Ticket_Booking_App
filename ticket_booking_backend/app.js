@@ -8,19 +8,6 @@ const prisma = new PrismaClient();
 
 app.set("trust proxy", 1); // trust first proxy
 
-
-// const { exec } = require('child_process');
-
-// app.get('/push-schema', async (req, res) => {
-//   exec('npx prisma db push', (err, stdout, stderr) => {
-//     if (err) {
-//       console.error(stderr);
-//       return res.status(500).send('Error pushing schema:\n' + stderr);
-//     }
-//     res.send('Schema pushed successfully:\n' + stdout);
-//   });
-// });
-
 // app.get('/push-schema', async (req, res) => {
 //   const { exec } = require('child_process');
 //   exec('npx prisma db push', (err, stdout, stderr) => {
@@ -36,7 +23,7 @@ app.use(express.json());
 
 const authRoutes = require('./src/routes/auth');
 const moviesRoutes = require('./src/routes/movies');
-const outreachRoutes = require('./src/routes/outreach'); 
+const outreachRoutes = require('./src/routes/outreach');
 const attractionsRoutes = require('./src/routes/attractions');
 const newsRoutes = require('./src/routes/news');
 const notificationsRoutes = require('./src/routes/notifications');
@@ -52,12 +39,12 @@ app.use('/api/movies', moviesRoutes);
 app.use('/api/outreach', outreachRoutes);
 app.use('/api/attractions', attractionsRoutes);
 app.use('/api/news', newsRoutes);
-app.use('/api/notifications', authMiddleware,notificationsRoutes);
+app.use('/api/notifications', authMiddleware, notificationsRoutes);
 app.use('/api/entry-tickets', entryRoutes);
 app.use('/api/parking-options', parkingRoutes);
-app.use('/api/bookings', authMiddleware ,bookingRoutes);
+app.use('/api/bookings', authMiddleware, bookingRoutes);
 app.use('/api/payments', paymentRoutes);
-app.use('/api/profile', authMiddleware ,userProfileRoutes);
+app.use('/api/profile', authMiddleware, userProfileRoutes);
 
 // ✅ Add this test route to check DB connection
 app.get('/push-schema', async (req, res) => {

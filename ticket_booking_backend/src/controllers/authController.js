@@ -68,7 +68,7 @@ const login = async (req, res) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
     console.log('👤 Fetched user:', user);  // 👈 Log result of Prisma query
-    
+
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const otp = generateOtp();
@@ -92,14 +92,14 @@ const verifyOtpctrl = async (req, res) => {
   try {
     const isValid = await verifyOtp(identifier.trim(), otp.trim());
     if (!isValid) {
-      return res.status(400).json({ message: "Invalid or expired OTP" });
+      return res.status(401).json({ message: "Invalid or expired OTP" });
     }
     await prisma.user.updateMany({
       where: { OR: [{ email: identifier }, { mobile: identifier }] },
       data: { verified: true }
     });
 
-// fetch the user so we can sign their id
+    // fetch the user so we can sign their id
     const user = await prisma.user.findFirst({
       where: { OR: [{ email: identifier }, { mobile: identifier }] }
     });
@@ -113,20 +113,10 @@ const verifyOtpctrl = async (req, res) => {
       data: { verified: true },
     });
 
-    // await prisma.user.updateMany({
-    //   where: {
-    //     OR: [{ email: identifier }, { mobile: identifier }]
-    //   },
-    //   data: { verified: true }
-    // });
-
-
-    // issue JWT
-    // const payload = { userId: user.id };
     const payload = { userId: user.id };
     const token = jwt.sign(
       payload,
-      JWT_SECRET  ,
+      JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -134,17 +124,13 @@ const verifyOtpctrl = async (req, res) => {
     // await prisma.oTPRequest.deleteMany({ where: { identifier } });
 
     res.status(200).json({ message: "Verified successfully", token });
-
-
-
-    
     // res.status(200).json({ message: "Verified successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-module.exports={
+module.exports = {
   signup,
   login,
   verifyOtpctrl,

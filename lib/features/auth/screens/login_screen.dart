@@ -13,6 +13,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void dispose() {
+    _emailPhoneCtrl.dispose(); // Dispose the controller
+    super.dispose();
+  }
+
   final TextEditingController _emailPhoneCtrl = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
   bool _isLoading = false;
@@ -30,10 +36,12 @@ class _LoginScreenState extends State<LoginScreen> {
         await showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            title:  Text('error'.tr()),
-            content:  Text('otpSendFailed'.tr()),
-                      actions: [
-              TextButton(onPressed: () => context.pop(), child: Text('ok'.tr())
+            title: Text('error'.tr()),
+            content: Text('otpSendFailed'.tr()),
+            actions: [
+              TextButton(
+                onPressed: () => context.pop(),
+                child: Text('ok'.tr()),
               ),
             ],
           ),
@@ -44,10 +52,13 @@ class _LoginScreenState extends State<LoginScreen> {
       await showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title:  Text('error'.tr()),
+          title: Text('error'.tr()),
           content: Text(e.toString()),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child:  Text('ok'.tr())),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('ok'.tr()),
+            ),
           ],
         ),
       );
@@ -58,7 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color(0xFFE7ECFD),
       body: Center(
@@ -92,11 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'enterPhoneOrEmail'.tr(),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
+                    'enterEmail'.tr(),
+                    style: const TextStyle(fontSize: 14, color: Colors.black54),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
@@ -116,20 +123,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _emailPhoneCtrl,
                     decoration: InputDecoration(
-                      hintText: 'phoneOrEmail'.tr(),
+                      hintText: 'Email'.tr(),
                       hintStyle: const TextStyle(color: Colors.black45),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'enterValidEmailOrPhone'.tr();
+                        return 'enterValidEmail'.tr();
                       }
                       final emailPattern = RegExp(
-                          r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}$');
+                        r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}$',
+                      );
                       final phonePattern = RegExp(r'^\d{10}$');
                       if (!emailPattern.hasMatch(value) &&
                           !phonePattern.hasMatch(value)) {
@@ -146,7 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: _isLoading ? null : requestOTP,
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24)),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
                         padding: const EdgeInsets.all(12),
                         backgroundColor: const Color(0xFF240E86),
                         foregroundColor: Colors.white,
@@ -170,13 +180,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextSpan(
                             text: ' ${'signUp'.tr()}',
                             style: const TextStyle(
-                                color: Color(0xFF240E86),
-                                fontWeight: FontWeight.bold),
+                              color: Color(0xFF240E86),
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

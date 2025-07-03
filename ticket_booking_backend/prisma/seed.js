@@ -98,7 +98,7 @@ async function main() {
         title: 'Musical fountain',
         description: 'Gain the beautiful Experience',
         imageUrl: 'https://images.unsplash.com/photo-1735615479490-237b941e996a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8aVVJc25WdGpCMFl8fGVufDB8fHx8fA%3D%3D',
-        releaseDate: new Date('2025-03-10'),        
+        releaseDate: new Date('2025-03-10'),
         timeSlot: '12:00 AM',
         duration: 50,
         format: 'D2',
@@ -127,10 +127,11 @@ async function main() {
         imageUrl: 'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8Q0R3dXdYSkFiRXd8fGVufDB8fHx8fA%3D%3D',
         priceAdult: 0, priceKid: 30, priceSchool: 20
       },
-      { title: 'Musical fountain', 
+      {
+        title: 'Musical fountain',
         description: 'Gain extraordinary Experience',
         imageUrl: 'https://images.unsplash.com/photo-1749746812881-c04e21eb1728?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOHx8fGVufDB8fHx8fA%3D%3D',
-        priceAdult: 70, priceKid: 80, priceSchool: 0 
+        priceAdult: 70, priceKid: 80, priceSchool: 0
       },
     ]
   });
@@ -175,7 +176,7 @@ async function main() {
 
   console.log('📰 News seeded');
 
-await prisma.entryTicket.createMany({
+  await prisma.entryTicket.createMany({
     data: [
       {
         name: "Adult",
@@ -201,9 +202,9 @@ await prisma.entryTicket.createMany({
 
     ]
   });
-console.log('📰 EntryTicketItem seeded');
+  console.log('📰 EntryTicketItem seeded');
 
-// 3. Seed Parking Options
+  // 3. Seed Parking Options
   await prisma.parkingOption.createMany({
     data: [
       {

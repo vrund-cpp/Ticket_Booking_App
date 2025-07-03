@@ -5,21 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:ticket_booking_app/core/services/api_service.dart';
-import 'package:ticket_booking_app/providers/profile_provider.dart';
-import 'package:ticket_booking_app/widgets/custom_drawer.dart';
-// import 'package:ticket_booking_app/core/services/auth_service.dart';
-// import 'package:ticket_booking_app/core/services/notification_service.dart';
+import 'package:ticket_booking_app/features/profile/providers/profile_provider.dart';
+import 'package:ticket_booking_app/core/widgets/custom_drawer.dart';
 import '../../../core/constants/colors.dart';
-import '../../../models/movie.dart';
-import '../../../models/outreach.dart';
-import '../../../models/attraction.dart';
-import '../../../models/news.dart';
-import '../../../widgets/quick_booking_item.dart';
-import '../../../widgets/movie_card.dart';
-import '../../../widgets/outreach_card.dart';
-import '../../../widgets/attraction_card.dart';
-import '../../../widgets/news_card.dart';
-// import '../../../models/notification_item.dart';
+import '../../movies/models/movie.dart';
+import '../../outreach/models/outreach.dart';
+import '../../attractions/model/attraction.dart';
+import '../../news/model/news.dart';
+import '../../../core/widgets/quick_booking_item.dart';
+import '../../../core/widgets/movie_card.dart';
+import '../../../core/widgets/outreach_card.dart';
+import '../../../core/widgets/attraction_card.dart';
+import '../../../core/widgets/news_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String userId;
@@ -51,12 +48,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _attractionsFuture = ApiService.fetchLatestAttractions();
     _newsFuture = ApiService.fetchLatestNews();
     _notifCountFuture = ApiService.getUnreadCount();
-    
-Future.microtask(() async {
-  print('👀 Fetching profile...');
-  await context.read<ProfileProvider>().fetchProfileData();
-  print('✅ Profile loaded');
-});
+
+    Future.microtask(() async {
+      print('👀 Fetching profile...');
+      await context.read<ProfileProvider>().fetchProfileData();
+      print('✅ Profile loaded');
+    });
 
     _moviePageController.addListener(() {
       final next = _moviePageController.page!.round();
@@ -68,11 +65,11 @@ Future.microtask(() async {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   _moviePageController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _moviePageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +80,12 @@ Future.microtask(() async {
         backgroundColor: AppColors.purpleDark,
         elevation: 0,
         leading: Builder(
-          builder:(ctx)=>IconButton(
-            icon: const Icon(Icons.menu, color:Colors.white, size:24),
-            onPressed:()=>Scaffold.of(ctx).openDrawer(),
+          builder: (ctx) => IconButton(
+            icon: const Icon(Icons.menu, color: Colors.white, size: 24),
+            onPressed: () => Scaffold.of(ctx).openDrawer(),
           ),
         ),
-        title:  Text(
+        title: Text(
           'Dashboard'.tr(),
           style: TextStyle(
             color: Colors.white,
@@ -102,10 +99,10 @@ Future.microtask(() async {
             child: GestureDetector(
               onTap: () async {
                 await context.push('/notifications', extra: widget.userId);
-  if (!mounted) return;
-  setState(() {
-    _notifCountFuture = ApiService.getUnreadCount();
-  });
+                if (!mounted) return;
+                setState(() {
+                  _notifCountFuture = ApiService.getUnreadCount();
+                });
               },
               child: Stack(
                 // alignment: Alignment.topRight,
@@ -143,28 +140,27 @@ Future.microtask(() async {
                       }
                       return const SizedBox();
                     },
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
-      
 
-        // 2. Body (scrollable)
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildQuickBookingSection(),
-              _buildMoviesSection(),
-              _buildOutreachSection(),
-              _buildAttractionsSection(),
-              _buildNewsSection(),
-            ],
-          )
+      // 2. Body (scrollable)
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildQuickBookingSection(),
+            _buildMoviesSection(),
+            _buildOutreachSection(),
+            _buildAttractionsSection(),
+            _buildNewsSection(),
+          ],
         ),
+      ),
     );
   }
 
@@ -212,7 +208,10 @@ Future.microtask(() async {
                       label: 'entryTicket'.tr(),
                       circleColor: AppColors.accentOrange,
                       onTap: () async {
-                        await context.push('/entry-tickets/booking', extra: widget.userId);
+                        await context.push(
+                          '/entry-tickets/booking',
+                          extra: widget.userId,
+                        );
                       },
                     ),
                     const SizedBox(width: 32),
@@ -221,7 +220,10 @@ Future.microtask(() async {
                       label: 'PARKING'.tr(),
                       circleColor: AppColors.cyanAccent,
                       onTap: () async {
-                        await context.push('/parking-options/booking', extra: widget.userId);
+                        await context.push(
+                          '/parking-options/booking',
+                          extra: widget.userId,
+                        );
                       },
                     ),
                     const SizedBox(width: 32),
@@ -230,7 +232,10 @@ Future.microtask(() async {
                       label: 'ATTRACTIONS'.tr(),
                       circleColor: Colors.purple,
                       onTap: () async {
-                        await context.push('/attractions/booking', extra: widget.userId);
+                        await context.push(
+                          '/attractions/booking',
+                          extra: widget.userId,
+                        );
                       },
                     ),
                     const SizedBox(width: 32),
@@ -239,7 +244,10 @@ Future.microtask(() async {
                       label: 'Movies'.tr(),
                       circleColor: AppColors.accentOrange,
                       onTap: () async {
-                        await context.push('/movies/booking', extra: widget.userId);
+                        await context.push(
+                          '/movies/booking',
+                          extra: widget.userId,
+                        );
                       },
                     ),
                   ],
@@ -286,7 +294,7 @@ Future.microtask(() async {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                 Text(
+                Text(
                   'Movies'.tr(),
                   style: TextStyle(
                     color: AppColors.purpleDark,
@@ -307,8 +315,9 @@ Future.microtask(() async {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () => context.push('/movies', extra: widget.userId),
-                  child:  Text(
+                  onPressed: () =>
+                      context.push('/movies', extra: widget.userId),
+                  child: Text(
                     'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
@@ -353,7 +362,10 @@ Future.microtask(() async {
                         itemCount: count,
                         padEnds: false,
                         itemBuilder: (context, index) {
-                          return MovieCard(movie: movies[index], userId: widget.userId);
+                          return MovieCard(
+                            movie: movies[index],
+                            userId: widget.userId,
+                          );
                         },
                       ),
                     ),
@@ -399,7 +411,7 @@ Future.microtask(() async {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                 Text(
+                Text(
                   'outreachPrograms'.tr(),
                   style: TextStyle(
                     color: AppColors.purpleDark,
@@ -420,8 +432,9 @@ Future.microtask(() async {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () => context.push('/outreach', extra: widget.userId),
-                  child:  Text(
+                  onPressed: () =>
+                      context.push('/outreach', extra: widget.userId),
+                  child: Text(
                     'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
@@ -497,7 +510,7 @@ Future.microtask(() async {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                 Text(
+                Text(
                   'Attractions'.tr(),
                   style: TextStyle(
                     color: Colors.white,
@@ -518,8 +531,9 @@ Future.microtask(() async {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () =>context.push('/attractions',extra: widget.userId),
-                  child:  Text(
+                  onPressed: () =>
+                      context.push('/attractions', extra: widget.userId),
+                  child: Text(
                     'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,
@@ -588,7 +602,7 @@ Future.microtask(() async {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                 Text(
+                Text(
                   'latestNews'.tr(),
                   style: TextStyle(
                     color: AppColors.purpleDark,
@@ -609,8 +623,8 @@ Future.microtask(() async {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () =>context.push('/news', extra: widget.userId),
-                  child:  Text(
+                  onPressed: () => context.push('/news', extra: widget.userId),
+                  child: Text(
                     'seeAll'.tr(),
                     style: TextStyle(
                       color: Colors.white,

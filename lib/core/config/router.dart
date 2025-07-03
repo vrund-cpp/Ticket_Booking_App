@@ -2,33 +2,33 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ticket_booking_app/features/auth/screens/language_selector_screen.dart';
+import 'package:ticket_booking_app/features/language_selection/screens/language_selector_screen.dart';
 import 'package:ticket_booking_app/features/auth/screens/splash_screen.dart';
 import 'package:ticket_booking_app/features/auth/screens/login_screen.dart';
 import 'package:ticket_booking_app/features/auth/screens/signup_screen.dart';
 import 'package:ticket_booking_app/features/auth/screens/otp_verification_screen.dart';
 import 'package:ticket_booking_app/features/dashboard/screens/dashboard_screen.dart';
-import 'package:ticket_booking_app/features/dashboard/screens/movie_detail_screen.dart';
-import 'package:ticket_booking_app/features/dashboard/screens/movies_list_screen.dart';
-import 'package:ticket_booking_app/features/dashboard/screens/attractions_list_screen.dart';
-import 'package:ticket_booking_app/features/dashboard/screens/outreach_list_screen.dart';
-import 'package:ticket_booking_app/features/dashboard/screens/news_list_screen.dart';
-import 'package:ticket_booking_app/features/dashboard/screens/notification_screen.dart';
+import 'package:ticket_booking_app/features/movies/screens/movie_detail_screen.dart';
+import 'package:ticket_booking_app/features/movies/screens/movies_list_screen.dart';
+import 'package:ticket_booking_app/features/attractions/screens/attractions_list_screen.dart';
+import 'package:ticket_booking_app/features/outreach/screens/outreach_list_screen.dart';
+import 'package:ticket_booking_app/features/news/screens/news_list_screen.dart';
+import 'package:ticket_booking_app/features/notification/screens/notification_screen.dart';
 import 'package:ticket_booking_app/core/services/auth_service.dart';
-import 'package:ticket_booking_app/models/movie.dart';
-import 'package:ticket_booking_app/screens/payment_failed_screen.dart';
-import 'package:ticket_booking_app/screens/payment_processing_screen.dart';
-import 'package:ticket_booking_app/screens/payment_screen.dart';
-import 'package:ticket_booking_app/screens/payment_success_screen.dart';
-import 'package:ticket_booking_app/screens/profile_screen.dart';
-import 'package:ticket_booking_app/screens/settings_screen.dart';
-import '../../screens/attractions_screen.dart';
-import '../../screens/entry_ticket_screen.dart';
-import '../../screens/movies_screen.dart';
-import '../../screens/parking_screen.dart';
-import 'package:ticket_booking_app/screens/attraction_visitor_screen.dart';
-import 'package:ticket_booking_app/screens/movie_visitors_screen.dart';
-import 'package:ticket_booking_app/screens/checkout_screen.dart';
+import 'package:ticket_booking_app/features/movies/models/movie.dart';
+import 'package:ticket_booking_app/features/payments/screens/payment_failed_screen.dart';
+import 'package:ticket_booking_app/features/payments/screens/payment_processing_screen.dart';
+import 'package:ticket_booking_app/features/payments/screens/payment_screen.dart';
+import 'package:ticket_booking_app/features/payments/screens/payment_success_screen.dart';
+import 'package:ticket_booking_app/features/profile/screens/profile_screen.dart';
+import 'package:ticket_booking_app/features/language_selection/screens/settings_screen.dart';
+import '../../features/attractions/screens/attractions_screen.dart';
+import '../../features/entry-tickets/screens/entry_ticket_screen.dart';
+import '../../features/movies/screens/movies_screen.dart';
+import '../../features/parking-options/screens/parking_screen.dart';
+import 'package:ticket_booking_app/features/visitor_slot/screens/attraction_visitor_screen.dart';
+import 'package:ticket_booking_app/features/visitor_slot/screens/movie_visitors_screen.dart';
+import 'package:ticket_booking_app/features/booking/screens/checkout_screen.dart';
 
 class AppRouter {
   /// Accepts the saved locale code ('' if none) and returns a GoRouter
@@ -50,34 +50,34 @@ class AppRouter {
           builder: (_, __) => const OTPVerificationScreen(),
         ),
         // Inside routes list:
-GoRoute(
-  path: '/movies',
-  builder: (context, state) {
-    final userId = state.extra as String;
-    return MoviesListScreen(userId: userId);
-  },
-),
-GoRoute(
-  path: '/attractions',
-  builder: (context, state) {
-    final userId = state.extra as String;
-    return AttractionsListScreen(userId: userId);
-  },
-),
-GoRoute(
-  path: '/outreach',
-  builder: (context, state) {
-    final userId = state.extra as String;
-    return OutreachListScreen(userId: userId);
-  },
-),
         GoRoute(
-  path: '/news',
-  builder: (context, state) {
-    final userId = state.extra as String;
-    return NewsListScreen(userId: userId);
-  },
-),
+          path: '/movies',
+          builder: (context, state) {
+            final userId = state.extra as String;
+            return MoviesListScreen(userId: userId);
+          },
+        ),
+        GoRoute(
+          path: '/attractions',
+          builder: (context, state) {
+            final userId = state.extra as String;
+            return AttractionsListScreen(userId: userId);
+          },
+        ),
+        GoRoute(
+          path: '/outreach',
+          builder: (context, state) {
+            final userId = state.extra as String;
+            return OutreachListScreen(userId: userId);
+          },
+        ),
+        GoRoute(
+          path: '/news',
+          builder: (context, state) {
+            final userId = state.extra as String;
+            return NewsListScreen(userId: userId);
+          },
+        ),
         GoRoute(
           path: '/dashboard',
           builder: (context, _) => FutureBuilder<String?>(
@@ -197,16 +197,16 @@ GoRoute(
             return SettingsScreen(userId: userId);
           },
         ),
-// Inside routes list:
-GoRoute(
-  path: '/movie-details',
-  builder: (context, state) {
-final extras = state.extra as Map<String, dynamic>;
-    final movie = extras['movie'] as Movie;
-    final userId = extras['userId'] as String;
-    return MovieDetailScreen(movie: movie, userId: userId);
-  },
-),
+        // Inside routes list:
+        GoRoute(
+          path: '/movie-details',
+          builder: (context, state) {
+            final extras = state.extra as Map<String, dynamic>;
+            final movie = extras['movie'] as Movie;
+            final userId = extras['userId'] as String;
+            return MovieDetailScreen(movie: movie, userId: userId);
+          },
+        ),
       ],
     );
   }

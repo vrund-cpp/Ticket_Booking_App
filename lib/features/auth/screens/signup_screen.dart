@@ -40,7 +40,7 @@ class _SignupScreenState extends State<SignupScreen> {
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title:  Text('signUpFailed'.tr()),
+          title: Text('signUpFailed'.tr()),
           content: Text(e.toString().replaceFirst('Exception: ', '')),
         ),
       );
@@ -50,8 +50,15 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void dispose() {
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _mobileCtrl.dispose();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE6F0FA), // Light blue background
       body: Center(
@@ -63,7 +70,11 @@ class _SignupScreenState extends State<SignupScreen> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
               boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3))
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                ),
               ],
             ),
             child: Form(
@@ -71,11 +82,14 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('signUp'.tr(),
-                      style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1E008A))),
+                  Text(
+                    'signUp'.tr(),
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1E008A),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   Text(
                     'signupSubtitle'.tr(),
@@ -96,7 +110,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 24),
 
                   // Full Name
-                  _buildField(_nameCtrl, 'Full Name'),
+                  _buildField(_nameCtrl, 'Full Name'.tr()),
                   const SizedBox(height: 12),
 
                   // Email ID
@@ -104,9 +118,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     _emailCtrl,
                     'emailId'.tr(),
                     validator: (val) {
-                      if (val == null || val.isEmpty) return 'emailRequired'.tr();
-                      final emailRegex = RegExp(r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$');
-                      return emailRegex.hasMatch(val) ? null : 'invalidEmail'.tr();
+                      if (val == null || val.isEmpty)
+                        return 'emailRequired'.tr();
+                      final emailRegex = RegExp(
+                        r'^[\w.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$',
+                      );
+                      return emailRegex.hasMatch(val)
+                          ? null
+                          : 'invalidEmail'.tr();
                     },
                   ),
                   const SizedBox(height: 12),
@@ -117,9 +136,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     'mobileNumber'.tr(),
                     keyboard: TextInputType.phone,
                     validator: (val) {
-                      if (val == null || val.isEmpty) return 'mobileRequired'.tr();
+                      if (val == null || val.isEmpty)
+                        return 'mobileRequired'.tr();
                       final phoneRegex = RegExp(r'^\d{10}$');
-                      return phoneRegex.hasMatch(val) ? null : 'invalidMobile'.tr();
+                      return phoneRegex.hasMatch(val)
+                          ? null
+                          : 'invalidMobile'.tr();
                     },
                   ),
                   const SizedBox(height: 24),
@@ -132,11 +154,16 @@ class _SignupScreenState extends State<SignupScreen> {
                       onPressed: _loading ? null : submitSignup,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1E008A),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       child: _loading
                           ? const CircularProgressIndicator(color: Colors.white)
-                          : Text('requestPin'.tr(), style: TextStyle(color: Colors.white)),
+                          : Text(
+                              'requestPin'.tr(),
+                              style: TextStyle(color: Colors.white),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -170,13 +197,17 @@ class _SignupScreenState extends State<SignupScreen> {
     return TextFormField(
       controller: ctrl,
       keyboardType: keyboard,
-      validator: validator ??
-          (val) => val == null || val.isEmpty ? 'This field is required' : null,
+      validator:
+          validator ??
+          (val) => val == null || val.isEmpty ? 'This field is required'.tr() : null,
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
         fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );

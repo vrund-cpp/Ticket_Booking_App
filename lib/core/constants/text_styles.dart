@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 class AppTextStyles {
   static const TextStyle heading1 = TextStyle(
-    fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
   );
   static const TextStyle heading2 = TextStyle(
-    fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
   );
-  static const TextStyle body1 = TextStyle(
-    fontSize: 16, color: Colors.black
-  );
-  static const TextStyle error = TextStyle(
-    fontSize: 14, color: Colors.red
-  );
+  static const TextStyle body1 = TextStyle(fontSize: 16, color: Colors.black);
+  static const TextStyle error = TextStyle(fontSize: 14, color: Colors.red);
 }

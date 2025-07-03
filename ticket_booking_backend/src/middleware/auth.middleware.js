@@ -15,16 +15,16 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: 'Token missing userId' });
     }
     // req.userId = payload.userId;
-        const user = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id: payload.userId }
     });
-        if (!user) {
+    if (!user) {
       return res.status(401).json({ message: 'Invalid token user' });
     }
     req.user = user; // ✅ THIS IS CRITICAL
 
     next();
-  } catch(err) {
+  } catch (err) {
     console.error('JWT error:', err.message);
     res.status(401).json({ message: 'Unauthorized' });
   }

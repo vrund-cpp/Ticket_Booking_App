@@ -14,19 +14,36 @@ class OTPVerificationScreen extends StatefulWidget {
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
-    final List<TextEditingController> otpControllers =
-      List.generate(4, (_) => TextEditingController());
-    final _focusNodes = List.generate(4, (_) => FocusNode());
-  
+  final List<TextEditingController> otpControllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
+  final _focusNodes = List.generate(4, (_) => FocusNode());
+
   bool _loading = false;
   String? userIdentifier;
   int _secondsRemaining = 60;
 
   @override
-    void initState() {
-      super.initState();
-      _startTimer();
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    // Dispose all OTP TextEditingControllers
+    for (final controller in otpControllers) {
+      controller.dispose();
     }
+
+    // Dispose all FocusNodes
+    for (final node in _focusNodes) {
+      node.dispose();
+    }
+
+    super.dispose();
+  }
 
   void _startTimer() {
     Future.doWhile(() async {
@@ -40,40 +57,40 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    userIdentifier = GoRouter.of(context).routerDelegate.currentConfiguration.extra as String;
+    userIdentifier =
+        GoRouter.of(context).routerDelegate.currentConfiguration.extra
+            as String;
   }
 
+  String get otp => otpControllers.map((e) => e.text.trim()).join();
 
-String get otp => otpControllers.map((e) => e.text.trim()).join();
+  Future<void> submitOTP(String code) async {
+    if (code.length != 4) return;
 
-Future<void> submitOTP(String code) async {
-  if (code.length != 4) return;
+    setState(() => _loading = true);
 
-  setState(() => _loading = true);
+    final success = await ApiService.verifyOtp(userIdentifier!, code.trim());
 
-  final success = await ApiService.verifyOtp(userIdentifier!, code.trim());
+    setState(() => _loading = false);
 
-  setState(() => _loading = false);
-
-  if (success) {
-    context.go('/dashboard', extra: userIdentifier);
-  } else {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('invalidOtp'.tr()),
-        content: Text('enterCorrectOtp'.tr()),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('ok'.tr()),
-          ),
-        ],
-      ),
-    );
+    if (success) {
+      context.go('/dashboard', extra: userIdentifier);
+    } else {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('invalidOtp'.tr()),
+          content: Text('enterCorrectOtp'.tr()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('ok'.tr()),
+            ),
+          ],
+        ),
+      );
+    }
   }
-}
-
 
   Widget _buildField(int i) {
     return SizedBox(
@@ -88,21 +105,22 @@ Future<void> submitOTP(String code) async {
           counterText: '',
           filled: true,
           fillColor: Color(0xFFF2F2F2),
-          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
         ),
         style: const TextStyle(fontSize: 20),
         onChanged: (val) {
-           if (val.isNotEmpty && i < 3) {
-             FocusScope.of(context).nextFocus();
-           }
-         },
+          if (val.isNotEmpty && i < 3) {
+            FocusScope.of(context).nextFocus();
+          }
+        },
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8FF),
       body: Center(
@@ -166,7 +184,9 @@ Future<void> submitOTP(String code) async {
                       : Text(
                           'submit'.tr(),
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                 ),
               ),

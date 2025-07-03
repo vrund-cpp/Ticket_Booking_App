@@ -10,4 +10,4 @@ const otpLimiter = rateLimit({
   message: 'Too many OTP requests. Please try again later.',
 });
 
-module.exports =  otpLimiter;
+module.exports = otpLimiter;

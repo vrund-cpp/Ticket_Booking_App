@@ -2,6 +2,13 @@ const prisma = require('../utils/db.js');
 const { v4: uuidv4 } = require('uuid');
 
 const createPayment = async (req, res) => {
+  if (!userId || !amount) {
+    return res.status(400).json({
+      success: false,
+      message: 'userId and totalamount are required'
+    });
+  }
+
   try {
     const { userId, bookingId, amount, method } = req.body;
 

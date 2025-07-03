@@ -21,9 +21,8 @@ class AuthService {
   static Future<String?> getUserId() => _storage.read(key: 'userId');
 
   /// Clear everything (for logout)
-  static Future<void> clearAll() async{
+  static Future<void> clearAll() async {
     await _storage.delete(key: 'jwt');
     await _storage.delete(key: 'userId');
   }
 }
-
