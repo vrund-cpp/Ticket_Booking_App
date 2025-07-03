@@ -72,16 +72,17 @@ const getProfile = async (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
-  if (!name || !email || !mobile) {
-    return res.status(400).json({
-      success: false,
-      message: 'All fields (name, email, mobile) are required.'
-    });
-  }
 
   try {
     const userId = req.user.id;
     const { name, email, mobile } = req.body;
+
+    if (!name || !email || !mobile) {
+      return res.status(400).json({
+        success: false,
+        message: 'All fields (name, email, mobile) are required.'
+      });
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },
