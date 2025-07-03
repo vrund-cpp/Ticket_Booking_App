@@ -1,44 +1,32 @@
 const prisma = require('../utils/db.js');
 
 const createBooking = async (req, res) => {
-
-  if (!userId || !total) {
-    return res.status(400).json({
-      success: false,
-      message: 'userId and totalAmount are required'
-    });
-  }
-
   try {
-    const {
-      userId,
-      entryTickets = [],
-      parking = [],
-      attractionVisitorSlots = [],
-      movieVisitorSlots = [],
-      attractions = [],
-      movies = [],
-      total
-    } = req.body;
+    const { userId, items = [], totalPrice } = req.body;
 
-    console.log("🛒 Received booking request body:", req.body);
+    console.log("🛒 Received booking request:", req.body);
 
-    if (!Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ message: 'Booking items are required' });
+    if (!userId || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ message: 'userId and items[] are required' });
     }
 
-    // 🔍 Fetch prices for entryTickets
-    const entryTicketIds = entryTickets.map(e => e.id);
+    // Group by type
+    const entryTickets = items.filter(i => i.type === 'entry_ticket');
+    const parking = items.filter(i => i.type === 'parking');
+    const attractions = items.filter(i => i.type === 'attraction' && i.quantity === 1 && !i.pricePerUnit);
+    const attractionVisitorSlots = items.filter(i => i.type === 'attraction' && i.pricePerUnit);
+    const movies = items.filter(i => i.type === 'movie' && i.quantity === 1 && !i.pricePerUnit);
+    const movieVisitorSlots = items.filter(i => i.type === 'movie' && i.pricePerUnit);
+
+    // Fetch latest prices from DB for entry and parking
     const entryData = await prisma.entryTicket.findMany({
-      where: { id: { in: entryTicketIds } },
+      where: { id: { in: entryTickets.map(e => e.entryTicketId) } },
       select: { id: true, price: true }
     });
     const entryPriceMap = Object.fromEntries(entryData.map(e => [e.id, e.price]));
 
-    // 🔍 Fetch prices for parking
-    const parkingIds = parking.map(p => p.id);
     const parkingData = await prisma.parkingOption.findMany({
-      where: { id: { in: parkingIds } },
+      where: { id: { in: parking.map(p => p.parkingId) } },
       select: { id: true, price: true }
     });
     const parkingPriceMap = Object.fromEntries(parkingData.map(p => [p.id, p.price]));
@@ -46,69 +34,57 @@ const createBooking = async (req, res) => {
     const booking = await prisma.booking.create({
       data: {
         userId,
-        totalPrice: total,
+        totalPrice,
         status: 'paid',
         items: {
           create: [
-            // ✅ Entry Tickets with correct prices
             ...entryTickets.map(e => ({
               type: 'entry_ticket',
-              quantity: e.count,
-              pricePerUnit: entryPriceMap[e.id] ?? 0,
-              entryTicket: { connect: { id: e.id } },
+              quantity: e.quantity,
+              pricePerUnit: entryPriceMap[e.entryTicketId] ?? e.pricePerUnit,
+              entryTicket: { connect: { id: e.entryTicketId } },
             })),
-
-            // ✅ Parking with correct prices
             ...parking.map(p => ({
               type: 'parking',
-              quantity: p.count,
-              pricePerUnit: parkingPriceMap[p.id] ?? 0,
-              parkingOption: { connect: { id: p.id } },
+              quantity: p.quantity,
+              pricePerUnit: parkingPriceMap[p.parkingId] ?? p.pricePerUnit,
+              parkingOption: { connect: { id: p.parkingId } },
             })),
-
-            // ✅ Attractions (basic toggle type — price is 0)
-            ...attractions.map(id => ({
+            ...attractions.map(a => ({
               type: 'attraction',
               quantity: 1,
               pricePerUnit: 0,
-              attraction: { connect: { id } },
+              attraction: { connect: { id: a.attractionId } },
             })),
-
-            // ✅ Movies (basic toggle type — price is 0)
-            ...movies.map(id => ({
-              type: 'movie',
-              quantity: 1,
-              pricePerUnit: 0,
-              movie: { connect: { id } },
-            })),
-
-            // ✅ Attraction Visitor Slots
             ...attractionVisitorSlots.map(s => ({
               type: 'attraction',
-              quantity: s.count,
+              quantity: s.quantity,
               pricePerUnit: s.pricePerUnit,
-              attraction: { connect: { id: s.id } },
+              attraction: { connect: { id: s.attractionId } },
             })),
-
-            // ✅ Movie Visitor Slots
+            ...movies.map(m => ({
+              type: 'movie',
+              quantity: 1,
+              pricePerUnit: 0,
+              movie: { connect: { id: m.movieId } },
+            })),
             ...movieVisitorSlots.map(s => ({
               type: 'movie',
-              quantity: s.count,
+              quantity: s.quantity,
               pricePerUnit: s.pricePerUnit,
-              movie: { connect: { id: s.id } },
+              movie: { connect: { id: s.movieId } },
             })),
           ]
         }
       }
     });
 
-    console.log("✅ Booking created:", booking.id);
+    console.log('✅ Booking created:', booking.id);
     res.status(201).json({ success: true, bookingId: booking.id });
 
   } catch (err) {
-    console.error('❌ Booking Creation Failed:', err.message);
-    if (err.meta) console.error('Meta:', err.meta);
-    res.status(500).json({ success: false, error: 'Booking failed', details: err.message });
+    console.error('❌ Booking error:', err);
+    res.status(500).json({ message: 'Booking failed', error: err.message });
   }
 };
 
