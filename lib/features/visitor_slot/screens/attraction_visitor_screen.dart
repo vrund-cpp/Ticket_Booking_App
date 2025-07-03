@@ -19,7 +19,6 @@ class AttractionVisitorScreen extends StatefulWidget {
 }
 
 class _AttractionVisitorScreenState extends State<AttractionVisitorScreen> {
-
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<BookingCartProvider>(context);
