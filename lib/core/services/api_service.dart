@@ -19,10 +19,10 @@ import '../../features/parking-options/models/parking_option.dart';
 class ApiService {
   //  static const String baseUrl = 'http://192.168.144.220:3000';
   // static const String baseUrl =
-  //     'https://ticket-booking-app-backend-0zhj.onrender.com';
+  //     'https://ticket-booking-app-backend-0zhj.onrender.com'; 
   //// Replace with your IP
 
-  static const String baseUrl =
+  static const String baseUrl = 
       'https://ticket-booking-app-backend-6y51.onrender.com';
 
   // static String get _host {
@@ -398,53 +398,36 @@ class ApiService {
   ) async {
     try {
       final url = Uri.parse('$baseUrl/api/bookings');
-
-      final items = <Map<String, dynamic>>[];
-
-      // Entry Tickets
-      for (final e in cart.selectedEntryTickets) {
-        items.add({
-          'type': 'entry_ticket',
-          'entryTicketId': e.id,
-          'quantity': e.count,
-          'pricePerUnit': e.price,
-        });
-      }
-
-      // Parking
-      for (final p in cart.selectedParking) {
-        items.add({
-          'type': 'parking',
-          'parkingId': p.id,
-          'quantity': p.count,
-          'pricePerUnit': p.price,
-        });
-      }
-
-      // Attractions (with visitor slots)
-      for (final slot in cart.selectedAttractionVisitorSlots) {
-        items.add({
-          'type': 'attraction',
-          'attractionId': slot.attractionId,
-          'quantity': slot.count,
-          'pricePerUnit': slot.price,
-        });
-      }
-
-      // Movies (with visitor slots)
-      for (final slot in cart.selectedMovieVisitorSlots) {
-        items.add({
-          'type': 'movie',
-          'movieId': slot.attractionId,
-          'quantity': slot.count,
-          'pricePerUnit': slot.price,
-        });
-      }
-
+      
       final body = {
         'userId': userId,
-        'items': items,
-        'totalPrice': cart.overallTotalAmount,
+        'entryTickets': cart.selectedEntryTickets
+            .map((e) => {'id': e.id, 'count': e.count, 'pricePerUnit': e.price})
+            .toList(),
+        'parking': cart.selectedParking
+            .map((p) => {'id': p.id, 'count': p.count, 'pricePerUnit': p.price})
+            .toList(),
+        'attractions': cart.selectedAttractions.map((a) => a.id).toList(),
+        'movies': cart.selectedMovies.map((m) => m.id).toList(),
+        'attractionVisitorSlots': cart.selectedAttractionVisitorSlots
+            .map(
+              (s) => {
+                'id': s.attractionId,
+                'count': s.count,
+                'pricePerUnit': s.price,
+              },
+            )
+            .toList(),
+        'movieVisitorSlots': cart.selectedMovieVisitorSlots
+            .map(
+              (s) => {
+                'id': s.attractionId,
+                'count': s.count,
+                'pricePerUnit': s.price,
+              },
+            )
+            .toList(),
+        'total': cart.overallTotalAmount,
       };
 
       final response = await http.post(
