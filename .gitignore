@@ -49,3 +49,7 @@ ticket_booking_backend/node_modules
 ticket_booking_backend/.env
 
 ticket_booking_backend/src/generated/prisma
+
+*.zip
+*.tar.gz
+*.rar
