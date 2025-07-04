@@ -43,7 +43,6 @@
   "description": "Description",
   "title": "Title",
   "dateRange": "{{start}} to {{end}}",
-  "invalidOtp": "Invalid OTP",
   "remove": "Remove",
   "add": "Add",
   "saveChanges": "Save Changes",
@@ -178,5 +177,7 @@
   "paymentSuccessful!": "Payment Successful!",
   "Booking": "Booking",
   "selectVisitorsForAttractions": "Select Visitors for Attractions",
-  "bookMovieTicket": "Book Movie Ticket"
+  "bookMovieTicket": "Book Movie Ticket",
+  "invalidOtp": "Invalid OTP. Please try again.",
+  "timeUp": "Time is up. Please login again."
 }

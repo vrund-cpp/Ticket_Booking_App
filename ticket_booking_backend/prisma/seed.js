@@ -3,9 +3,9 @@ const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
 const { faker } = require('@faker-js/faker');
 
-function imageUrl(query) {
-  const sig = Math.floor(Math.random() * 10000);
-  return `https://source.unsplash.com/random/800x600/?${query}&sig=${sig}`;
+function imageUrl(query = '') {
+  const id = Math.floor(Math.random() * 1000);
+  return `https://picsum.photos/seed/${encodeURIComponent(query)}-${id}/800/600`;
 }
 
 async function generateOtpAndHash() {
@@ -131,7 +131,7 @@ async function main() {
         data: {
           title: faker.commerce.productName(),
           description: faker.lorem.paragraph(),
-          imageUrl: imageUrl("attraction"),
+          imageUrl: imageUrl('attraction'),
           priceAdult: faker.number.float({ min: 100, max: 200 }),
           priceKid: faker.number.float({ min: 50, max: 100 }),
           priceSchool: faker.number.float({ min: 40, max: 80 })
@@ -148,7 +148,7 @@ async function main() {
         data: {
           title: faker.company.catchPhrase(),
           description: faker.lorem.paragraph(),
-          imageUrl: imageUrl("movie"),
+          imageUrl: imageUrl('movie'),
           releaseDate: faker.date.soon({ days: 15 }),
           timeSlot: `${faker.number.int({ min: 10, max: 20 })}:00`,
           duration: faker.number.int({ min: 90, max: 180 }),
@@ -171,7 +171,7 @@ async function main() {
         data: {
           title: faker.company.catchPhrase(),
           description: faker.lorem.sentences(2),
-          imageUrl: imageUrl("event"),
+          imageUrl: imageUrl('event'),
           Startdate: faker.date.recent({ days: 10 }),
           Enddate: faker.date.soon({ days: 20 })
         }

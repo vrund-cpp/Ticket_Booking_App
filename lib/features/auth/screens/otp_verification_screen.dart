@@ -27,6 +27,11 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Let’s say you want to choose 1 to 5 (in minutes) dynamically
+    final int minutes = 2; // Change this value from 1 to 5
+    _secondsRemaining = minutes * 60;
+
     _startTimer();
   }
 
@@ -48,7 +53,18 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   void _startTimer() {
     Future.doWhile(() async {
       await Future.delayed(const Duration(seconds: 1));
-      if (_secondsRemaining == 0) return false;
+      if (_secondsRemaining == 0) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('timeUp'.tr()),
+            ), // Add 'timeUp' in localization
+          );
+          await Future.delayed(const Duration(seconds: 2));
+          if (mounted) context.go('/login'); // Go back to login page
+        }
+        return false;
+      }
       setState(() => _secondsRemaining--);
       return true;
     });
@@ -76,17 +92,10 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     if (success) {
       context.go('/dashboard', extra: userIdentifier);
     } else {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('invalidOtp'.tr()),
-          content: Text('enterCorrectOtp'.tr()),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('ok'.tr()),
-            ),
-          ],
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('invalidOtp'.tr()), // Add in localization file
+          backgroundColor: Colors.red,
         ),
       );
     }

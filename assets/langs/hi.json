@@ -42,7 +42,6 @@
   "description": "विवरण",
   "title": "शीर्षक",
   "dateRange": "{{start}} से {{end}}",
-  "invalidOtp": "अमान्य ओटीपी",
   "remove": "हटाएं",
   "add": "जोड़ें",
   "saveChanges": "परिवर्तन सहेजें",
@@ -178,5 +177,7 @@
   "paymentSuccessful!": "भुगतान सफल!",
   "Booking": "बुकिंग",
   "selectVisitorsForAttractions": "आकर्षणों के लिए आगंतुक चुनें",
-  "bookMovieTicket": "फिल्म टिकट बुक करें"
+  "bookMovieTicket": "फिल्म टिकट बुक करें",
+  "invalidOtp": "अमान्य ओटीपी। कृपया पुनः प्रयास करें।",
+  "timeUp": "समय समाप्त हो गया है। कृपया फिर से लॉगिन करें।"
 }
