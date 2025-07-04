@@ -44,21 +44,28 @@ const signup = async (req, res) => {
 };
 
 const requestOtp = async (req, res) => {
+
   const { identifier } = req.body || {};
   if (!identifier) return res.status(400).json({ message: 'Identifier is required' });
 
-  const isEmail = isValidEmail(identifier);
-  const isMobile = isValidMobile(identifier);
+  try {
+    const isEmail = isValidEmail(identifier);
+    const isMobile = isValidMobile(identifier);
 
-  if (!isEmail && !isMobile) return res.status(400).json({ message: 'Invalid identifier' });
+    if (!isEmail && !isMobile) return res.status(400).json({ message: 'Invalid identifier' });
 
-  const otp = generateOtp();
-  await saveOtp(identifier, otp);
+    const otp = generateOtp();
+    await saveOtp(identifier, otp);
 
-  if (isEmail) await sendEmail(identifier, otp);
-  // For mobile, integrate SMS API here
+    if (isEmail) await sendEmail(identifier, otp);
+    // For mobile, integrate SMS API here
 
-  return res.status(200).json({ message: 'OTP sent' });
+    return res.status(200).json({ message: 'OTP sent' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+
 };
 
 const login = async (req, res) => {
