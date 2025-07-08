@@ -22,7 +22,11 @@ class QuickBookingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      child: SizedBox(
+        height: 100, // Fixed height to prevent overflow
+        width: 80,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Circular background with icon
           Container(
@@ -46,9 +50,10 @@ class QuickBookingItem extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_booking_app/features/attractions/model/attraction.dart';
-import 'package:ticket_booking_app/features/movies/models/movie.dart';
-import 'package:ticket_booking_app/features/visitor_slot/models/visitor_slot.dart';
-import '../../entry-tickets/models/entry_ticket.dart';
-import '../../parking-options/models/parking_option.dart';
+import 'package:ticketease/features/attractions/model/attraction.dart';
+import 'package:ticketease/features/movies/models/movie.dart';
+import 'package:ticketease/features/visitor_slot/models/visitor_slot.dart';
+import 'package:ticketease/features/entry-tickets/models/entry_ticket.dart';
+import 'package:ticketease/features/parking-options/models/parking_option.dart';
 
 class BookingCartProvider with ChangeNotifier {
   final Map<String, EntryTicket> _entryTickets = {};

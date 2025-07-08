@@ -2,6 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../features/booking/models/booking_history.dart';
 
+String safeSubstring(String text, int start, int end) {
+  if (text.length < end) return text;
+  return text.substring(start, end);
+}
+
 class BookingHistoryCard extends StatelessWidget {
   final BookingHistory booking;
 
@@ -22,8 +27,7 @@ class BookingHistoryCard extends StatelessWidget {
               children: [
                 Text('bookingNo:'.tr()),
                 const SizedBox(width: 4),
-                Text(
-                  '#${booking.id.substring(0, 8)}',
+                Text(safeSubstring(booking.id, 0, 8),
                   style: const TextStyle(color: Colors.blue),
                 ),
               ],

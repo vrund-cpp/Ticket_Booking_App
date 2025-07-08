@@ -2,8 +2,8 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_booking_app/features/notification/models/notification_item.dart';
-import '../../../core/services/api_service.dart';
+import 'package:ticketease/features/notification/models/notification_item.dart';
+import 'package:ticketease/core/services/api_service.dart';
 
 class NotificationScreen extends StatefulWidget {
   final String userId;

@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ticket_booking_app/core/constants/colors.dart';
-import 'package:ticket_booking_app/core/services/api_service.dart';
-import '../models/movie.dart';
-import '../../../core/widgets/movie_card.dart';
+import 'package:ticketease/core/constants/colors.dart';
+import 'package:ticketease/core/services/api_service.dart';
+import 'package:ticketease/features/movies/models/movie.dart';
+import 'package:ticketease/core/widgets/movie_card.dart';
 
 class MoviesListScreen extends StatefulWidget {
   final String userId;

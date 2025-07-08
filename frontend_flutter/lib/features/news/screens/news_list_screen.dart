@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ticket_booking_app/core/constants/colors.dart';
-import 'package:ticket_booking_app/core/services/api_service.dart';
-import '../model/news.dart';
-import '../../../core/widgets/news_card.dart';
+import 'package:ticketease/core/constants/colors.dart';
+import 'package:ticketease/core/services/api_service.dart';
+import 'package:ticketease/features/news/model/news.dart';
+import 'package:ticketease/core/widgets/news_card.dart';
 
 class NewsListScreen extends StatefulWidget {
   final String userId;

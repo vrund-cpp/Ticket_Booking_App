@@ -4,10 +4,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:ticket_booking_app/core/constants/colors.dart';
-import '../models/visitor_slot.dart';
-import '../../booking/providers/booking_cart_provider.dart';
-import 'package:ticket_booking_app/core/widgets/booking_tab_bar.dart';
+import 'package:ticketease/core/constants/colors.dart';
+import 'package:ticketease/features/visitor_slot/models/visitor_slot.dart';
+import 'package:ticketease/features/booking/providers/booking_cart_provider.dart';
+import 'package:ticketease/core/widgets/booking_tab_bar.dart';
 
 class MovieVisitorsScreen extends StatefulWidget {
   final String userId;

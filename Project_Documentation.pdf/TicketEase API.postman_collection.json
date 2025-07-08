@@ -1,0 +1,4845 @@
+{
+	"info": {
+		"_postman_id": "afaf5eac-1f75-43ce-b3a6-64a90cfb1cf8",
+		"name": "TicketEase API",
+		"description": "This collection includes authentication, booking, and notification APIs for the TicketEase mobile application.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39728119"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "request otp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"seed2@inboxkitten.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/request-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"request-otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "request otp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"seed2@inboxkitten.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/request-otp",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"request-otp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:01:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"16-c0B7i8fEAxKJO3fmRZ68aw5PmCA\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "dcf353ef-f033-4dd4"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "3"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "1"
+								},
+								{
+									"key": "x-ratelimit-reset",
+									"value": "1751609142"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c6826eff947ec-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP sent\"\n}"
+						}
+					]
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"name\": \"John Doe\",\r\n  \"mobile\": \"1234567891\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"name\": \"John Doe\",\r\n  \"mobile\": \"1234567891\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/signup",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:03:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"16-c0B7i8fEAxKJO3fmRZ68aw5PmCA\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "424f43b8-8ae5-4372"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c6bbf89277adf-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP sent\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"seed2@inboxkitten.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"seed2@inboxkitten.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:04:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"16-c0B7i8fEAxKJO3fmRZ68aw5PmCA\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "4e967f50-87bd-4e31"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c6ce518d27adf-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP sent\"\n}"
+						}
+					]
+				},
+				{
+					"name": "verify-otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"seed2@inboxkitten.com\",\r\n  \"otp\":\"4952\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/verify-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verify-otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "verify-otp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"seed2@inboxkitten.com\",\r\n  \"otp\":\"4952\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/verify-otp",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"verify-otp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:05:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "203"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"ee-urCHeEweBQlA8HUk0vWCMhjKJXY\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "1e1148a1-d9ea-4835"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c6e653cb1ff6c-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Verified successfully\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjcxMzczNC03MWVmLTQwNDktOTY5Mi0xOTU1NzgwM2M3MTQiLCJpYXQiOjE3NTE2MDkxMzAsImV4cCI6MTc1MjIxMzkzMH0.bT-Hp1B9K8rw7_LAwUb9TdlOejpZWSN3m9azO-Hc2zo\"\n}"
+						}
+					]
+				},
+				{
+					"name": "request otp with invalid email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"temp1@.com\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/request-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"request-otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "invalid email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"temp1@.com\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/request-otp",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"request-otp"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 08:22:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"20-Gbr2WC5OBwmwqpNjiYqGmUC5suY\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "195aad10-eb41-4c34"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "3"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "0"
+								},
+								{
+									"key": "x-ratelimit-reset",
+									"value": "1751703835"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a574fd789f3f9d-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid identifier\"\n}"
+						}
+					]
+				},
+				{
+					"name": "signup with invalid email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"userexample.com\",\r\n  \"name\": \"John Doe\",\r\n  \"mobile\": \"1234567891\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "invalid email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"userexample.com\",\r\n  \"name\": \"John Doe\",\r\n  \"mobile\": \"1234567891\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/signup",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 08:26:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"25-izwsy6NkgVT7ePUoXRfaeJabXno\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "bab8354b-a4d5-4306"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a57ac1bec23a17-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid email or mobile\"\n}"
+						}
+					]
+				},
+				{
+					"name": "signup with already exist email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"seed2@inboxkitten.com\",\r\n  \"name\": \"John Doe Tor\",\r\n  \"mobile\": \"1234567892\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "already exist email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"seed2@inboxkitten.com\",\r\n  \"name\": \"John Doe Tor\",\r\n  \"mobile\": \"1234567892\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/signup",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 08:32:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"3b-HEASF3JdhOnJdd4PpTQz4qOCS68\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "6c21ee0d-8a47-4163"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a583b38edaff6a-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User already exists with this email or mobile\"\n}"
+						}
+					]
+				},
+				{
+					"name": "wrong-otp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"seed2@inboxkitten.com\",\r\n  \"otp\":\"4951\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/verify-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verify-otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "invalid or expired otp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"seed2@inboxkitten.com\",\r\n  \"otp\":\"4951\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/auth/verify-otp",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"verify-otp"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 08:39:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"24-7ImyVMQpKxZnysGEZ8gv0nBKnO8\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "1b270473-3598-472c"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a58d418ef62772-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid or expired OTP\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "latest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/movies/latest",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"latest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "latest",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/movies/latest",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"movies",
+										"latest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:08:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1149"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"a8e-pLtzewZTLd8iDNVn+k+2TzHjuJ8\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "14ec90be-02ef-4d1a"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c7312c938428a-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 16,\n        \"title\": \"Customer-focused radical hardware\",\n        \"description\": \"Stips aurum capitulus theca audio vinitor. Laborum cohibeo calamitas vallum vero suppono uredo altus repellendus. Celebrer ara aveho bellicus contego stips administratio urbs comminor summopere.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=20\",\n        \"releaseDate\": \"2025-07-16T21:08:16.061Z\",\n        \"timeSlot\": \"14:00\",\n        \"duration\": 153,\n        \"format\": \"D3\",\n        \"language\": \"Gujarati\",\n        \"priceAdult\": 103.1655609808649,\n        \"priceKid\": 84.01944948461616,\n        \"priceSchool\": 82.99906923852217,\n        \"createdAt\": \"2025-07-03T17:09:44.552Z\"\n    },\n    {\n        \"id\": 18,\n        \"title\": \"Balanced cohesive structure\",\n        \"description\": \"Clamo tumultus canonicus. Thesis tubineus sed defessus. Campana laboriosam vulgus praesentium subiungo.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=2593\",\n        \"releaseDate\": \"2025-07-14T00:41:57.184Z\",\n        \"timeSlot\": \"10:00\",\n        \"duration\": 174,\n        \"format\": \"D2\",\n        \"language\": \"English\",\n        \"priceAdult\": 222.6050296222667,\n        \"priceKid\": 94.88891295537809,\n        \"priceSchool\": 80.44984526776327,\n        \"createdAt\": \"2025-07-03T17:09:44.554Z\"\n    },\n    {\n        \"id\": 19,\n        \"title\": \"Open-architected 24/7 service-desk\",\n        \"description\": \"Cattus cattus acsi alioqui decor aggero cupiditas tersus. Depopulo tandem synagoga voco canonicus comminor. Vilicus vacuus soluta nobis carmen quia vacuus.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=1913\",\n        \"releaseDate\": \"2025-07-09T17:53:16.659Z\",\n        \"timeSlot\": \"14:00\",\n        \"duration\": 127,\n        \"format\": \"D2\",\n        \"language\": \"Tamil\",\n        \"priceAdult\": 167.0634292023135,\n        \"priceKid\": 64.82422194815545,\n        \"priceSchool\": 64.18687032065664,\n        \"createdAt\": \"2025-07-03T17:09:44.552Z\"\n    },\n    {\n        \"id\": 15,\n        \"title\": \"Advanced intermediate architecture\",\n        \"description\": \"Ipsum desolo nobis umquam amita saepe volaticus unde harum sunt. Veritas deprecator denique appono atqui. Adhuc curvo volubilis canis caelestis verto capitulus correptius audeo terror.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=4391\",\n        \"releaseDate\": \"2025-07-08T18:36:51.628Z\",\n        \"timeSlot\": \"18:00\",\n        \"duration\": 91,\n        \"format\": \"D2\",\n        \"language\": \"Hindi\",\n        \"priceAdult\": 224.7858548334125,\n        \"priceKid\": 95.15030577172898,\n        \"priceSchool\": 86.70001556507418,\n        \"createdAt\": \"2025-07-03T17:09:44.553Z\"\n    },\n    {\n        \"id\": 20,\n        \"title\": \"Intuitive maximized attitude\",\n        \"description\": \"Vesco vesco deinde studio deleo teneo subseco cuppedia cribro. Audeo arcus admitto itaque terra desidero traho vestrum bellum. Attollo campana recusandae vere.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=7496\",\n        \"releaseDate\": \"2025-07-07T23:56:58.296Z\",\n        \"timeSlot\": \"16:00\",\n        \"duration\": 151,\n        \"format\": \"D2\",\n        \"language\": \"Gujarati\",\n        \"priceAdult\": 196.4470373235232,\n        \"priceKid\": 88.45428731534088,\n        \"priceSchool\": 53.59991780416055,\n        \"createdAt\": \"2025-07-03T17:09:44.554Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/movies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/movies",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"movies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:12:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1521"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"ecb-M5t9IBPPk5HHBAGig/xzsVCOXXE\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "3f71bcde-6dc8-4860"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c78236aa73d3f-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 15,\n        \"title\": \"Advanced intermediate architecture\",\n        \"description\": \"Ipsum desolo nobis umquam amita saepe volaticus unde harum sunt. Veritas deprecator denique appono atqui. Adhuc curvo volubilis canis caelestis verto capitulus correptius audeo terror.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=4391\",\n        \"releaseDate\": \"2025-07-08T18:36:51.628Z\",\n        \"timeSlot\": \"18:00\",\n        \"duration\": 91,\n        \"format\": \"D2\",\n        \"language\": \"Hindi\",\n        \"priceAdult\": 224.7858548334125,\n        \"priceKid\": 95.15030577172898,\n        \"priceSchool\": 86.70001556507418,\n        \"createdAt\": \"2025-07-03T17:09:44.553Z\"\n    },\n    {\n        \"id\": 16,\n        \"title\": \"Customer-focused radical hardware\",\n        \"description\": \"Stips aurum capitulus theca audio vinitor. Laborum cohibeo calamitas vallum vero suppono uredo altus repellendus. Celebrer ara aveho bellicus contego stips administratio urbs comminor summopere.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=20\",\n        \"releaseDate\": \"2025-07-16T21:08:16.061Z\",\n        \"timeSlot\": \"14:00\",\n        \"duration\": 153,\n        \"format\": \"D3\",\n        \"language\": \"Gujarati\",\n        \"priceAdult\": 103.1655609808649,\n        \"priceKid\": 84.01944948461616,\n        \"priceSchool\": 82.99906923852217,\n        \"createdAt\": \"2025-07-03T17:09:44.552Z\"\n    },\n    {\n        \"id\": 17,\n        \"title\": \"Customer-focused heuristic utilisation\",\n        \"description\": \"Comedo volutabrum custodia. Terror laboriosam admitto damno advenio odit curvo delinquo. Itaque tertius cubo subiungo vere adhuc viscus expedita tripudio utrimque.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=516\",\n        \"releaseDate\": \"2025-07-04T22:03:07.074Z\",\n        \"timeSlot\": \"15:00\",\n        \"duration\": 138,\n        \"format\": \"D3\",\n        \"language\": \"Hindi\",\n        \"priceAdult\": 233.7562738977529,\n        \"priceKid\": 85.4272804008537,\n        \"priceSchool\": 59.55059022012787,\n        \"createdAt\": \"2025-07-03T17:09:44.552Z\"\n    },\n    {\n        \"id\": 18,\n        \"title\": \"Balanced cohesive structure\",\n        \"description\": \"Clamo tumultus canonicus. Thesis tubineus sed defessus. Campana laboriosam vulgus praesentium subiungo.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=2593\",\n        \"releaseDate\": \"2025-07-14T00:41:57.184Z\",\n        \"timeSlot\": \"10:00\",\n        \"duration\": 174,\n        \"format\": \"D2\",\n        \"language\": \"English\",\n        \"priceAdult\": 222.6050296222667,\n        \"priceKid\": 94.88891295537809,\n        \"priceSchool\": 80.44984526776327,\n        \"createdAt\": \"2025-07-03T17:09:44.554Z\"\n    },\n    {\n        \"id\": 19,\n        \"title\": \"Open-architected 24/7 service-desk\",\n        \"description\": \"Cattus cattus acsi alioqui decor aggero cupiditas tersus. Depopulo tandem synagoga voco canonicus comminor. Vilicus vacuus soluta nobis carmen quia vacuus.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=1913\",\n        \"releaseDate\": \"2025-07-09T17:53:16.659Z\",\n        \"timeSlot\": \"14:00\",\n        \"duration\": 127,\n        \"format\": \"D2\",\n        \"language\": \"Tamil\",\n        \"priceAdult\": 167.0634292023135,\n        \"priceKid\": 64.82422194815545,\n        \"priceSchool\": 64.18687032065664,\n        \"createdAt\": \"2025-07-03T17:09:44.552Z\"\n    },\n    {\n        \"id\": 20,\n        \"title\": \"Intuitive maximized attitude\",\n        \"description\": \"Vesco vesco deinde studio deleo teneo subseco cuppedia cribro. Audeo arcus admitto itaque terra desidero traho vestrum bellum. Attollo campana recusandae vere.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=7496\",\n        \"releaseDate\": \"2025-07-07T23:56:58.296Z\",\n        \"timeSlot\": \"16:00\",\n        \"duration\": 151,\n        \"format\": \"D2\",\n        \"language\": \"Gujarati\",\n        \"priceAdult\": 196.4470373235232,\n        \"priceKid\": 88.45428731534088,\n        \"priceSchool\": 53.59991780416055,\n        \"createdAt\": \"2025-07-03T17:09:44.554Z\"\n    },\n    {\n        \"id\": 21,\n        \"title\": \"Total zero administration capacity\",\n        \"description\": \"Repellendus aspernatur tollo corrupti suasoria. Adipisci universe debilito aegre ea supplanto certus decretum. Accedo cicuta sum admoneo conatus cum carbo.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?movie&sig=6455\",\n        \"releaseDate\": \"2025-07-07T04:33:17.021Z\",\n        \"timeSlot\": \"11:00\",\n        \"duration\": 129,\n        \"format\": \"D2\",\n        \"language\": \"Hindi\",\n        \"priceAdult\": 195.6879339613714,\n        \"priceKid\": 81.51644695679212,\n        \"priceSchool\": 85.6152195241929,\n        \"createdAt\": \"2025-07-03T17:09:44.555Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Unauthorized",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/movies/latest",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"latest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/movies/latest",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"movies",
+										"latest"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 10:31:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "542c1e61-2bab-4e34"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a63161a8900028-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Entry/Attraction/Parking/News/Outreach",
+			"item": [
+				{
+					"name": "entry-tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/entry-tickets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"entry-tickets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "entry-tickets",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/entry-tickets",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"entry-tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:12:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "320"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"335-Ser6ykfBT0ZcFx2ssnW2O/K1oGw\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "b37b712e-ae72-4881"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c793a0ab83d3f-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"3c728e88-28b7-4ba6-bc05-a9f41560f423\",\n        \"name\": \"Adult\",\n        \"description\": \"People above 18 Years of age\",\n        \"price\": 20,\n        \"slotCount\": 100,\n        \"iconUrl\": \"https://cdn-icons-png.flaticon.com/512/3571/3571490.png\",\n        \"createdAt\": \"2025-07-03T17:09:37.990Z\",\n        \"updatedAt\": \"2025-07-03T17:09:37.990Z\"\n    },\n    {\n        \"id\": \"314d0fee-61a7-455d-9f47-4eda2e0b1590\",\n        \"name\": \"kids\",\n        \"description\": \"Age between 8 to 18 years\",\n        \"price\": 10,\n        \"slotCount\": 100,\n        \"iconUrl\": \"https://cdn-icons-png.flaticon.com/512/3571/3571490.png\",\n        \"createdAt\": \"2025-07-03T17:09:37.990Z\",\n        \"updatedAt\": \"2025-07-03T17:09:37.990Z\"\n    },\n    {\n        \"id\": \"01c79c4b-dec0-40b5-aea3-a4f8534fec8e\",\n        \"name\": \"Schools\",\n        \"description\": \"A min of 15 pax\",\n        \"price\": 5,\n        \"slotCount\": 50,\n        \"iconUrl\": \"https://cdn-icons-png.flaticon.com/512/2645/2645897.png\",\n        \"createdAt\": \"2025-07-03T17:09:37.990Z\",\n        \"updatedAt\": \"2025-07-03T17:09:37.990Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "attractions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/attractions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"attractions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "attractions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/attractions",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"attractions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:13:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1221"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"c34-WXfBDHc5Usv8p0Nnos6ltqE+QKA\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "51812ae2-58b7-48bd"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c79dbba7a3d3f-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 15,\n        \"title\": \"Rustic Granite Hat\",\n        \"description\": \"Ex synagoga tactus accendo minima tribuo quia unde. Socius patrocinor porro correptius tabula cogito uredo alveus appositus. Stultus corrupti auxilium amplexus cunabula timidus congregatio conscendo tepesco ullam.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=3147\",\n        \"priceAdult\": 121.2204902380899,\n        \"priceKid\": 85.51849402093293,\n        \"priceSchool\": 75.06266803708453,\n        \"createdAt\": \"2025-07-03T17:09:41.942Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.942Z\"\n    },\n    {\n        \"id\": 16,\n        \"title\": \"Awesome Bamboo Towels\",\n        \"description\": \"Sui centum accusator. Venio utrimque acies nihil tego valde decor tero uredo comes. Amita totus aufero aequus urbanus fuga alter.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=3215\",\n        \"priceAdult\": 133.0310319727652,\n        \"priceKid\": 84.47784624582752,\n        \"priceSchool\": 44.4728484201958,\n        \"createdAt\": \"2025-07-03T17:09:41.943Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.943Z\"\n    },\n    {\n        \"id\": 17,\n        \"title\": \"Incredible Plastic Computer\",\n        \"description\": \"Provident ab amicitia verecundia ante. Corroboro vinculum curtus est vestigium sordeo patruus. Utilis acidus stillicidium cetera.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=3724\",\n        \"priceAdult\": 150.4383159153446,\n        \"priceKid\": 90.3088434079508,\n        \"priceSchool\": 69.87609704208731,\n        \"createdAt\": \"2025-07-03T17:09:41.943Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.943Z\"\n    },\n    {\n        \"id\": 18,\n        \"title\": \"Handcrafted Bamboo Computer\",\n        \"description\": \"Viriliter collum desipio carmen uxor nesciunt tui. Tametsi vilitas crustulum caritas animus crustulum. Summisse audentia degero aureus cavus vere.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=4153\",\n        \"priceAdult\": 100.6764244359491,\n        \"priceKid\": 75.65016723792037,\n        \"priceSchool\": 63.30999475695295,\n        \"createdAt\": \"2025-07-03T17:09:41.943Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.943Z\"\n    },\n    {\n        \"id\": 20,\n        \"title\": \"Handcrafted Granite Pants\",\n        \"description\": \"Deprecator somnus sollicito. Sonitus eveniet vae virga. Decipio absque colo ait.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=8192\",\n        \"priceAdult\": 141.4969120471454,\n        \"priceKid\": 70.82385329168453,\n        \"priceSchool\": 51.76187912365696,\n        \"createdAt\": \"2025-07-03T17:09:41.942Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.942Z\"\n    },\n    {\n        \"id\": 19,\n        \"title\": \"Sleek Metal Chair\",\n        \"description\": \"Conor saepe crebro adflicto. Terreo tabesco abbas tres aggero. Vado valetudo conqueror turbo est turpis sodalitas carpo decor.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=5248\",\n        \"priceAdult\": 167.1458692670848,\n        \"priceKid\": 60.23561326090362,\n        \"priceSchool\": 59.21107764617654,\n        \"createdAt\": \"2025-07-03T17:09:41.942Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.942Z\"\n    },\n    {\n        \"id\": 21,\n        \"title\": \"Handmade Marble Bike\",\n        \"description\": \"Ambulo reiciendis venio admoneo utrimque spiculum ventosus cenaculum ullus. Cito demitto voluptatum uterque curvo arbor sto. Ademptio rerum congregatio.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?attraction&sig=3853\",\n        \"priceAdult\": 146.0717598372082,\n        \"priceKid\": 79.49337219072586,\n        \"priceSchool\": 41.89260539212751,\n        \"createdAt\": \"2025-07-03T17:09:41.942Z\",\n        \"updatedAt\": \"2025-07-03T17:09:41.942Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "parking-options",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/parking-options",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"parking-options"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "parking-options",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/parking-options",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"parking-options"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:14:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "284"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"28e-2gunfNma99uTCCSwS5Mfy4pBvq4\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "8d616d72-11a2-41e8"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c7adb5c813d3f-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"b3cd64cd-b26d-45dc-8d10-f8859421f3c4\",\n        \"vehicleType\": \"two_wheeler\",\n        \"description\": \"Scooter,Bike etc\",\n        \"price\": 5,\n        \"slotCount\": 40,\n        \"createdAt\": \"2025-07-03T17:09:39.845Z\",\n        \"updatedAt\": \"2025-07-03T17:09:39.845Z\"\n    },\n    {\n        \"id\": \"d401f5d7-752e-489d-956b-3ae200fcdd81\",\n        \"vehicleType\": \"four_wheeler\",\n        \"description\": \"Car & Passenger Vehicles\",\n        \"price\": 10,\n        \"slotCount\": 30,\n        \"createdAt\": \"2025-07-03T17:09:39.845Z\",\n        \"updatedAt\": \"2025-07-03T17:09:39.845Z\"\n    },\n    {\n        \"id\": \"fa7faf76-2094-4054-81ea-9e7c21412860\",\n        \"vehicleType\": \"school_bus\",\n        \"description\": \"A min of 15 pax makes a group\",\n        \"price\": 25,\n        \"slotCount\": 10,\n        \"createdAt\": \"2025-07-03T17:09:39.845Z\",\n        \"updatedAt\": \"2025-07-03T17:09:39.845Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "news",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/news",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"news"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "news",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/news",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"news"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:15:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "408"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"3fc-cDQkzZunpkjLU3dqlbZx44DtgPc\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "8de43b62-1e61-4f0d"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c7c6afcc83e4c-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 3,\n        \"summary\": \"Derelinquo coadunatio coaegresco verbera validus chirographum.\",\n        \"date\": \"2025-07-03T16:48:51.150Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.426Z\"\n    },\n    {\n        \"id\": 4,\n        \"summary\": \"Bonus civis supellex benigne fugiat sapiente demitto.\",\n        \"date\": \"2025-07-03T15:29:26.489Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.426Z\"\n    },\n    {\n        \"id\": 7,\n        \"summary\": \"Argentum distinctio coruscus approbo sui templum ex vos alii subnecto.\",\n        \"date\": \"2025-07-03T15:22:03.377Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.428Z\"\n    },\n    {\n        \"id\": 1,\n        \"summary\": \"Triduana corrigo necessitatibus.\",\n        \"date\": \"2025-07-03T03:44:57.891Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.427Z\"\n    },\n    {\n        \"id\": 2,\n        \"summary\": \"Paens ter terminatio tego.\",\n        \"date\": \"2025-07-02T23:55:19.167Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.425Z\"\n    },\n    {\n        \"id\": 6,\n        \"summary\": \"Defendo candidus sulum appello natus minima tot.\",\n        \"date\": \"2025-07-02T23:49:46.466Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.428Z\"\n    },\n    {\n        \"id\": 5,\n        \"summary\": \"Suscipio defendo stips curiositas suppellex carmen bos subseco.\",\n        \"date\": \"2025-07-02T17:56:32.658Z\",\n        \"createdAt\": \"2025-07-03T17:09:46.425Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "outreach",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/outreach",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"outreach"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "outreach",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/outreach",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"outreach"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 06:15:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "987"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"ab0-RW85nk7WSD1kAbgFHHuQljfh/4g\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "6c08a83e-c9cd-4f74"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959c7d4c5f903e4c-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 4,\n        \"title\": \"Expanded zero defect software\",\n        \"description\": \"Cenaculum temeritas turpis ciminatio quidem sit. Vereor crapula comparo.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=1087\",\n        \"Startdate\": \"2025-07-01T17:40:19.642Z\",\n        \"Enddate\": \"2025-07-15T10:40:50.408Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.535Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.535Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Polarised discrete infrastructure\",\n        \"description\": \"Vilitas volva aestus torqueo suasoria vulnero solus. Taedium adeo laborum dens voco claustrum thesaurus defaeco reiciendis denique.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=7945\",\n        \"Startdate\": \"2025-07-01T10:29:22.313Z\",\n        \"Enddate\": \"2025-07-09T19:52:03.427Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.538Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.538Z\"\n    },\n    {\n        \"id\": 1,\n        \"title\": \"Exclusive real-time data-warehouse\",\n        \"description\": \"Patior spiculum sustineo conor. Suspendo nam consequuntur alveus clementia cresco canonicus agnosco.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=8764\",\n        \"Startdate\": \"2025-06-29T21:31:47.074Z\",\n        \"Enddate\": \"2025-07-20T23:37:07.768Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.538Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.538Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Open-source context-sensitive complexity\",\n        \"description\": \"Cursus sonitus demulceo. Quibusdam vinitor quia amissio comptus.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=6200\",\n        \"Startdate\": \"2025-06-28T16:36:02.795Z\",\n        \"Enddate\": \"2025-07-10T00:37:38.059Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.535Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.535Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Intuitive high-level access\",\n        \"description\": \"Tempus basium tendo thesaurus summopere. Usus aranea quis vix viscus eligendi undique thalassinus titulus ter.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=5203\",\n        \"Startdate\": \"2025-06-27T12:29:07.734Z\",\n        \"Enddate\": \"2025-07-04T00:36:50.085Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.535Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.535Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"User-friendly fresh-thinking core\",\n        \"description\": \"Claro angelus valens verto dapifer cuppedia. Sulum sursum vobis desparatus viriliter aggero contego aliqua cresco.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=3993\",\n        \"Startdate\": \"2025-06-26T18:57:08.115Z\",\n        \"Enddate\": \"2025-07-05T06:03:22.252Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.538Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.538Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Universal value-added core\",\n        \"description\": \"Suus tristis terror. Undique cotidie tergiversatio accendo tumultus defaeco tego.\",\n        \"imageUrl\": \"https://source.unsplash.com/random/800x600/?event&sig=9096\",\n        \"Startdate\": \"2025-06-24T15:35:05.286Z\",\n        \"Enddate\": \"2025-07-14T16:44:25.506Z\",\n        \"createdAt\": \"2025-07-03T17:09:45.535Z\",\n        \"updatedAt\": \"2025-07-03T17:09:45.535Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Unauthorized",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/parking-options",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"parking-options"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/parking-options",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"parking-options"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 10:34:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "8853e9ff-cf84-42cb"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a6359ada853c4c-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "unread notification count",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications/count",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"count"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "unread notification count",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/notifications/count",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"notifications",
+										"count"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:10:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "15"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"b-qA97yBec1rrOyf2eVsYdWwFPOso\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "90a5dd74-32df-45bb"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959d7de15ef0dab3-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "all notification for particular user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all notification for particular user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/notifications",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"notifications"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:11:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"17b-ltI20YF3kfarQreYYVKZTHmyK84\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "cd4867ee-d32b-406e"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959d7e8b0a52dab3-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 3,\n        \"title\": \"Booking Confirmed\",\n        \"message\": \"Your booking is paid. Total: ₹25.00\",\n        \"isRead\": false,\n        \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\n        \"createdAt\": \"2025-07-03T17:09:55.912Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Booking Failed\",\n        \"message\": \"Your booking is pending. Total: ₹267.61\",\n        \"isRead\": true,\n        \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\n        \"createdAt\": \"2025-07-03T17:09:54.357Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "mark read notification",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications/mark-read/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"mark-read",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "mark read notification",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/notifications/mark-read/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"notifications",
+										"mark-read",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:12:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "177"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"db-/G8mvaBlk6ubKga0gC72sPsg7CU\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "93ac07ee-c099-4794"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959d7fefbcdfdab3-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"notification\": {\n        \"id\": 3,\n        \"title\": \"Booking Confirmed\",\n        \"message\": \"Your booking is paid. Total: ₹25.00\",\n        \"isRead\": true,\n        \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\n        \"createdAt\": \"2025-07-03T17:09:55.912Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "mark all notification read",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications/mark-all-read",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"mark-all-read"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "mark all notification read",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/notifications/mark-all-read",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"notifications",
+										"mark-all-read"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:14:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"10-oV4hJxRVSENxc/wX8+mA4/Pe4tA\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "b698db99-a7de-42af"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959d82a48f924043-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Unauthorized",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/notifications",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"notifications"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 10:38:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"1a-pljHtlo127JYJR4E/RYOPb6ucbw\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "d3da4b46-4b3d-47de"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a63b98bca9b550-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "create booking",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"entryTickets\": [\r\n    {\r\n      \"id\": \"3c728e88-28b7-4ba6-bc05-a9f41560f423\",\r\n      \"count\": 2,\r\n      \"pricePerUnit\": 20\r\n    },\r\n    {\r\n      \"id\": \"314d0fee-61a7-455d-9f47-4eda2e0b1590\",\r\n      \"count\": 1,\r\n      \"pricePerUnit\": 10\r\n    }\r\n  ],\r\n  \"parking\": [\r\n    {\r\n      \"id\": \"fa7faf76-2094-4054-81ea-9e7c21412860\",\r\n      \"count\": 2,\r\n      \"pricePerUnit\": 25\r\n    },\r\n    {\r\n      \"id\": \"d401f5d7-752e-489d-956b-3ae200fcdd81\",\r\n      \"count\": 3,\r\n      \"pricePerUnit\": 10\r\n    }\r\n  ],\r\n  \"attractions\": [ 15 ],\r\n  \"movies\": [ 15, 16 ],\r\n  \"attractionVisitorSlots\": [\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 85.51849402093293 },\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 75.06266803708453 },\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 121.2204902380899 }\r\n  ],\r\n  \"movieVisitorSlots\": [\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 224.7858548334125 },\r\n    { \"id\": 15, \"count\": 1, \"pricePerUnit\": 95.15030577172898 },\r\n    { \"id\": 15, \"count\": 1, \"pricePerUnit\": 86.70001556507418 },\r\n    { \"id\": 16, \"count\": 2, \"pricePerUnit\": 103.1655609808649 },\r\n    { \"id\": 16, \"count\": 2, \"pricePerUnit\": 84.01944948461616 },\r\n    { \"id\": 16, \"count\": 1, \"pricePerUnit\": 82.99906923852217 }\r\n  ],\r\n  \"total\": 1782.3944257653272\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"entryTickets\": [\r\n    {\r\n      \"id\": \"3c728e88-28b7-4ba6-bc05-a9f41560f423\",\r\n      \"count\": 2,\r\n      \"pricePerUnit\": 20\r\n    },\r\n    {\r\n      \"id\": \"314d0fee-61a7-455d-9f47-4eda2e0b1590\",\r\n      \"count\": 1,\r\n      \"pricePerUnit\": 10\r\n    }\r\n  ],\r\n  \"parking\": [\r\n    {\r\n      \"id\": \"fa7faf76-2094-4054-81ea-9e7c21412860\",\r\n      \"count\": 2,\r\n      \"pricePerUnit\": 25\r\n    },\r\n    {\r\n      \"id\": \"d401f5d7-752e-489d-956b-3ae200fcdd81\",\r\n      \"count\": 3,\r\n      \"pricePerUnit\": 10\r\n    }\r\n  ],\r\n  \"attractions\": [ 15 ],\r\n  \"movies\": [ 15, 16 ],\r\n  \"attractionVisitorSlots\": [\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 85.51849402093293 },\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 75.06266803708453 },\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 121.2204902380899 }\r\n  ],\r\n  \"movieVisitorSlots\": [\r\n    { \"id\": 15, \"count\": 2, \"pricePerUnit\": 224.7858548334125 },\r\n    { \"id\": 15, \"count\": 1, \"pricePerUnit\": 95.15030577172898 },\r\n    { \"id\": 15, \"count\": 1, \"pricePerUnit\": 86.70001556507418 },\r\n    { \"id\": 16, \"count\": 2, \"pricePerUnit\": 103.1655609808649 },\r\n    { \"id\": 16, \"count\": 2, \"pricePerUnit\": 84.01944948461616 },\r\n    { \"id\": 16, \"count\": 1, \"pricePerUnit\": 82.99906923852217 }\r\n  ],\r\n  \"total\": 1782.3944257653272\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"bookings"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:34:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"43-flnlBd9YBdByTnSc6XbEj/cMVv4\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "8f13221b-5aac-4fac"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959da10b8c6cfb88-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb7\"\n}"
+						}
+					]
+				},
+				{
+					"name": "booking with empty cart",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"entryTickets\": [\r\n  ],\r\n  \"parking\": [\r\n  ],\r\n  \"attractions\": [ ],\r\n  \"movies\": [  ],\r\n  \"attractionVisitorSlots\": [\r\n  ],\r\n  \"movieVisitorSlots\": [\r\n  ],\r\n  \"total\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "booking with empty cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"entryTickets\": [\r\n  ],\r\n  \"parking\": [\r\n  ],\r\n  \"attractions\": [ ],\r\n  \"movies\": [  ],\r\n  \"attractionVisitorSlots\": [\r\n  ],\r\n  \"movieVisitorSlots\": [\r\n  ],\r\n  \"total\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"bookings"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 11:08:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"41-O+b98De26FC4pT7VmcyC+CgrQ/4\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "609c5f01-07bd-4164"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a66714dcbe48f8-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"userId and totalAmount are required\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "create payments",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb7\",\r\n  \"amount\": 1782.3944257653272,\r\n  \"method\": \"card\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create payments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb7\",\r\n  \"amount\": 1782.3944257653272,\r\n  \"method\": \"card\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"payments"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:37:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "232"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"147-xK/azNVg7XTJwg61OloVUkrDTeY\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "973c553d-f5b1-4f23"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959da4ae1c8d0522-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"payment\": {\n        \"id\": \"fefddd43-0592-43fd-9978-d3940f2c1a87\",\n        \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\n        \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb7\",\n        \"amount\": 1782.394425765327,\n        \"status\": \"success\",\n        \"method\": \"card\",\n        \"transactionId\": \"34e11be3-2a08-4811-953f-c12d902c9992\",\n        \"createdAt\": \"2025-07-04T09:37:19.214Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "payment with smaller amount than total amount",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb\",\r\n  \"amount\": 0,\r\n  \"method\": \"card\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "smaller than total amount",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb\",\r\n  \"amount\": 0,\r\n  \"method\": \"card\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"payments"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 11:11:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"2a-Dj5QSjuqs1WoWD4tGO/+6Bp5K0I\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "65700d4f-9376-431d"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a66cb12eb742ed-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"Payment failed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "wrong booking id",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcd\",\r\n  \"amount\": 1782.3944257653272,\r\n  \"method\": \"card\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "wrong booking id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\",\r\n  \"bookingId\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcd\",\r\n  \"amount\": 1782.3944257653272,\r\n  \"method\": \"card\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"payments"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 11:17:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"2a-Dj5QSjuqs1WoWD4tGO/+6Bp5K0I\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "8880ab39-144f-40d7"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a67517aee046a4-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"Payment failed\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"26713734-71ef-4049-9692-19557803c714\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/profile",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:39:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "415"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"3e9-9i9jsbsztoNkZvJA3tXLjxafcO8\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "e6222b5e-807f-4f2d"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959da7eb6e2047f6-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"26713734-71ef-4049-9692-19557803c714\",\n        \"name\": \"Francis Murphy\",\n        \"email\": \"seed2@inboxkitten.com\",\n        \"mobile\": \"9494949494\"\n    },\n    \"bookings\": [\n        {\n            \"id\": \"e42dd1a9-d340-4f56-bede-0cabbc3fdcb7\",\n            \"entryAmount\": 50,\n            \"parkingAmount\": 80,\n            \"attractionAmount\": 563.6033045922147,\n            \"movieAmount\": 1088.7911211731125,\n            \"total\": 1782.394425765327,\n            \"createdAt\": \"Friday, 04 July 2025\",\n            \"status\": \"paid\"\n        },\n        {\n            \"id\": \"cf8e2432-f3a5-467f-87dc-ed2a69d744b2\",\n            \"entryAmount\": 50,\n            \"parkingAmount\": 80,\n            \"attractionAmount\": 563.6033045922147,\n            \"movieAmount\": 1088.7911211731125,\n            \"total\": 1782.394425765327,\n            \"createdAt\": \"Friday, 04 July 2025\",\n            \"status\": \"paid\"\n        },\n        {\n            \"id\": \"7c3c6e52-e02c-4d51-a85f-3511e7ed53ee\",\n            \"entryAmount\": 40,\n            \"parkingAmount\": 0,\n            \"attractionAmount\": 0,\n            \"movieAmount\": 0,\n            \"total\": 40,\n            \"createdAt\": \"Thursday, 03 July 2025\",\n            \"status\": \"paid\"\n        },\n        {\n            \"id\": \"f4a381be-3f2e-429b-8293-0158fd65afc8\",\n            \"entryAmount\": 40,\n            \"parkingAmount\": 5,\n            \"attractionAmount\": 0,\n            \"movieAmount\": 222.6050296222667,\n            \"total\": 267.6050296222667,\n            \"createdAt\": \"Thursday, 03 July 2025\",\n            \"status\": \"pending\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\": \"Ravi Sharma\",\r\n \"email\": \"seed2@inboxkitten.com\",\r\n \"mobile\": \"9898989898\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update profile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"Ravi Sharma\",\r\n \"email\": \"seed2@inboxkitten.com\",\r\n \"mobile\": \"9898989898\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/profile",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 09:40:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"ff-QuT2urMggdFGBIyj6FdNxcAyVsw\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "6f6fa3f5-c6ef-43bf"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "959daa0cbe633ce8-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"user\": {\n        \"id\": \"26713734-71ef-4049-9692-19557803c714\",\n        \"name\": \"Ravi Sharma\",\n        \"email\": \"seed2@inboxkitten.com\",\n        \"mobile\": \"9898989898\",\n        \"userType\": \"kid\",\n        \"verified\": true,\n        \"createdAt\": \"2025-07-03T17:09:32.534Z\",\n        \"updatedAt\": \"2025-07-04T09:40:59.732Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update email with existing email",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\": \"Ravi Sharma\",\r\n \"email\": \"seed3@inboxkitten.com\",\r\n \"mobile\": \"9898989898\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update email with existing email",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"Ravi Sharma\",\r\n \"email\": \"seed3@inboxkitten.com\",\r\n \"mobile\": \"9898989898\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/profile",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 11:23:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"33-CqifOyMzGecdCBIthwBFPlOYAKM\""
+								},
+								{
+									"key": "rndr-id",
+									"value": "1fb3feac-b65c-42ed"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "95a67e0118df3a3c-BOM"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Internal server Error\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://ticket-booking-app-backend-6y51.onrender.com\n",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "Bearer ",
+			"type": "string"
+		}
+	]
+}

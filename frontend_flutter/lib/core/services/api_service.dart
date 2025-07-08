@@ -4,18 +4,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:ticket_booking_app/features/booking/models/booking_history.dart';
-import 'package:ticket_booking_app/features/auth/model/user.dart';
-import 'package:ticket_booking_app/features/booking/providers/booking_cart_provider.dart';
+import 'package:ticketease/features/booking/models/booking_history.dart';
+import 'package:ticketease/features/auth/model/user.dart';
+import 'package:ticketease/features/booking/providers/booking_cart_provider.dart';
 import 'auth_service.dart';
-import '../../features/movies/models/movie.dart';
-import '../../features/outreach/models/outreach.dart';
-import '../../features/attractions/model/attraction.dart';
-import '../../features/news/model/news.dart';
-import '../../features/notification/models/notification_item.dart';
-import '../../features/entry-tickets/models/entry_ticket.dart';
-import '../../features/parking-options/models/parking_option.dart';
-
+import 'package:ticketease/features/movies/models/movie.dart';
+import 'package:ticketease/features/outreach/models/outreach.dart';
+import 'package:ticketease/features/attractions/model/attraction.dart';
+import 'package:ticketease/features/news/model/news.dart';
+import 'package:ticketease/features/notification/models/notification_item.dart';
+import 'package:ticketease/features/entry-tickets/models/entry_ticket.dart';
+import 'package:ticketease/features/parking-options/models/parking_option.dart';
 class ApiService {
   //  static const String baseUrl = 'http://192.168.144.220:3000';
   // static const String baseUrl =

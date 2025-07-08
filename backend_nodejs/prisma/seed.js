@@ -3,9 +3,32 @@ const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
 const { faker } = require('@faker-js/faker');
 
-function imageUrl(query = '') {
-  const id = Math.floor(Math.random() * 1000);
-  return `https://picsum.photos/seed/${encodeURIComponent(query)}-${id}/800/600`;
+const movieImages = [
+  "https://images.unsplash.com/photo-1581905764498-7f8cc7db0228",
+  "https://images.unsplash.com/photo-1620392294532-99cdb90c4c12",
+  "https://images.unsplash.com/photo-1608136534532-4a16817cf0d2",
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+  "https://images.unsplash.com/photo-1598899134739-2c38d9d09d1f"
+];
+
+const attractionImages = [
+  "https://images.unsplash.com/photo-1562161210-2589cfb6ef05",
+  "https://images.unsplash.com/photo-1581851411497-cb4685c6b709",
+  "https://images.unsplash.com/photo-1604393486404-c59ce2c0c8e7",
+  "https://images.unsplash.com/photo-1594031357829-4c0872d49b09",
+  "https://images.unsplash.com/photo-1581315279013-51a942d3d69a"
+];
+
+const outreachImages = [
+  "https://images.unsplash.com/photo-1531058020387-3be344556be6",
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+  "https://images.unsplash.com/photo-1485217988980-11786ced9454",
+  "https://images.unsplash.com/photo-1543269865-cbf427effbad",
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
+];
+
+function pickRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 async function generateOtpAndHash() {
@@ -17,18 +40,19 @@ async function generateOtpAndHash() {
 async function main() {
 
   // Clear old data (optional in dev)
+  // Clear old data (in order to avoid foreign key constraint errors)
   await prisma.notification.deleteMany();
-  await prisma.user.deleteMany();
+  await prisma.payment.deleteMany();
+  await prisma.bookingItem.deleteMany();
+  await prisma.booking.deleteMany();
   await prisma.oTPRequest.deleteMany();
   await prisma.movie.deleteMany();
   await prisma.attraction.deleteMany();
   await prisma.outreach.deleteMany();
   await prisma.news.deleteMany();
-  await prisma.bookingItem.deleteMany();
-  await prisma.booking.deleteMany();
   await prisma.parkingOption.deleteMany();
   await prisma.entryTicket.deleteMany();
-  await prisma.payment.deleteMany();
+  await prisma.user.deleteMany(); // DELETE USERS LAST (safe now)
 
   console.log('🧹 Old data cleared');
   console.log("🌱 Starting seeding...");
@@ -131,7 +155,7 @@ async function main() {
         data: {
           title: faker.commerce.productName(),
           description: faker.lorem.paragraph(),
-          imageUrl: imageUrl('attraction'),
+          imageUrl: pickRandom(attractionImages),
           priceAdult: faker.number.float({ min: 100, max: 200 }),
           priceKid: faker.number.float({ min: 50, max: 100 }),
           priceSchool: faker.number.float({ min: 40, max: 80 })
@@ -148,7 +172,7 @@ async function main() {
         data: {
           title: faker.company.catchPhrase(),
           description: faker.lorem.paragraph(),
-          imageUrl: imageUrl('movie'),
+          imageUrl: pickRandom(movieImages),
           releaseDate: faker.date.soon({ days: 15 }),
           timeSlot: `${faker.number.int({ min: 10, max: 20 })}:00`,
           duration: faker.number.int({ min: 90, max: 180 }),
@@ -171,7 +195,7 @@ async function main() {
         data: {
           title: faker.company.catchPhrase(),
           description: faker.lorem.sentences(2),
-          imageUrl: imageUrl('event'),
+          imageUrl: pickRandom(outreachImages),
           Startdate: faker.date.recent({ days: 10 }),
           Enddate: faker.date.soon({ days: 20 })
         }

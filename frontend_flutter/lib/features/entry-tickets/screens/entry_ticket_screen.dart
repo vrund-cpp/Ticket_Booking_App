@@ -2,12 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:ticket_booking_app/core/constants/colors.dart';
-
-import '../models/entry_ticket.dart';
-import '../../../../../core/services/api_service.dart';
-import '../../booking/providers/booking_cart_provider.dart';
-import '../../../core/widgets/booking_tab_bar.dart';// your custom color file
+import 'package:ticketease/core/constants/colors.dart';
+import 'package:ticketease/features/entry-tickets/models/entry_ticket.dart';
+import 'package:ticketease/core/services/api_service.dart';
+import 'package:ticketease/features/booking/providers/booking_cart_provider.dart';
+import 'package:ticketease/core/widgets/booking_tab_bar.dart';
 
 class EntryTicketScreen extends StatefulWidget {
   final String userId;

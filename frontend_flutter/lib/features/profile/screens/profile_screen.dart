@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:ticket_booking_app/core/constants/colors.dart';
-import '../providers/profile_provider.dart';
-import '../../../core/widgets/profile_card.dart';
-import '../../../core/widgets/booking_history_card.dart';
+import 'package:ticketease/core/constants/colors.dart';
+import 'package:ticketease/features/profile/providers/profile_provider.dart';
+import 'package:ticketease/core/widgets/profile_card.dart';
+import 'package:ticketease/core/widgets/booking_history_card.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
