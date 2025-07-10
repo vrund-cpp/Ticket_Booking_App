@@ -2,7 +2,8 @@
 
 const nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({
+function getTransporter() {
+return nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587, // ✅ Not 465
   secure: false, // ⚠️ Must be false for port 587
@@ -11,8 +12,10 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
+}
 
 async function sendEmail(email, otp) {
+   const transporter = getTransporter(); // ✅ Call after mock applied
   await transporter.sendMail({
     from: `"My App" <${process.env.EMAIL_USER}>`,
     to: email,

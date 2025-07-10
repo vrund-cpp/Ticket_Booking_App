@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.52% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/42</span>
+                <span class='fraction'>12/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">45.83% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/24</span>
+                <span class='fraction'>11/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>2/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.81% </span>
+                <span class="strong">32.43% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/37</span>
+                <span class='fraction'>12/37</span>
             </div>
         
             
@@ -205,7 +205,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,10 +215,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -324,13 +324,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -341,22 +341,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const prisma = require('../utils/db.js');
 &nbsp;
-const createBooking = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+const createBooking = async (req, res) =&gt; {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  try {</span>
+  try {
     const {
       userId,
-      entryTickets = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
-      parking = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
-      attractionVisitorSlots = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
-      movieVisitorSlots = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
-      attractions = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
-      movies = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
+      entryTickets = [],
+      parking = [],
+      attractionVisitorSlots = [],
+      movieVisitorSlots = [],
+      attractions = [],
+      movies = [],
       total
-    } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+    } = req.body;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!userId || !total) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(400).json({</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!userId || <span class="branch-1 cbranch-no" title="branch not covered" >!total)</span> {
+      return res.status(400).json({
         success: false,
         message: 'userId and totalAmount are required'
       });
@@ -461,14 +461,14 @@ const createBooking = <span class="fstat-no" title="function not covered" >as</s
   }
 };
 &nbsp;
-const getUserBookings = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const bookings = <span class="cstat-no" title="statement not covered" >await prisma.booking.findMany({</span>
+const getUserBookings = async (req, res) =&gt; {
+  try {
+    const bookings = await prisma.booking.findMany({
       where: { userId: req.user.id },
       include: { items: true }
     });
-<span class="cstat-no" title="statement not covered" >    if (!bookings || bookings.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'No bookings found' });</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!bookings || bookings.length === 0) {
+      return res.status(404).json({ message: 'No bookings found' });
     }
 <span class="cstat-no" title="statement not covered" >    res.status(200).json(bookings);</span>
   } catch (err) {
@@ -484,7 +484,7 @@ module.exports = { createBooking,getUserBookings };</pre></td></tr></table></pre
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-10T14:03:42.114Z
+                at 2025-07-10T17:15:01.180Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
