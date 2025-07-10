@@ -9,9 +9,9 @@ describe("🧪 AUTH CONTROLLER TESTS", () => {
   jest.setTimeout(30000);
 
     const testUser = {
-    name: "test name2",
-    email: `test_${Date.now()}@example2.com`,
-    mobile: "1999999992",
+    name: "test name10",
+    email: `test_${Date.now()}@example10.com`,
+    mobile: "1999999910",
   };
 
   afterAll(async () => {

@@ -4,16 +4,16 @@ const jwt = require("jsonwebtoken");
 const app = require("../../app");
 const prisma = require("../../src/utils/db");
 
-describe("🎟 Booking Controller", () => {
+describe("🎬 Movies Controller", () => {
   let user, token;
 
   beforeAll(async () => {
     const timestamp = Date.now();
     user = await prisma.user.create({
       data: {
-        email: `book_${timestamp}@example5.com`,
-        name: "Test@1235",
-        mobile: "9876543215",
+        email: `test_${timestamp}@example1.com`,
+        name: "Test@12341",
+        mobile: "1234567891",
       },
     });
 
@@ -21,27 +21,13 @@ describe("🎟 Booking Controller", () => {
   });
 
   afterAll(async () => {
-    await prisma.booking.deleteMany();
     await prisma.user.delete({ where: { id: user.id } });
     await prisma.$disconnect();
   });
 
-  it("✅ should create a booking", async () => {
+  it("should return movies (token required)", async () => {
     const res = await request(app)
-      .post("/api/bookings")
-      .set("Authorization", `Bearer ${token}`)
-      .send({
-        attractionId: 1, // must exist in DB or adjust
-        bookingDate: "2025-07-11",
-        quantity: 2,
-      });
-
-    expect([201, 400, 404]).toContain(res.statusCode);
-  });
-
-  it("✅ should get user bookings", async () => {
-    const res = await request(app)
-      .get("/api/bookings/user")
+      .get("/api/movies")
       .set("Authorization", `Bearer ${token}`);
 
     expect([200, 404]).toContain(res.statusCode);
