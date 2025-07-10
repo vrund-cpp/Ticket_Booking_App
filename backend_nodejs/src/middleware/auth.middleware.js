@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 const prisma = require('../utils/db');
 
-const secret = process.env.JWT_SECRET || "testsecret";
+const secret = process.env.JWT_SECRET || "your-secret";
 
 const authMiddleware = async (req, res, next) => {
   const auth = req.headers.authorization;

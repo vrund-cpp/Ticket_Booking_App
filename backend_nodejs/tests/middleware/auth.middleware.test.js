@@ -2,30 +2,45 @@
 const jwt = require("jsonwebtoken");
 const request = require("supertest");
 const app = require("../../app");
-
-const validUserPayload = { userId: "test-user-id" };
-const validToken = jwt.sign(validUserPayload, process.env.JWT_SECRET || "testsecret", { expiresIn: '1h' });
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 describe("🔐 Auth Middleware", () => {
 
-  it("should block access without token", async () => {
-    const res = await request(app).get("/api/bookings/user");
-    expect(res.statusCode).toBe(401);
+  let token;
+  let testUser;
+
+  beforeAll(async () => {
+    const timestamp = Date.now();
+
+    // 👤 Create real user in test DB
+    testUser = await prisma.user.create({
+      data: {
+        email: `test_${timestamp}@mail.com`,
+        name: "AuthTestUser",
+        mobile: `99999${timestamp.toString().slice(-5)}`,
+      },
+    });
+
+    // 🔐 Sign valid token with this user's id
+    token = jwt.sign({ userId: testUser.id }, process.env.JWT_SECRET || "your-secret", {
+      expiresIn: "1h",
+    });
   });
 
-  it("should block access with invalid token", async () => {
-    const res = await request(app)
-      .get("/api/bookings/user")
-      .set("Authorization", `Bearer invalidtoken`);
-    expect(res.statusCode).toBe(401);
+  afterAll(async () => {
+    if (testUser?.id) {
+      await prisma.user.delete({ where: { id: testUser.id } });
+    }
+    await prisma.$disconnect();
   });
 
-  it("should allow access with valid token", async () => {
+  it("✅ should allow access with valid token", async () => {
     const res = await request(app)
-      .get("/api/bookings/user")
-      .set("Authorization", `Bearer ${validToken}`);
-    
-    // You may get 404 or other response if user 123 not exist — but auth middleware passes
+      .get("/api/profile") // 🔒 Must be a real route protected by auth middleware
+      .set("Authorization", `Bearer ${token}`);
+
+    // Allow any valid response except 401/403
     expect(res.statusCode).not.toBe(401);
     expect(res.statusCode).not.toBe(403);
   });

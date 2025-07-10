@@ -10,21 +10,25 @@ describe("🎟 Booking Controller", () => {
   let user;
 
   beforeAll(async () => {
+    const timestamp = Date.now();
+
     user = await prisma.user.create({
       data: {
-        email: `test_${Date.now()}@example.com`,
-        name: "Test@1234",
-        mobile: "1111111112",
+        email: `test_${timestamp}@example.com`,
+        name: "Test@ 12345",
+        mobile: `99999${timestamp.toString().slice(-5)}`,
       },
     });
     token = jwt.sign({ userId: user.id }, "testsecret", { expiresIn: "1h" });
   });
 
   afterAll(async () => {
+  if (user?.id) {
     await prisma.payment.deleteMany();
-  await prisma.bookingItem.deleteMany();
-  await prisma.booking.deleteMany();
-  await prisma.user.delete({ where: { id: user.id } });
+    await prisma.bookingItem.deleteMany();
+    await prisma.booking.deleteMany();
+    await prisma.user.delete({ where: { id: user.id } });
+  }
   await prisma.$disconnect();
   });
 
