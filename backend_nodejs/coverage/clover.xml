@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1752167701401" clover="3.2.0">
-  <project timestamp="1752167701402" name="All files">
-    <metrics statements="430" coveredstatements="259" conditionals="95" coveredconditionals="37" methods="56" coveredmethods="19" elements="581" coveredelements="315" complexity="0" loc="430" ncloc="430" packages="6" files="30" classes="30"/>
+<coverage generated="1752170389434" clover="3.2.0">
+  <project timestamp="1752170389434" name="All files">
+    <metrics statements="431" coveredstatements="260" conditionals="95" coveredconditionals="37" methods="57" coveredmethods="20" elements="583" coveredelements="317" complexity="0" loc="431" ncloc="431" packages="6" files="30" classes="30"/>
     <package name="backend_nodejs">
       <metrics statements="42" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="app.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\app.js">
@@ -492,13 +492,14 @@
       </file>
     </package>
     <package name="backend_nodejs.src.services">
-      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
       <file name="email.service.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\src\services\email.service.js">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="16" count="5" type="stmt"/>
-        <line num="24" count="6" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
       </file>
       <file name="otp.service.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\src\services\otp.service.js">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>

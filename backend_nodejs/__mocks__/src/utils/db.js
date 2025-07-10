@@ -1,4 +1,4 @@
-module.exports = {
+const mockPrisma = {
   oTPRequest: {
     create: jest.fn(),
     findFirst: jest.fn(),
@@ -9,5 +9,10 @@ module.exports = {
   movie: {
     findMany: jest.fn(),
   },
-  // Add other models if needed
+  user: {
+    findUnique: jest.fn(),
+  },
+  // Add more model mocks as needed
 };
+
+module.exports = mockPrisma;
