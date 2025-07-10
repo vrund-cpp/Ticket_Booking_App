@@ -2,6 +2,8 @@
 const jwt = require('jsonwebtoken');
 const prisma = require('../utils/db');
 
+const secret = process.env.JWT_SECRET || "testsecret";
+
 const authMiddleware = async (req, res, next) => {
   const auth = req.headers.authorization;
   if (!auth || !auth.startsWith('Bearer ')) {
@@ -10,7 +12,7 @@ const authMiddleware = async (req, res, next) => {
   // const token = auth.slice(7);
   const token = auth.split(' ')[1];
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const payload = jwt.verify(token, secret);
     if (!payload.userId) {
       return res.status(401).json({ message: 'Token missing userId' });
     }

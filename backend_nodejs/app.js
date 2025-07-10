@@ -46,6 +46,11 @@ app.use('/api/bookings', authMiddleware, bookingRoutes);
 app.use('/api/payments', authMiddleware, paymentRoutes);
 app.use('/api/profile', authMiddleware, userProfileRoutes);
 
+app.use((req, res, next) => {
+  console.log("404 fallback hit for:", req.path);
+  res.status(404).send({ message: "Route not found" });
+});
+
 // ✅ Add this test route to check DB connection
 app.get('/push-schema', async (req, res) => {
   try {

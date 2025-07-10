@@ -52,7 +52,7 @@ const requestOtp = async (req, res) => {
     const isEmail = isValidEmail(identifier);
     const isMobile = isValidMobile(identifier);
 
-    if (!isEmail && !isMobile) return res.status(400).json({ message: 'Invalid identifier' });
+    if (!isEmail) return res.status(400).json({ message: 'Invalid identifier' });
 
     const otp = generateOtp();
     await saveOtp(identifier, otp);

@@ -4,19 +4,23 @@ const bcrypt = require('bcrypt');
 const { faker } = require('@faker-js/faker');
 
 const movieImages = [
-  "https://images.unsplash.com/photo-1581905764498-7f8cc7db0228",
-  "https://images.unsplash.com/photo-1620392294532-99cdb90c4c12",
-  "https://images.unsplash.com/photo-1608136534532-4a16817cf0d2",
-  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
-  "https://images.unsplash.com/photo-1598899134739-2c38d9d09d1f"
+'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1502136969935-8c1208be5306?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1558981285-687577b7669f?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1517701604595-45e1b1f964c8?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1542206395-9feb3edaa68b?auto=format&fit=crop&w=220&h=120',
 ];
 
 const attractionImages = [
-  "https://images.unsplash.com/photo-1562161210-2589cfb6ef05",
-  "https://images.unsplash.com/photo-1581851411497-cb4685c6b709",
-  "https://images.unsplash.com/photo-1604393486404-c59ce2c0c8e7",
-  "https://images.unsplash.com/photo-1594031357829-4c0872d49b09",
-  "https://images.unsplash.com/photo-1581315279013-51a942d3d69a"
+  'https://images.unsplash.com/photo-1531900216845-823787929750?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1517600414359-0a963a212d04?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1526403228773-25ec2eff5d79?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1511452516248-dcf555ee82d6?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1570378972113-1d20cb3a0d7a?auto=format&fit=crop&w=220&h=120',
+  'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=220&h=120',
 ];
 
 const outreachImages = [

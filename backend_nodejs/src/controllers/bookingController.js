@@ -120,4 +120,20 @@ const createBooking = async (req, res) => {
   }
 };
 
-module.exports = { createBooking };
+const getUserBookings = async (req, res) => {
+  try {
+    const bookings = await prisma.booking.findMany({
+      where: { userId: req.user.id },
+      include: { items: true }
+    });
+    if (!bookings || bookings.length === 0) {
+      return res.status(404).json({ message: 'No bookings found' });
+    }
+    res.status(200).json(bookings);
+  } catch (err) {
+    console.error("getUserBookings error:", err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { createBooking,getUserBookings };
