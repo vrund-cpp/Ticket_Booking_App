@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1752147583439" clover="3.2.0">
-  <project timestamp="1752147583439" name="All files">
-    <metrics statements="430" coveredstatements="236" conditionals="93" coveredconditionals="20" methods="54" coveredmethods="13" elements="577" coveredelements="269" complexity="0" loc="430" ncloc="430" packages="6" files="29" classes="29"/>
+<coverage generated="1752148101819" clover="3.2.0">
+  <project timestamp="1752148101820" name="All files">
+    <metrics statements="430" coveredstatements="240" conditionals="93" coveredconditionals="20" methods="54" coveredmethods="13" elements="577" coveredelements="273" complexity="0" loc="430" ncloc="430" packages="6" files="29" classes="29"/>
     <package name="backend_nodejs">
       <metrics statements="42" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="app.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\app.js">
@@ -51,7 +51,7 @@
       </file>
     </package>
     <package name="backend_nodejs.src.controllers">
-      <metrics statements="266" coveredstatements="86" conditionals="81" coveredconditionals="14" methods="44" coveredmethods="4"/>
+      <metrics statements="266" coveredstatements="90" conditionals="81" coveredconditionals="14" methods="44" coveredmethods="4"/>
       <file name="attractionsController.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\src\controllers\attractionsController.js">
         <metrics statements="13" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="2" count="3" type="stmt"/>
@@ -69,7 +69,7 @@
         <line num="29" count="3" type="stmt"/>
       </file>
       <file name="authController.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\src\controllers\authController.js">
-        <metrics statements="66" coveredstatements="44" conditionals="26" coveredconditionals="14" methods="4" coveredmethods="4"/>
+        <metrics statements="66" coveredstatements="48" conditionals="26" coveredconditionals="14" methods="4" coveredmethods="4"/>
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
@@ -84,12 +84,12 @@
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="25" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
         <line num="46" count="3" type="stmt"/>
@@ -497,7 +497,7 @@
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="3" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
         <line num="24" count="3" type="stmt"/>
       </file>
       <file name="otp.service.js" path="C:\FlutterProjects\TicketEase\backend_nodejs\src\services\otp.service.js">
@@ -505,11 +505,11 @@
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>

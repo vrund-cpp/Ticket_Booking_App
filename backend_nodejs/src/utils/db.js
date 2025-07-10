@@ -1,11 +1,10 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+let prisma;
 
 if (process.env.NODE_ENV === 'test') {
-  module.exports = require('../../__mocks__/prismaClient');
+  prisma = require('../../__mocks__/prismaClient'); // use mock client in tests
 } else {
   const { PrismaClient } = require('@prisma/client');
-  const prisma = new PrismaClient();
-  module.exports =  prisma;
+  prisma = new PrismaClient();
 }
 
+module.exports = prisma;
