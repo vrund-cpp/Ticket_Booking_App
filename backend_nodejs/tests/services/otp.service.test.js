@@ -1,8 +1,7 @@
 // tests/services/otp.service.test.js
+jest.mock('../../src/utils/db');
 const otpService = require('../../src/services/otp.service');
 const prisma = require('../../src/utils/db');
-
-jest.mock('../../src/utils/db');
 
 const crypto = require('crypto'); // ✅ Needed for hash comparison
 

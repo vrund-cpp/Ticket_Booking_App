@@ -1,9 +1,7 @@
 // ✅ tests/controllers/attractionsController.test.js
+jest.mock('../../src/utils/db');
 const request = require('supertest');
 const app = require('../../app'); // ✅ Path to your main app
-const prisma = require('../../src/utils/db');
-
-jest.mock('../../src/utils/db');
 
 // ✅ Mock auth middleware to bypass JWT verification
 jest.mock('../../src/middleware/auth.middleware', () => ({
@@ -12,6 +10,9 @@ jest.mock('../../src/middleware/auth.middleware', () => ({
     next();
   }
 }));
+
+const prisma = require('../../src/utils/db');
+
 
 const mockAttractions = [
   { id: 1, name: 'Attraction A' },

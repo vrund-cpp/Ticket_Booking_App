@@ -1,7 +1,12 @@
+// __mocks__/src/utils/db.js
+
+console.log("✅ __mocks__/src/utils/db.js loaded by Jest");
+
 const mockPrisma = {
   oTPRequest: {
     create: jest.fn(),
     findFirst: jest.fn(),
+    deleteMany: jest.fn(),
   },
   attraction: {
     findMany: jest.fn(),
@@ -11,8 +16,8 @@ const mockPrisma = {
   },
   user: {
     findUnique: jest.fn(),
+    update: jest.fn(),
   },
-  // Add more model mocks as needed
 };
 
 module.exports = mockPrisma;
