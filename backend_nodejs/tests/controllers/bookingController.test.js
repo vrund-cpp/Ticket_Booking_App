@@ -1,8 +1,9 @@
+jest.mock('@prisma/client');
 const request = require("supertest");
 const app = require("../../app");
 const jwt = require("jsonwebtoken");
 
-jest.setTimeout(10000);
+jest.setTimeout(10000); // just in case
 
 describe("🎟 Booking Controller", () => {
   let token;
@@ -20,11 +21,16 @@ describe("🎟 Booking Controller", () => {
       .post("/api/bookings")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        attractionId: "mock-attraction-id",
-        ticketCount: 2,
+        userId: "mock-user-id",
+              attractionId: "mock-attraction-id",
+      date: "2025-07-15",
+      slot: "10:00 AM - 12:00 PM",
+      totalTickets: 2,
       });
 
-    expect([201, 400, 404]).toContain(res.statusCode); // ✅ No 401!
+    // ✅ These are the only valid responses we expect — no 401 anymore
+expect(res.statusCode).toBe(200);
+expect(res.body).toHaveProperty("message");
   });
 
   it("✅ should get user bookings", async () => {
@@ -32,7 +38,8 @@ describe("🎟 Booking Controller", () => {
       .get("/api/bookings/user")
       .set("Authorization", `Bearer ${token}`);
 
-    expect([200, 404]).toContain(res.statusCode); // ✅ No 401!
-    expect(res.body).toBeDefined();
+    expect(res.statusCode).toBe(200);
+expect(res.body).toBeDefined();
+    expect(Array.isArray(res.body)).toBe(true);
   });
 });

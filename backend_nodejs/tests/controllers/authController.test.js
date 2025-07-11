@@ -1,8 +1,5 @@
 // tests/controllers/authController.test.js
-const request = require("supertest");
-const app = require("../../app"); // ensure index.js exports app
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+jest.mock("../../src/utils/db"); // ✅ Ensure correct path
 
 jest.mock("nodemailer", () => ({
   createTransport: () => ({
@@ -10,12 +7,22 @@ jest.mock("nodemailer", () => ({
   }),
 }));
 
+jest.mock("../../src/services/otp.service", () => ({
+  generateOtp: jest.fn(() => "1234"),
+  saveOtp: jest.fn(() => Promise.resolve()),
+  verifyOtp: jest.fn(() => Promise.resolve(true)),
+}));
+
+const prisma = require("../../src/utils/db");
+const request = require("supertest");
+const app = require("../../app"); // ensure index.js exports app
+
 describe("🧪 AUTH CONTROLLER TESTS", () => {
   jest.setTimeout(30000);
 
     const testUser = {
     name: "Test User",
-    email: `seed2@inboxkitten.com`,
+    email: "seed2@inboxkitten.com",
     mobile: "1234567890",
   };
 beforeAll(async () => {
@@ -40,9 +47,10 @@ it("✅ /auth/signup should register user", async () => {
     const res = await request(app)
       .post("/api/auth/login")
       .send({
-        email: "seed2@inboxkitten.com",
+        email: testUser.email,
       });
 
+    console.log("🧪 Response:", res.body);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("message");
   });

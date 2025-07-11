@@ -1,6 +1,8 @@
-// ✅ Make sure mock comes before otpService import
-jest.mock('../../src/utils/db');
-const prisma = require('../../src/utils/db');
+jest.mock('@prisma/client'); // 👈 this tells Jest to use your mock
+
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient(); // 👈 this will use your mock
+
 const otpService = require('../../src/services/otp.service');
 const crypto = require('crypto');
 

@@ -1,6 +1,5 @@
 // controllers/attractionsController.js
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../utils/db');
 
 const getLatestAttractions = async (req, res) => {
   try {

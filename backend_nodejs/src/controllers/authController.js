@@ -1,7 +1,6 @@
 // ticket_booking_app\ticket_booking_backend\src\controllers\authController.js
 
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../utils/db');
 const { isValidEmail, isValidMobile } = require('../utils/validators');
 const { sendEmail } = require('../services/email.service');
 const { generateOtp, saveOtp, verifyOtp } = require('../services/otp.service');

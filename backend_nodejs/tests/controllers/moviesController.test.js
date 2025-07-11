@@ -9,8 +9,8 @@ describe("🎬 Movies Controller", () => {
 
   beforeAll(() => {
     token = jwt.sign(
-      { userId: "mock-user-id" },
-      process.env.JWT_SECRET || "your-secret",
+      { id: "mock-user-id" },
+      "your-secret",
       { expiresIn: "1h" }
     );
   });
@@ -20,7 +20,9 @@ describe("🎬 Movies Controller", () => {
       .get("/api/movies")
       .set("Authorization", `Bearer ${token}`);
 
-    expect([200, 404]).toContain(res.statusCode); // ✅ Valid token = no 401
-    expect(res.body).toBeDefined();
+    // ✅ Only expecting valid responses — remove incorrect 401 expectation
+expect(res.statusCode).toBe(200);
+expect(res.body).toBeDefined();
+expect(Array.isArray(res.body)).toBe(true);
   });
 });
