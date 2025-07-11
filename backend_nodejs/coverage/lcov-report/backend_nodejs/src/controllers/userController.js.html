@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.5% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/40</span>
+                <span class='fraction'>4/40</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">7.69% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.94% </span>
+                <span class="strong">10.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/38</span>
+                <span class='fraction'>4/38</span>
             </div>
         
             
@@ -165,30 +165,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,6 +189,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -211,6 +207,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,7 +227,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -261,22 +261,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const prisma = require('../utils/db');
 &nbsp;
-const getProfile = async (req, res) =&gt; {
+const getProfile = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.user || !req.user.id) {
+<span class="cstat-no" title="statement not covered" >  if (!req.user || !req.user.id) {</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(401).json({ message: 'Unauthorized – user not found' });</span>
   }
 &nbsp;
-  const userId = req.user.id;
+  const userId = <span class="cstat-no" title="statement not covered" >req.user.id;</span>
 &nbsp;
-  try {
+<span class="cstat-no" title="statement not covered" >  try {</span>
 &nbsp;
-    const user = await prisma.user.findUnique({
+    const user = <span class="cstat-no" title="statement not covered" >await prisma.user.findUnique({</span>
       where: { id: userId },
       select: { id: true, name: true, email: true, mobile: true },
     });
 &nbsp;
-    const bookings = await prisma.booking.findMany({
+    const bookings = <span class="cstat-no" title="statement not covered" >await prisma.booking.findMany({</span>
       where: { userId },
       include: {
         items: true,
@@ -284,7 +284,7 @@ const getProfile = async (req, res) =&gt; {
       orderBy: { createdAt: 'desc' },
     });
 &nbsp;
-    const formatted = bookings.map(<span class="fstat-no" title="function not covered" >b </span>=&gt; {
+    const formatted = <span class="cstat-no" title="statement not covered" >bookings.map(<span class="fstat-no" title="function not covered" >b </span>=&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      console.log('👉 ITEM TYPES:', b.items.map(<span class="fstat-no" title="function not covered" >i </span>=&gt; <span class="cstat-no" title="statement not covered" >i.type)</span>);</span>
 <span class="cstat-no" title="statement not covered" >      console.log('🧾 Items for booking:', b.items.map(<span class="fstat-no" title="function not covered" >i </span>=&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
         type: i.type,
@@ -325,7 +325,7 @@ const getProfile = async (req, res) =&gt; {
       };
     });
 &nbsp;
-    res.json({ user, bookings: formatted });
+<span class="cstat-no" title="statement not covered" >    res.json({ user, bookings: formatted });</span>
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    console.error('❌ Failed to get profile:', err.message);</span>
 <span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: 'Internal server Error' });</span>
@@ -364,7 +364,7 @@ module.exports = { getProfile, updateProfile };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-11T04:11:57.269Z
+                at 2025-07-11T05:29:41.841Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

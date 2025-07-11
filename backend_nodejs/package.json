@@ -11,11 +11,6 @@
     "prisma:migrate": "prisma migrate dev --name init",
     "test": "cross-env NODE_ENV=test jest --coverage"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "^../../src/utils/db$": "<rootDir>/__mocks__/src/utils/db.js"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

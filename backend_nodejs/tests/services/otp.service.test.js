@@ -1,9 +1,8 @@
-// tests/services/otp.service.test.js
+// ✅ Make sure mock comes before otpService import
 jest.mock('../../src/utils/db');
-const otpService = require('../../src/services/otp.service');
 const prisma = require('../../src/utils/db');
-
-const crypto = require('crypto'); // ✅ Needed for hash comparison
+const otpService = require('../../src/services/otp.service');
+const crypto = require('crypto');
 
 describe('🔢 OTP Service', () => {
   const identifier = 'user@example.com';
@@ -20,7 +19,7 @@ describe('🔢 OTP Service', () => {
   });
 
   it('✅ should save OTP in database', async () => {
-    prisma.oTPRequest.create = jest.fn();
+    prisma.oTPRequest.create.mockResolvedValue({}); // ✅ Mock the method
 
     await otpService.saveOtp(identifier, otp);
 
@@ -34,16 +33,19 @@ describe('🔢 OTP Service', () => {
     }));
   });
 
-  it('✅ should return true if OTP matches', async () => {
+  it('✅ should return true if OTP matches and not expired', async () => {
     const hashed = otpService.hashOtp(otp);
-    prisma.oTPRequest.findFirst = jest.fn().mockResolvedValue({ hashedOtp: hashed, expiresAt: new Date(Date.now() + 1000) });
+    prisma.oTPRequest.findFirst.mockResolvedValue({
+      hashedOtp: hashed,
+      expiresAt: new Date(Date.now() + 5 * 60 * 1000), // 5 min in future
+    });
 
     const result = await otpService.verifyOtp(identifier, otp);
     expect(result).toBe(true);
   });
 
   it('❌ should return false if OTP not found or expired', async () => {
-    prisma.oTPRequest.findFirst = jest.fn().mockResolvedValue(null);
+    prisma.oTPRequest.findFirst.mockResolvedValue(null); // ❌ not found
 
     const result = await otpService.verifyOtp(identifier, otp);
     expect(result).toBe(false);

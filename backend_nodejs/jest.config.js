@@ -11,4 +11,7 @@ module.exports = {
       statements: 80
     }
   },
+  moduleNameMapper: {
+    "^../../src/utils/db$": "<rootDir>/__mocks__/src/utils/db.js"
+  },
 };
