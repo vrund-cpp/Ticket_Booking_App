@@ -1,8 +1,7 @@
 // ticket_booking_app\ticket_booking_backend\src\services\otp.service.js
 
 const crypto = require('crypto');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../utils/db');
 
 function generateOtp() {
   return Math.floor(1000 + Math.random() * 9000).toString();

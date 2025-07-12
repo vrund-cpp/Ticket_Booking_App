@@ -1,10 +1,16 @@
-jest.mock('@prisma/client'); // 👈 this tells Jest to use your mock
+//otp.service.test.js
+jest.mock("../../src/utils/db", () => {
+  return {
+    oTPRequest: {
+      create: jest.fn(),
+      findFirst: jest.fn(),
+    },
+  };
+});
 
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient(); // 👈 this will use your mock
-
-const otpService = require('../../src/services/otp.service');
-const crypto = require('crypto');
+const prisma = require("../../src/utils/db");  // ← now this is the mocked object
+const otpService = require("../../src/services/otp.service");
+const crypto = require("crypto");
 
 describe('🔢 OTP Service', () => {
   const identifier = 'user@example.com';

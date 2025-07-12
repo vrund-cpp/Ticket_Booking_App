@@ -3,18 +3,23 @@
 > Comprehensive internship submission showcasing scalable mobile and server‑side design.  
 > Flutter frontend + Node.js/Express server + PostgreSQL via Prisma ORM.  
 
+![TicketEase Logo](https://source.unsplash.com/random/500x150/?ticket,logo)
+
 ---
 
 ## 📘 Table of Contents  
+
 1. [🎯 Executive Summary](#executive-summary)  
-2. [🚀 Features](#features)  
-3. [🧱 Architecture & Tech Stack](#architecture---tech-stack)  
-4. [👨‍💼 Internship Journey & Design Rationale](#internship-journey--design-rationale)  
-5. [🧠 Why TicketEase?](#-why-ticketease)
-6. [📦 Project Structure](#project-structure)  
-7. [🔧 Setup & Running](#setup--running)  
-8. [📂 Deep Dive Docs](#deep-dive-docs)  
-9. [📞 Contact & License](#contact--license)  
+2. [🚀 Key Features](#key-features)  
+3. [🧱 Architecture & Tech Stack](#architecture---tech-stack) 
+4. [📦 Project Structure](#project-structure) 
+5. [🧪 Quality Assurance & Testing Report](#quality-assurance--testing-report) 
+6. [🔗 Explore](#explore) 
+7. [🧠 Why TicketEase?](#-why-ticketease)
+8. [👨‍💼 Internship Journey & Design Rationale](#internship-journey--design-rationale)  
+9. [🔧 Setup & Running](#setup--running)  
+10. [👨‍💻 Contact](#contact)
+11. [📜 License & Security Notice](#license-&--security-notice)  
 
 ---
 
@@ -23,15 +28,18 @@ TicketEase is an internship-built full‑stack platform enabling users to book m
 
 ---
 
-## 🚀 Features  
-- **🔐 Authentication**: OTP‑based login/signup backed by JWT.  
-- **🎟️ Booking System**: Multi-category bookings—movies (with visitor add‑ons), attractions, parking, entry.  
-- **🧾 Payments**: Simulated payment flow with success confirmation.  
-- **👤 Profile**: View & update information; booking history retrieval.  
-- **🔔 Notifications**: Fetch, mark‑read, and count unread alerts.  
-- **🌐 Localization**: Runtime English↔Hindi via easy_localization.  
-- **📲 Push Notifications**: Firebase-powered.  
-- **📊 Dashboard**: Top‑5 items view with detailed lists.
+## 🚀 Key Features  
+
+| Feature | Description |
+|--------|-------------|
+| 🔐 OTP + JWT Auth | Stateless, secure login |
+| 🌐 i18n | English 🇬🇧 & Hindi 🇮🇳 support |
+| 🎫 Bookings | Movies, Attractions, Parking, Entry |
+| 📲 Push Notifications | Firebase-based alerts |
+| 🔔 Notifications | List, count, mark read/all-read |
+| 👤 Profile | View & edit + Booking history |
+| 💳 Payment Flow | Simulated checkout with success |
+| 📊 Dashboard | Top-5 cards & insights |
 
 ---
 
@@ -46,10 +54,43 @@ TicketEase is an internship-built full‑stack platform enabling users to book m
 - **SharedPreferences & SecureStorage**: Persistent user data and tokens.  
 - **Firebase Messaging**: Reliable push notification backend.  
 
+
 ### 🔄 Rejected Alternatives  
 - **Bloc instead of Provider**: Chosen Provider for its simplicity and quicker implementation during internship.  
 - **TypeORM instead of Prisma**: Prisma offers better type safety and developer DX.  
 - **Firebase Auth**: Instead, OTP + JWT allowed full control of authentication flows.
+
+---
+
+## 🧪 Quality Assurance & Testing Report
+
+| Area                            | Status | Notes                                   |
+| ------------------------------- | ------ | --------------------------------------- |
+| API Testing (Postman)           | ✅      | Done + documented                       |
+| Backend Unit Testing (Jest) | ✅      | Added using `jest` and `supertest`      |
+| UI Testing (flutter\_test)      | ✅      | Login, language switch                  |
+| Localization Testing            | ✅      | Dropdown + EN/HI switch                 |
+| Edge Case & Error Testing       | ✅      | Invalid inputs, OTP, empty booking      |
+| Test Documentation              | ✅      | README with all tables                  |
+
+See [TESTING.md](./TESTING.md) for detailed testing strategy and QA report.
+
+---
+
+## 🔗 Explore
+
+- 📱 **Frontend Details:** [`frontend_flutter/README.md`](./frontend_flutter/README.md)
+- ⚙️ **Backend Details:** [`backend_nodejs/README.md`](./backend_nodejs/README.md)
+- 🧪 **Testing Details**[`TESTING.md`](./TESTING.md)
+
+---
+
+## 🧠 Why TicketEase?
+
+TicketEase is not just a demo app — it's a **modular, layered, and scalable** full-stack mobile booking platform that mimics the complexity of real-world production apps.
+
+- Built during internship with a focus on **quality**, **architecture**, and **user experience**
+- Uses **clean architecture**, **state management**, and **i18n** principles
 
 ---
 
@@ -62,15 +103,6 @@ TicketEase is an internship-built full‑stack platform enabling users to book m
   4. Iterative localization support with easy_localization + JSON.  
   5. Added push notifications mid-way via Firebase.  
   6. Emphasis on reusable widgets and consistent UI patterns.
-
----
-
-## 🧠 Why TicketEase?
-
-TicketEase is not just a demo app — it's a **modular, layered, and scalable** full-stack mobile booking platform that mimics the complexity of real-world production apps.
-
-- Built during internship with a focus on **quality**, **architecture**, and **user experience**
-- Uses **clean architecture**, **state management**, and **i18n** principles
 
 ---
 
@@ -92,25 +124,23 @@ TicketEase/
 - Modular folder structure in backend for scalability
 - Flutter frontend follows **Clean Architecture** with `data`, `domain`, and `features` layers
 
----
+## 👨‍💻 Contact
 
-## 🔗 Explore
+Developed during internship at **Silver Touch Technologies**
 
-- 📱 **Frontend Details:** [`frontend_flutter/README.md`](./frontend_flutter/README.md)
-- ⚙️ **Backend Details:** [`backend_nodejs/README.md`](./backend_nodejs/README.md)
-- 📮 **Postman Collection:** `TicketEase.postman_collection.json`
-
----
-
-## 👨‍💻 Developed By
-
-Your Name  
+**Your Name**  
 📧 your.email@example.com  
-🔗 [LinkedIn](https://linkedin.com/in/your-profile)  
-🔗 [GitHub](https://github.com/your-username)
+🔗 [GitHub](https://github.com/your-username)  
+🔗 [LinkedIn](https://linkedin.com/in/your-profile)
 
 ---
 
-## 📜 License
+## 📜 License & Security Notice
 
 MIT License – Free to use with attribution 🙏
+
+### Notice
+- Never commit real `.env` files to GitHub.
+- JWT secrets and database URLs must be stored in environment variables.
+- Inputs (like OTP, email, count) are validated at both client & server level.
+- All user-sensitive data is stored securely using JWT and encrypted storage.

@@ -9,7 +9,7 @@
     "postinstall": "prisma generate && prisma migrate deploy",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
-    "test": "cross-env NODE_ENV=test jest --coverage"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -37,6 +37,7 @@
     "cross-env": "^7.0.3",
     "jest": "^30.0.4",
     "jest-cli": "^30.0.4",
+    "node-mocks-http": "^1.17.2",
     "nodemon": "^3.1.10",
     "prisma": "^6.11.1",
     "supertest": "^7.1.3"

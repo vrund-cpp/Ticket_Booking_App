@@ -1,5 +1,14 @@
 // ticket_booking_backend\src\services\email.service.js
 
+if (process.env.NODE_ENV === 'test') {
+  module.exports = {
+    // still export sendEmail (not sendMail) so authController.import works
+    sendEmail: async (...args) => {
+      console.log("📨 Mock email sent");
+      return { messageId: 'mocked-id' };
+    }
+  };
+} else {
 const nodemailer = require('nodemailer');
 
 function getTransporter() {
@@ -25,3 +34,6 @@ async function sendEmail(email, otp) {
 }
 
 module.exports = { sendEmail };
+
+}
+

@@ -87,6 +87,17 @@ lib/
 
 ---
 
+## 🧪 Frontend Testing
+
+We leverage Flutter’s built‑in framework plus golden tests for UI robustness:
+
+| Test Type         | Scope                             | Files                                | Command                         |
+|-------------------|-----------------------------------|--------------------------------------|---------------------------------|
+| Widget Tests      | Login Screen, Forms      | `auth_provider_test.dart`<br>`language_toggle_test.dart` | `flutter test`                  |
+> See [`TESTING.md`](../TESTING.md) for snippets and deeper insights. 
+
+---
+
 ## 🔗 API Reference
 - The app integrates with a secure backend (Node.js + Prisma).
 - All interactions follow REST principles. Authenticated endpoints use JWT in headers.
