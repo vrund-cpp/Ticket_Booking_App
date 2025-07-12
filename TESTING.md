@@ -90,6 +90,7 @@ TicketEase has undergone rigorous **multi-layered QA** — from UI widgets and b
 cd backend_nodejs
 npm install
 npm test
+```
 
 ### ✅ Tests Covered:
 - OTP generation + validation
@@ -101,6 +102,7 @@ npm test
 ```bash
 - npm install --save-dev jest jest-cli
 - npx jest --coverage
+```
 
 | Metric        | % Covered |
 | ------------- | --------- |
@@ -118,12 +120,12 @@ npm test
 ▶️ Run:
 ```bash
 flutter test
+```
 
 ### ✅ Widgets Validated:
 - OTP screen (empty input shows error)
 - Language toggle (switches EN ↔ HI)
 - Profile form update (valid/invalid cases)
-
 
 ### 🧠 Edge Case Simulation:
 
@@ -135,7 +137,7 @@ flutter test
 | Network Failure        | Retry option in UI      | Manual + UI Mocks |
 | Invalid Profile Update | 422 "Validation error"  | Jest              |
 
-
+---
 
 ## 🌐 Localization Checks
 📍 Validated both en.json and hi.json for:
@@ -174,7 +176,6 @@ flutter test
 | 🔬 API Load Testing (k6/Artillery) | Stress test performance + bottlenecks       |
 | 🕵️ JWT Replay Protection          | Add nonce-based replay attack middleware    |
 
-
 ---
 
 ## 🏁 Sign‑Off
@@ -191,4 +192,4 @@ TicketEase has passed rigorous, real-world QA across all layers:
 📦 Ready to deploy. Scalable. Maintainable. Testable.
 
 
-<p align="center"> <strong>🔒 Quality Delivered. Confidence Assured. — TicketEase QA Report</strong> </p> <p align="center"> <em>© 2025 Vrund Leuva — All rights reserved</em> </p> ```
+<p align="center"> <strong>🔒 Quality Delivered. Confidence Assured. — TicketEase QA Report</strong> </p> <p align="center"> <em>© 2025 Vrund Leuva — All rights reserved</em> </p> 

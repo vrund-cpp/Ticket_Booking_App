@@ -36,11 +36,12 @@ npx prisma db seed
 
 # 🚀 Start development server
 npm run dev
+```
 
 ---
 
 ## 📁 Project Structure
-
+```bash
 backend_nodejs/
 ├── controllers/        # Business logic for each feature
 ├── routes/             # RESTful route definitions
@@ -51,6 +52,7 @@ backend_nodejs/
 ├── .env.example        # Sample env config
 ├── app.js              # Express app init
 └── server.js           # Entry point
+```
 
 ---
 
@@ -62,6 +64,7 @@ EMAIL_PASS="your_app_password"      # Use Gmail App Password, not main password
 JWT_SECRET="your_128_char_jwt_secret"
 JWT_EXPIRES_IN=7d
 PORT=3000
+```
 
 ---
 
@@ -86,8 +89,8 @@ PORT=3000
 | PUT    | `/profile`                     | ✅       | Update profile details        |
 
 
-📖 Full API docs: TicketEase_API-docs.md
-📬 Postman Collection: TicketEase.postman_collection.json
+[📖 Full API docs](`../TicketEase_API-docs.md`)
+[📬 Postman Collection](`../TicketEase.postman_collection.json`)
 
 ---
 
@@ -118,6 +121,7 @@ model Notification {
   isRead  Boolean
   user    User     @relation(fields: [userId], references: [id])
 }
+```
 
 📁 Full schema: prisma/schema.prisma
 
@@ -154,8 +158,8 @@ model Notification {
 ## 👨‍💻 Developed By
 Vrund Leuva
 📧 vrundleuva3@gmail.com
-🔗 LinkedIn
-🔗 GitHub
+[🔗 GitHub](https://github.com/vrund-cpp)
+[🔗 LinkedIn](https://linkedin.com/in/vrundleuva)
 
 
 ## 📜 License

@@ -32,6 +32,7 @@ flutter pub get
 
 # 🚀 Run the app (ensure backend is live)
 flutter run
+```
 ✅ Note: The backend must be running and connected to the correct base URL.
 
 ---
@@ -62,7 +63,7 @@ lib/
 ├── domain/            # Models, business logic (Clean Arch)
 ├── utils/             # Helpers, JWT parsing, extensions
 └── main.dart          # App entry point
-
+```
 🧩 Follows a domain-driven modular structure — ready for large-scale projects.
 
 
@@ -74,8 +75,9 @@ lib/
 | `tab_selector.dart` | Switch tabs (bookings, notifications) |
 | `profile_card.dart` | Profile + booking history summary     |
 
+---
 
-##🌍 Language Support (i18n)
+## 🌍Language Support (i18n)
 📁 assets/translations/en.json
 📁 assets/translations/hi.json
 
@@ -91,7 +93,7 @@ lib/
   "login": "लॉग इन",
   "book_now": "बुक करें"
 }
-
+```
 - 🗣️ Language toggle persists using SharedPreferences
 - No restart needed — switches in real-time!
 
@@ -106,6 +108,7 @@ Uses Flutter test suite + golden test potential.
 
 📘 See: TESTING.md for complete strategy.
 
+---
 
 ## 🔗 API Reference
 - Connects to a RESTful Node.js + Prisma backend.
@@ -128,8 +131,25 @@ Uses Flutter test suite + golden test potential.
 2. Verify OTP   → /auth/verify-otp
 3. JWT Token stored → SecureStorage
 4. Authenticated requests → Bearer token in header
+'''
+
+```bash
+📲 Authentication Flow
+
+┌────────────┐       ┌───────────────┐        ┌─────────────┐
+│  User App  ├──────►│ /auth/otp     ├───────►│  SMS/Email  │
+└────────────┘       └───────────────┘        └─────────────┘
+       │                     ▲
+       ▼                     │
+┌────────────┐       ┌───────────────┐
+│ Enter OTP  ├──────►│ /auth/verify  │──┬────► JWT token
+└────────────┘       └───────────────┘  │
+                                        ▼
+                                Stored via FlutterSecureStorage
+```
 
 🔐 Stateless, secure, scalable authentication flow.
+
 
 
 ## 💡 Unique Engineering Decisions
@@ -149,6 +169,7 @@ Uses Flutter test suite + golden test potential.
 - 🔌 Real-time bookings via WebSocket/Firebase
 - 📊 Booking analytics page
 
+---
 
 ## 🛠 Developer Notes
 - Reusable widgets across modules (cards, inputs, selectors)
@@ -156,19 +177,20 @@ Uses Flutter test suite + golden test potential.
 - Clean separation of business logic and UI
 - Persistent session via token & language storage
 
+---
 
 ## 🙌 Contributions
 🎯 This app was built as part of an internship and is maintained for learning & demo purposes.
 
 Feel free to fork, raise issues, or contribute PRs!
 
-
+---
 
 ## 👨‍💻 Author
 Vrund Leuva
 📧 vrundleuva3@gmail.com
-🔗 LinkedIn
-🔗 GitHub
+[🔗 GitHub](https://github.com/vrund-cpp)
+[🔗 LinkedIn](https://linkedin.com/in/vrundleuva)
 
 
 ## 📜 License

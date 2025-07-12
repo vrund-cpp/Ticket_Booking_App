@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://source.unsplash.com/random/800x200/?ticket,logo" alt="TicketEase Logo" />
+  <img src="TicketEase_logo.png" alt="TicketEase Logo" />
 </p>
 
 <h1 align="center">🎟️ TicketEase</h1>
@@ -10,9 +10,17 @@
   <img src="https://img.shields.io/badge/Built%20with-Flutter-blue" />
   <img src="https://img.shields.io/badge/Backend-Node.js-green" />
   <img src="https://img.shields.io/badge/Database-PostgreSQL-blue" />
-  <img src="https://img.shields.io/badge/Test%20Coverage-68%25-brightgreen" />
+  <img src="https://img.shields.io/badge/Test%20Coverage-68%25-yellow" />
   <img src="https://img.shields.io/badge/Localization-EN%20%7C%20HI-orange" />
 </p>
+
+---
+
+📱 **Download & Try the App (APK)**  
+[⬇️ Click here to download TicketEase (.apk)](https://drive.google.com/file/d/1dbrTksYwGhjMJITEzEE0ZhC3tzcUrgl5/view?usp=sharing)  
+📦 *Tested on Android 11+, built using Flutter 3.22.0*  
+
+> ⚠️ Make sure “Install from Unknown Sources” is enabled on your Android device. 
 
 ---
 
@@ -87,6 +95,7 @@ Designed & developed during a tech internship — **production-level quality, st
 ---
 
 ## 📦 Folder Structure
+```bash
 
 TicketEase/
 ├── frontend_flutter/ # 📱 Flutter mobile application
@@ -102,6 +111,7 @@ TicketEase/
 │ └── prisma/ # DB schema, migrations
 │
 └── README.md # 📘 This file
+```
 
 ---
 
@@ -132,16 +142,17 @@ npm install
 npx prisma generate
 npx prisma migrate dev --name init
 npm run dev
+```
 
 ### 📱 Frontend (Flutter)
 ```bash
 cd frontend_flutter
 flutter pub get
 flutter run
-
+```
 
 ## 📸 Demo Screenshots
-<p align="center"> <img src="screenshots/splash.png" width="250" /> <img src="screenshots/dashboard.png" width="250" /> <img src="screenshots/booking_movie.png" width="250" /> <img src="screenshots/notifications.png" width="250" /> <img src="screenshots/profile.png" width="250" /> </p>
+<p align="center"> <img src="screenshots/otp2.png" width="250" /> <img src="screenshots/dashboard.png" width="250" /> <img src="screenshots/movie_booking_2.png" width="250" /> <img src="screenshots/notification.png" width="250" /> <img src="screenshots/profile.png" width="250" /> </p>
 
 ## 🧠 Engineering Highlights
 - 🔄 Simulated Payment: UX-first checkout simulation without external gateway
@@ -169,17 +180,18 @@ flutter run
 
 
 ## 🔗 Explore More
-- 📱 Frontend Guide: frontend_flutter/README.md
-- ⚙️ Backend Guide: backend_nodejs/README.md
-- 🧪 Test Docs: TESTING.md
+- 📌 Download APK: [TicketEase_v1.0.apk](https://drive.google.com/file/d/1dbrTksYwGhjMJITEzEE0ZhC3tzcUrgl5/view?usp=sharing)
+- 📱 Frontend Guide: [frontend README.md](`frontend_flutter/README.md`)
+- ⚙️ Backend Guide: [backend README.md](`backend_nodejs/README.md`)
+- 🧪 Test Docs: [TESTING.md](`TESTING.md`)
 
 ## 👨‍💻 Contact
 Developed by:
 
 Vrund Leuva
 📧 vrundleuva3@gmail.com
-🔗 GitHub
-🔗 LinkedIn
+[🔗 GitHub](https://github.com/vrund-cpp)
+[🔗 LinkedIn](https://linkedin.com/in/vrundleuva)
 
 
 ## 📜 License & Security
@@ -190,5 +202,6 @@ License: MIT — Free to use with attribution ❤️
 ✅ JWT secrets stored in environment variables
 ✅ Inputs are validated at frontend & backend
 ✅ No real payment gateway or sensitive user data
+
 
 <p align="center"><strong>✨ Thank you for exploring TicketEase! ✨</strong></p> ```
