@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
-}
+
 
 async function sendEmail(email, otp) { 
   await transporter.sendMail({
@@ -32,5 +32,7 @@ async function sendEmail(email, otp) {
 }
 
 module.exports = { sendEmail };
+
+}
 
 
