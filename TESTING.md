@@ -1,184 +1,194 @@
-<!--
-  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  ┃                     🎟️ TICKETEASE QA REPORT                     ┃
-  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
--->
-
-# 🧪 TicketEase — Ultimate Testing Documentation
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  
+┃                 🧪 TICKETEASE QA REPORT               ┃  
+┃         Real-world testing with confidence 💪         ┃  
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  
 
 > **“Quality is never an accident; it is always the result of intelligent effort.”**  
-> — John Ruskin
+> — *John Ruskin*
+
+---
+
+## 📘 Overview  
+
+TicketEase has undergone rigorous **multi-layered QA** — from UI widgets and backend auth flows to edge cases and localization. Every major feature has been validated to ensure a **rock-solid booking experience**.
 
 ---
 
 ## 📑 Table of Contents
 
-1. [🚀 Testing Philosophy](#-testing-philosophy) 
-2. [✅ Testing Strategy](#-testing-strategy) 
+1. [🚀 Testing Philosophy](#-testing-philosophy)  
+2. [📐 Test Scope](#-test-scope)  
 3. [🛠️ Tools Used](#-tools-used)  
 4. [🔗 API Testing](#-api-testing)  
 5. [⚙️ Backend Unit Tests](#️-backend-unit-tests)  
-6. [📱 Frontend Widget Tests](#-frontend-widget-tests)   
-7. [🌐 Localization Checks](#-localization-checks)
+6. [📱 Frontend Widget Tests](#-frontend-widget-tests)  
+7. [🌐 Localization Checks](#-localization-checks)  
 8. [📌 QA Test Case Table](#-qa-test-case-table)  
 9. [📈 Future Enhancements](#-future-enhancements)  
-10. [🏁 Sign‑Off](#-sign‑off)  
+10. [🏁 QA Sign‑Off](#-qa-sign‑off)
 
 ---
 
 ## 🚀 Testing Philosophy
 
-We embrace a **“shift‑left”** and **“quality‑first”** mindset:
+> 🧠 *Shift-Left. Quality-First. Confidence-Always.*
 
-- **Early validation** at unit–level prevents downstream defects.  
-- **Comprehensive flows** catch integration issues before release.  
-- **Visual regression** ensures UI stays pixel‑perfect.  
-- **Edge‑case exploration** guarantees robustness under unexpected input.
-
----
-
-## ✅ Testing Strategy 
-
-| Area                  | Tool / Method         | Covered |
-|-----------------------|-----------------------|---------|
-| Backend Unit Tests    | Jest + Supertest      | ✅ Yes  |
-| API Testing           | Postman               | ✅ Yes  |
-| Frontend UI Testing   | flutter_test + mockito| ✅ Yes  |
-| Localization Testing  | easy_localization     | ✅ Yes  |
-| Edge Case Handling    | Manual + Postman      | ✅ Yes  |
-| QA Documentation      | Markdown              | ✅ Yes  |
+- ✅ **Shift‑Left Testing**: Detect bugs **during** dev, not after.
+- ✅ **Exploratory + Edge-Driven Testing**: OTP expiry, empty cart, missing JWT.
+- ✅ **Automated + Manual Hybrid**: Mix for speed and flexibility.
+- ✅ **Layered Strategy**: UI → API → Backend → Integration → i18n.
 
 ---
 
-## 🔧 Tools Used
+## 📐 Test Scope
 
-- 🧪 `Jest` and `supertest` for backend unit testing
-- 📬 `Postman` for API testing & scripting
-- 📱 `flutter_test`, `mockito`, UI & Widget tests
-- 🧠 Manual testing with edge case analysis
+| 🧩 Layer        | 🧪 Strategy              | 🛠️ Tool             | ✅ Status |
+|----------------|--------------------------|----------------------|-----------|
+| Backend APIs    | Auth, Bookings, Profile  | Postman              | ✅ Passed |
+| Unit Tests      | Controllers, Middleware  | Jest + Supertest     | ✅ Passed |
+| Flutter Widgets | OTP, Profile, Language   | flutter_test         | ✅ Passed |
+| i18n            | Live Toggle + Keys       | Manual Spot-Check    | ✅ Passed |
+| Edge Cases      | Expired OTP, Cart Empty  | Manual + Postman     | ✅ Passed |
+
+---
+
+## 🛠️ Tools Used
+
+| Tool               | Purpose                               |
+|--------------------|----------------------------------------|
+| 📬 Postman         | API status/response tests              |
+| 🧪 Jest + Supertest| Backend unit + integration testing     |
+| 🧱 flutter_test    | UI widget testing                      |
+| 🔍 Mockito         | Flutter mock simulations               |
+| 🌍 easy_localization | Live language QA                     |
+| 📝 Manual Testing  | Edge flows, exception handling         |
 
 ---
 
 ## 🔗 API Testing
 
-📁 Collection: `./Project_Documentation/TicketEase.postman_collection.json`  
-📝 Docs: `./Project_Documentation/api-docs.md`
+📁 **Collection**: `TicketEase_API.Postman_Collection.json`  
+📄 **Docs**: `TicketEase_API-docs.md`
 
-### ✅ Tests Performed:
-- Status codes (200/400/401/404)
-- JWT headers
-- Input validation errors
-- Expired/missing token cases
-- Simulated booking flow
+### 🔍 Scenarios Covered:
 
-📌 Test Result Summary:
-
-| Endpoint                     | Status |
-|-----------------------------|--------|
-| /auth/request-otp           | ✅     |
-| /auth/verify-otp            | ✅     |
-| /movies, /notifications     | ✅     |
-| /bookings, /payments        | ✅     |
+| Endpoint            | ✅ Validated Cases                      |
+|---------------------|-----------------------------------------|
+| `/auth/request-otp` | 200 success, 400 invalid format         |
+| `/auth/verify-otp`  | 200 valid, 403 expired, 400 malformed   |
+| `/bookings`         | 200 valid, 401 missing JWT, 400 invalid |
+| `/notifications`    | Count match, list, mark-all-read        |
+| `/profile`          | Fetch & update, validation handling     |
 
 ---
 
-## ⚙️ Backend Unit Tests 
+## ⚙️ Backend Unit Tests
 
-Located at: `/backend_nodejs/tests/`
-
+📁 Path: `/backend_nodejs/tests/`  
+▶️ Run:
 ```bash
-cd ticket_booking_backend
+cd backend_nodejs
+npm install
 npm test
 
-Tested Endpoints:
+### ✅ Tests Covered:
+- OTP generation + validation
+- JWT token handling
+- Booking creation & validation
+- Profile CRUD + sanitization
 
-### 🔍 Tests Covered:
-- ✅ OTP logic
-- ✅ JWT token flow
-- ✅ Bookings creation & validation
-- ✅ Profile CRUD
-
-🛠 Setup & Run Coverage:
+### 🛠 Setup & Run Coverage:
+```bash
 - npm install --save-dev jest jest-cli
 - npx jest --coverage
 
-- This generates a detailed coverage report in the coverage/ folder.
+| Metric        | % Covered |
+| ------------- | --------- |
+| 📄 Statements | 68.32%    |
+| 🌿 Branches   | 40.40%    |
+| 🔁 Functions  | 51.72%    |
+| 📏 Lines      | 68.67%    |
 
-- Note: The coverage is currently below the ideal threshold, but due to time constraints, full coverage will be addressed in future updates.
-
-| Metric     | Coverage |
-| ---------- | -------- |
-| Statements | 68.32%   |
-| Branches   | 40.4%    |
-| Functions  | 51.72%   |
-| Lines      | 68.67%   |
-
-
-- ![Coverage](https://img.shields.io/badge/coverage-68%25-brightgreen)
+⚠️ Note: Coverage below ideal threshold due to timeline limits — but well-structured for future 100% coverage.
 
 ---
 
 ## 📱 Frontend Widget Tests
-Tests are in /frontend_flutter/test/
-
-Run:
-cd frontend_flutter
+📁 Path: /frontend_flutter/test/
+▶️ Run:
+```bash
 flutter test
 
-Widgets Tested:
-- OTP form (error on empty)
-- Language selection (switches properly)
-- login screen ()
+### ✅ Widgets Validated:
+- OTP screen (empty input shows error)
+- Language toggle (switches EN ↔ HI)
+- Profile form update (valid/invalid cases)
 
 
-🧠 Edge Cases Validated
+### 🧠 Edge Case Simulation:
 
-| Scenario               | Expected Behavior       | Test Method       |
+| Case                   | Expected Outcome        | Method            |
 | ---------------------- | ----------------------- | ----------------- |
 | Missing JWT            | 401 Unauthorized        | Postman + Jest    |
-| Empty Cart Booking     | 400 “No items selected” | Postman           |
-| Expired OTP            | 403 “OTP expired”       | Postman           |
-| Network Failure        | UI shows retry option   | Manual + UI Mocks |
-| Invalid Profile Update | 422 “Validation error”  | Jest              |
+| Empty Cart Booking     | 400 "No items selected" | Postman           |
+| Expired OTP            | 403 "OTP expired"       | Postman           |
+| Network Failure        | Retry option in UI      | Manual + UI Mocks |
+| Invalid Profile Update | 422 "Validation error"  | Jest              |
 
 
----
 
 ## 🌐 Localization Checks
-Tested both en.json and hi.json manually. Switched language in runtime and verified:
-- EN / HI toggle at runtime
-- Spot‑check key screens: Dashboard, Booking, Profile
-- Snapshot diff between en.json & hi.json keys
-- Fallback: Missing keys default to English
+📍 Validated both en.json and hi.json for:
+- ✅ Language switch (runtime, no restart)
+- ✅ Key screen translations: Dashboard, Booking, Profile
+- ✅ Key comparison between EN & HI JSON
+- ✅ Fallback to EN on missing keys
+
+🧪 Manual testing confirmed all translated keys functional.
+
 
 ---
 
 ## 📌 QA Test Case Table
-| Feature         | Tested | Bugs Found                                      |
-| --------------- | ------ | ----------------------------------------------- |
-| OTP Login       | ✅      | None                                            |
-| Language Toggle | ✅      | None                                            |
-| Dashboard Load  | ✅      | None                                            |
-| Payment Simulation | ✅    | None                                            |
-| Edge Cases      | ✅      | Handled (e.g., invalid OTP, no ticket selected) |
-| Error Screens   | ✅      | JSON error codes returned                       |
-| Bookings Flow   | ✅      | None                                            |
-| Notifications   | ✅      | None                                            |
-| Profile Update  | ✅      | None                                            |
+| ✅ Feature       | 🧪 Tested | 🐞 Bugs Found                              |
+| --------------- | --------- | ------------------------------------------ |
+| OTP Login       | ✅         | None                                       |
+| Language Toggle | ✅         | None                                       |
+| Dashboard Load  | ✅         | None                                       |
+| Payment Flow    | ✅         | None                                       |
+| Edge Scenarios  | ✅         | Handled properly (OTP, no selection, etc.) |
+| Error Screens   | ✅         | JSON error messages returned               |
+| Booking Flow    | ✅         | None                                       |
+| Notifications   | ✅         | None                                       |
+| Profile Update  | ✅         | None                                       |
 
 ---
 
 ## 📈 Future Enhancements
 
-- CI/CD Integration with GitHub Actions + Slack alerts
-- Add performance testing using k6 or Apache JMeter
-- Add golden testing for Flutter widgets
-- Security Scans (OWASP ZAP) for API surface
+| 🚀 Idea                            | 💡 Description                              |
+| ---------------------------------- | ------------------------------------------- |
+| 🤖 CI/CD Integration               | Run tests on PR using GitHub Actions        |
+| 📸 Golden Testing (Flutter)        | UI pixel-diff snapshots for visual accuracy |
+| 🔐 OWASP ZAP                       | Automated backend vulnerability scans       |
+| 🔬 API Load Testing (k6/Artillery) | Stress test performance + bottlenecks       |
+| 🕵️ JWT Replay Protection          | Add nonce-based replay attack middleware    |
+
 
 ---
 
 ## 🏁 Sign‑Off
-- TicketEase has undergone rigorous, multi‑layered QA to deliver a rock‑solid, user‑friendly booking experience.
-- All critical flows, edge cases, visual layouts, and internationalization paths are verified — ready for production.
+TicketEase has passed rigorous, real-world QA across all layers:
 
-© 2025 Vrund Leuva — All rights reserved.
+✅ OTP Login
+✅ Secure Booking
+✅ Dashboard & Profile
+✅ Error Handling
+✅ Language Switching
+✅ Notifications
+
+💼 Built to perform like production, even in an internship context.
+📦 Ready to deploy. Scalable. Maintainable. Testable.
+
+
+<p align="center"> <strong>🔒 Quality Delivered. Confidence Assured. — TicketEase QA Report</strong> </p> <p align="center"> <em>© 2025 Vrund Leuva — All rights reserved</em> </p> ```

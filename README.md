@@ -1,146 +1,194 @@
-# 🎟️ TicketEase – Full‑Stack Multilingual Booking Platform  
+<p align="center">
+  <img src="https://source.unsplash.com/random/800x200/?ticket,logo" alt="TicketEase Logo" />
+</p>
 
-> Comprehensive internship submission showcasing scalable mobile and server‑side design.  
-> Flutter frontend + Node.js/Express server + PostgreSQL via Prisma ORM.  
+<h1 align="center">🎟️ TicketEase</h1>
 
-![TicketEase Logo](https://source.unsplash.com/random/500x150/?ticket,logo)
+<p align="center"><em>“Your one-stop multilingual ticket booking platform for the real world.”</em></p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Built%20with-Flutter-blue" />
+  <img src="https://img.shields.io/badge/Backend-Node.js-green" />
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-blue" />
+  <img src="https://img.shields.io/badge/Test%20Coverage-68%25-brightgreen" />
+  <img src="https://img.shields.io/badge/Localization-EN%20%7C%20HI-orange" />
+</p>
 
 ---
 
 ## 📘 Table of Contents  
+> Fast navigation for explorers
 
-1. [🎯 Executive Summary](#executive-summary)  
-2. [🚀 Key Features](#key-features)  
-3. [🧱 Architecture & Tech Stack](#architecture---tech-stack) 
-4. [📦 Project Structure](#project-structure) 
-5. [🧪 Quality Assurance & Testing Report](#quality-assurance--testing-report) 
-6. [🔗 Explore](#explore) 
-7. [🧠 Why TicketEase?](#-why-ticketease)
-8. [👨‍💼 Internship Journey & Design Rationale](#internship-journey--design-rationale)  
-9. [🔧 Setup & Running](#setup--running)  
-10. [👨‍💻 Contact](#contact)
-11. [📜 License & Security Notice](#license-&--security-notice)  
-
----
-
-## 🎯 Executive Summary  
-TicketEase is an internship-built full‑stack platform enabling users to book movies, parking, attractions, and entry tickets. Featuring OTP authentication, seamless language switching (English/Hindi), real‑world booking flows, notifications, and a simulated payment system. Built with production‑grade architecture in mind.
+- [🎯 Overview](#-overview)
+- [🚀 Features](#-features)
+- [🧱 Tech Stack & Architecture](#-tech-stack--architecture)
+- [📦 Folder Structure](#-folder-structure)
+- [🧪 Testing & QA Report](#-testing--qa-report)
+- [🔧 Setup Guide](#-setup-guide)
+- [📸 Demo Screenshots](#-demo-screenshots)
+- [🧠 Engineering Highlights](#-engineering-highlights)
+- [👨‍💼 Internship Journey](#-internship-journey)
+- [🔗 Explore More](#-explore-more)
+- [👨‍💻 Contact](#-contact)
+- [📜 License & Security](#-license--security)
 
 ---
 
-## 🚀 Key Features  
+## 🎯 Overview  
+> A full-stack **mobile-first** platform to book 🎬 movies, 🅿️ parking, 🎢 attractions, and 🎫 entry tickets — **built with scalability and real-world UX** in mind.
 
-| Feature | Description |
-|--------|-------------|
-| 🔐 OTP + JWT Auth | Stateless, secure login |
-| 🌐 i18n | English 🇬🇧 & Hindi 🇮🇳 support |
-| 🎫 Bookings | Movies, Attractions, Parking, Entry |
-| 📲 Push Notifications | Firebase-based alerts |
-| 🔔 Notifications | List, count, mark read/all-read |
-| 👤 Profile | View & edit + Booking history |
-| 💳 Payment Flow | Simulated checkout with success |
-| 📊 Dashboard | Top-5 cards & insights |
+- 🔐 OTP-based mobile login with JWT auth
+- 🌐 Supports English & Hindi (i18n)
+- 📲 Push & in-app notifications
+- 💳 Simulated payment workflow
+- 📊 Real-time dashboard insights
+
+Designed & developed during a tech internship — **production-level quality, startup-level agility.**
 
 ---
 
-## 🧱 Architecture & Tech Stack  
+## 🚀 Features
 
-### 🧭 Why These Choices  
-- **Flutter + Dart**: Cross-platform UI with clean architecture, null safety, and ready for expansion.  
-- **GoRouter + Provider**: For declarative navigation and responsive state management.  
-- **Node.js + Express**: Fast, modular REST API suited for iterative backend development.  
-- **Prisma + PostgreSQL**: Schema-driven, type-safe ORM maintaining relational integrity.  
-- **OTP + JWT**: Secure stateless authentication, ideal for mobile context.  
-- **SharedPreferences & SecureStorage**: Persistent user data and tokens.  
-- **Firebase Messaging**: Reliable push notification backend.  
-
-
-### 🔄 Rejected Alternatives  
-- **Bloc instead of Provider**: Chosen Provider for its simplicity and quicker implementation during internship.  
-- **TypeORM instead of Prisma**: Prisma offers better type safety and developer DX.  
-- **Firebase Auth**: Instead, OTP + JWT allowed full control of authentication flows.
+| 💡 Feature                | Description |
+|--------------------------|-------------|
+| 🔐 **OTP + JWT Auth**     | Secure, stateless login for mobile-first UX |
+| 🌐 **Multilingual UI**    | English 🇬🇧 + Hindi 🇮🇳 with live language switching |
+| 🎫 **Bookings**           | Movies, Attractions, Parking, Entry Tickets |
+| 📲 **Push Notifications** | Firebase-powered real-time alerts |
+| 🔔 **In-App Notifications** | Count, list, mark-read, clear-all |
+| 💳 **Simulated Payments** | Realistic checkout flow (no gateway needed) |
+| 👤 **Profile Management** | View & update profile + booking history |
+| 📊 **Dashboard Insights** | Live summary cards for quick insights |
 
 ---
 
-## 🧪 Quality Assurance & Testing Report
+## 🧱 Tech Stack & Architecture
 
-| Area                            | Status | Notes                                   |
-| ------------------------------- | ------ | --------------------------------------- |
-| API Testing (Postman)           | ✅      | Done + documented                       |
-| Backend Unit Testing (Jest) | ✅      | Added using `jest` and `supertest`      |
-| UI Testing (flutter\_test)      | ✅      | Login, language switch                  |
-| Localization Testing            | ✅      | Dropdown + EN/HI switch                 |
-| Edge Case & Error Testing       | ✅      | Invalid inputs, OTP, empty booking      |
-| Test Documentation              | ✅      | README with all tables                  |
+### 🧭 Frontend
+- ⚡ **Flutter**: Cross-platform performance with native feel
+- 🧭 **GoRouter + Provider**: Declarative routing & simple state management
+- 🌍 **easy_localization**: Dynamic language switching
+- 📱 **SharedPreferences + SecureStorage**: Persistent secure user data
 
-See [TESTING.md](./TESTING.md) for detailed testing strategy and QA report.
+### 🛠️ Backend
+- 🚀 **Node.js + Express**: Modular, high-performance REST API
+- 🧬 **Prisma ORM**: Type-safe DB access with PostgreSQL
+- 🔐 **JWT + Custom OTP Auth**: Secure custom authentication
 
----
+### 🔄 Rejected Alternatives
+> Every choice is intentional
 
-## 🔗 Explore
-
-- 📱 **Frontend Details:** [`frontend_flutter/README.md`](./frontend_flutter/README.md)
-- ⚙️ **Backend Details:** [`backend_nodejs/README.md`](./backend_nodejs/README.md)
-- 🧪 **Testing Details**[`TESTING.md`](./TESTING.md)
-
----
-
-## 🧠 Why TicketEase?
-
-TicketEase is not just a demo app — it's a **modular, layered, and scalable** full-stack mobile booking platform that mimics the complexity of real-world production apps.
-
-- Built during internship with a focus on **quality**, **architecture**, and **user experience**
-- Uses **clean architecture**, **state management**, and **i18n** principles
+| ❌ Option | ✅ Chosen Instead | Reason |
+|----------|------------------|--------|
+| BLoC     | Provider          | Lighter and quicker for internship duration |
+| TypeORM  | Prisma            | Type-safe, better DX |
+| Firebase Auth | Custom OTP + JWT | Full control over auth flow |
 
 ---
 
-## 👨‍💼 Internship Journey & Design Rationale  
-- **Problem**: Build a real‑world booking app end‑to‑end under real constraints.  
-- **Approach**:  
-  1. Rapidtech MVP with OTP/JWT flows.  
-  2. Modular Flutter architecture: `core`, `features`, `data`, `domain`.  
-  3. Backend built feature-by-feature: controllers, routes, middleware.  
-  4. Iterative localization support with easy_localization + JSON.  
-  5. Added push notifications mid-way via Firebase.  
-  6. Emphasis on reusable widgets and consistent UI patterns.
-
----
-
-## 🧭 Project Structure
+## 📦 Folder Structure
 
 TicketEase/
-├── frontend_flutter/ # Flutter mobile application
-│ └── README.md # 📱 Flutter app documentation
-├── backend_nodejs/ # Node.js RESTful API backend
-│ └── README.md # ⚙️ Backend API documentation
-└── README.md # 📦 Main project overview (this file)
+├── frontend_flutter/ # 📱 Flutter mobile application
+│ ├── core/ # Core theme, styles, utils
+│ ├── features/ # Screens & flows: bookings, dashboard etc.
+│ ├── domain/ # Business logic
+│ └── data/ # Services, API calls, models
+│
+├── backend_nodejs/ # ⚙️ Express backend
+│ ├── controllers/ # API handlers
+│ ├── routes/ # REST endpoints
+│ ├── middleware/ # Auth, validation
+│ └── prisma/ # DB schema, migrations
+│
+└── README.md # 📘 This file
 
 ---
 
-## 🧾 API + Architecture
+## 🧪 Testing & QA Report
 
-- RESTful API with secure **JWT Auth**
-- **Prisma** ORM with type-safe PostgreSQL schema
-- Modular folder structure in backend for scalability
-- Flutter frontend follows **Clean Architecture** with `data`, `domain`, and `features` layers
+> ✅ Thorough testing ensures reliability
+
+| Area                         | Status | Notes                          |
+|------------------------------|--------|--------------------------------|
+| 🔄 API Testing               | ✅     | Covered via Postman scripts    |
+| 🧪 Backend Unit Tests        | ✅     | Using `jest` + `supertest`     |
+| 🧬 UI Widget Tests (Flutter) | ✅     | Language toggle, auth screen   |
+| 🧠 Edge Case Tests           | ✅     | Invalid inputs, expired OTP    |
+| 🌍 i18n Language QA          | ✅     | EN ↔️ HI toggles live tested    |
+| 📜 Test Docs                 | ✅     | See `TESTING.md`               |
+
+> See detailed testing logs in [`TESTING.md`](./TESTING.md)
+
+---
+
+## 🔧 Setup Guide
+
+### 🔌 Backend (Node.js + PostgreSQL)
+```bash
+cd backend_nodejs
+cp .env.example .env
+npm install
+npx prisma generate
+npx prisma migrate dev --name init
+npm run dev
+
+### 📱 Frontend (Flutter)
+```bash
+cd frontend_flutter
+flutter pub get
+flutter run
+
+
+## 📸 Demo Screenshots
+<p align="center"> <img src="screenshots/splash.png" width="250" /> <img src="screenshots/dashboard.png" width="250" /> <img src="screenshots/booking_movie.png" width="250" /> <img src="screenshots/notifications.png" width="250" /> <img src="screenshots/profile.png" width="250" /> </p>
+
+## 🧠 Engineering Highlights
+- 🔄 Simulated Payment: UX-first checkout simulation without external gateway
+- 🌍 Live Language Toggle: Instant language switch with easy_localization
+- 🔐 Custom OTP Auth: Full backend-controlled login flow
+- 🧠 Modular Clean Architecture: core, features, domain, data
+- 🧩 Scalable API Design: Modular routes, services, and middleware
+
+
+
+## 👨‍💼 Internship Journey
+- 🎓 Developed during internship at Silver Touch Technologies
+
+### 📌 Challenge:
+- Build a real-world mobile booking app from scratch.
+
+### 🛠️ My Approach:
+- Set up OTP + JWT Auth flow
+- Implemented modular clean architecture (Flutter + Express)
+- Designed UI with real-world UX in mind
+- Integrated Firebase for push notifications
+- Implemented i18n + language switcher
+- Built reusable widgets and consistent design tokens
+
+
+
+## 🔗 Explore More
+- 📱 Frontend Guide: frontend_flutter/README.md
+- ⚙️ Backend Guide: backend_nodejs/README.md
+- 🧪 Test Docs: TESTING.md
 
 ## 👨‍💻 Contact
+Developed by:
 
-Developed during internship at **Silver Touch Technologies**
+Vrund Leuva
+📧 vrundleuva3@gmail.com
+🔗 GitHub
+🔗 LinkedIn
 
-**Your Name**  
-📧 your.email@example.com  
-🔗 [GitHub](https://github.com/your-username)  
-🔗 [LinkedIn](https://linkedin.com/in/your-profile)
 
----
+## 📜 License & Security
+License: MIT — Free to use with attribution ❤️
 
-## 📜 License & Security Notice
+### ⚠️ Security Best Practices
+✅ .env files are git-ignored
+✅ JWT secrets stored in environment variables
+✅ Inputs are validated at frontend & backend
+✅ No real payment gateway or sensitive user data
 
-MIT License – Free to use with attribution 🙏
-
-### Notice
-- Never commit real `.env` files to GitHub.
-- JWT secrets and database URLs must be stored in environment variables.
-- Inputs (like OTP, email, count) are validated at both client & server level.
-- All user-sensitive data is stored securely using JWT and encrypted storage.
+<p align="center"><strong>✨ Thank you for exploring TicketEase! ✨</strong></p> ```

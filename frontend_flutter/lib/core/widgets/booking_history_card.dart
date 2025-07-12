@@ -27,7 +27,8 @@ class BookingHistoryCard extends StatelessWidget {
               children: [
                 Text('bookingNo:'.tr()),
                 const SizedBox(width: 4),
-                Text(safeSubstring(booking.id, 0, 8),
+                Text(
+                  safeSubstring(booking.id, 0, 8),
                   style: const TextStyle(color: Colors.blue),
                 ),
               ],
@@ -59,7 +60,7 @@ class BookingHistoryCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                'Total'.tr(args: [booking.total.toStringAsFixed(0)]),
+                'Total: ₹${booking.total.toStringAsFixed(0)}',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),

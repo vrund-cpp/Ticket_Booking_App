@@ -1,165 +1,178 @@
-```markdown
-# 📱 TicketEase Frontend – Flutter Mobile App
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  
+┃           📱 TICKETEASE FLUTTER APP           ┃  
+┃     Scalable, multilingual, production UI     ┃  
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  
 
-> Full-Stack Multilingual Ticket Booking App  
-> Built using Flutter + Node.js + PostgreSQL with 🔐 Auth, 🎬 Movie Tickets, 🚗 Parking, 🧍 Visitors & 🔔 Notifications  
-> Developed as an internship project to demonstrate real-world, scalable, production-ready app development
+> **"Built with Flutter. Designed for the real world."**
 
 ---
 
 ## ✨ Key Highlights
 
-- 🌐 Multilingual support – English 🇬🇧 & Hindi 🇮🇳
-- 🔐 OTP-based authentication
-- 🎫 Book movies, attractions, parking & entry tickets
-- 👥 Visitor management
-- 🧾 Booking history & simulated payment flow
-- 🔔 Notifications with read/unread states
-- 🧑‍💼 Profile view & update
-- 📲 Push Notifications via Firebase
-- 💡 Designed for scalability and real-world usage
+- 🗂️ Modular structure with `features/`, `core/`, `data/`, and `domain/`
+- 🌐 i18n using `easy_localization` with runtime language switching
+- 🔐 Secure token + language persistence via SecureStorage
+- 🔁 Efficient state management with `Provider`
+- 🧠 Real-world user flow: splash → login → book → dashboard → notify
 
 ---
 
 ## 🚀 Getting Started
 
-```cmd
-# Clone the repository
-git clone https://github.com/your-username/ticketease.git
+```bash
+# 📥 Clone the repo
+git clone https://github.com/vrund-cpp/Ticket_Booking_App
 cd frontend_flutter
 
+# 🔄 Clean old builds
 flutter clean
 
-# Install dependencies
+# 📦 Install dependencies
 flutter pub get
 
-# Run on connected device or emulator
+# 🚀 Run the app (ensure backend is live)
 flutter run
-
-Make sure the backend server is running and connected
+✅ Note: The backend must be running and connected to the correct base URL.
 
 ---
 
 ## 🏗️ Tech Stack
-
-| Layer              | Technology                                | Purpose                                     |
-|-------------------|--------------------------------------------|---------------------------------------------|
-| Frontend          | Flutter 3.22.0                             | Cross-platform UI                           |
-| Language          | Dart 3.8.0                                 | Null-safe, modern syntax                    |
-| State Management  | Provider                                   | Efficient widget state sharing              |
-| Routing           | GoRouter                                   | Declarative, dynamic navigation             |
-| Local Storage     | SharedPreferences, FlutterSecureStorage    | Persist language settings & tokens          |
-| Push Notifications| Firebase Messaging                         | Re-engagement and updates                   |
-| Localization      | Easy_Localization                          | Language toggle at runtime                  |
+| Layer            | Tech                              | Purpose                          |
+| ---------------- | --------------------------------- | -------------------------------- |
+| 📱 UI            | Flutter 3.22.0                    | Cross-platform, fast UIs         |
+| 🧠 Language      | Dart 3.8.0                        | Null-safe modern language        |
+| 🔄 State Mgmt    | Provider                          | Reactive UI + app-wide state     |
+| 🧭 Routing       | GoRouter                          | Declarative nested navigation    |
+| 🔐 Storage       | SharedPreferences + SecureStorage | Persist language, token securely |
+| 🔔 Notifications | Firebase Messaging                | Push alerts to users             |
+| 🌍 Localization  | easy\_localization                | EN/HI toggle at runtime          |
 
 ---
 
 ## 🧾 Folder Structure
+```bash
 
 lib/
-├── core/ # Configs, themes, constants
-│ ├── config/ # Routing
-│ ├── services/ # API/auth services
-│ └── widgets/ # Shared custom widgets
-├── features/ # Modular feature folders (booking, movies, notifications, etc.)
-├── utils/ # JWT handling and helpers
-├── data/ # Network + local storage logic
-├── domain/ # Models/entities (clean architecture)
-└── main.dart # Entry point
+├── core/              # Global configs, routing, constants
+│   ├── config/        # GoRouter + app routes
+│   ├── services/      # API + auth handlers
+│   └── widgets/       # Reusable widgets (cards, buttons)
+├── features/          # Booking, auth, movies, profile, etc.
+├── data/              # Data sources, local persistence
+├── domain/            # Models, business logic (Clean Arch)
+├── utils/             # Helpers, JWT parsing, extensions
+└── main.dart          # App entry point
 
----
+🧩 Follows a domain-driven modular structure — ready for large-scale projects.
 
-## 🌍 Language Support (i18n)
-- Fully supports runtime switch between English & Hindi
-- JSON-based translations using easy_localization
 
-// assets/translations/en.json
+## 🔑 Core Widgets
+| Widget              | Purpose                               |
+| ------------------- | ------------------------------------- |
+| `booking_card.dart` | Generic ticket tile                   |
+| `otp_input.dart`    | Custom 6-digit OTP input              |
+| `tab_selector.dart` | Switch tabs (bookings, notifications) |
+| `profile_card.dart` | Profile + booking history summary     |
+
+
+##🌍 Language Support (i18n)
+📁 assets/translations/en.json
+📁 assets/translations/hi.json
+
+```json
+// en.json
 {
   "login": "Login",
   "book_now": "Book Now"
 }
 
-// assets/translations/hi.json
+// hi.json
 {
   "login": "लॉग इन",
   "book_now": "बुक करें"
 }
 
----
+- 🗣️ Language toggle persists using SharedPreferences
+- No restart needed — switches in real-time!
+
 
 ## 🧪 Frontend Testing
+Uses Flutter test suite + golden test potential.
 
-We leverage Flutter’s built‑in framework plus golden tests for UI robustness:
+| Test Type      | Scope                     | Example Files               | Command        |
+| -------------- | ------------------------- | --------------------------- | -------------- |
+| ✅ Widget Test  | OTP, Login, Profile       | `auth_provider_test.dart`   | `flutter test` |
+| 🌍 i18n Toggle | EN ↔ HI switch at runtime | `language_toggle_test.dart` | `flutter test` |
 
-| Test Type         | Scope                             | Files                                | Command                         |
-|-------------------|-----------------------------------|--------------------------------------|---------------------------------|
-| Widget Tests      | Login Screen, Forms      | `auth_provider_test.dart`<br>`language_toggle_test.dart` | `flutter test`                  |
-> See [`TESTING.md`](../TESTING.md) for snippets and deeper insights. 
+📘 See: TESTING.md for complete strategy.
 
----
 
 ## 🔗 API Reference
-- The app integrates with a secure backend (Node.js + Prisma).
-- All interactions follow REST principles. Authenticated endpoints use JWT in headers.
+- Connects to a RESTful Node.js + Prisma backend.
+- JWT used in headers for protected endpoints.
 
-GET    /movies             # Fetch all movies
-POST   /bookings           # Submit booking
-POST   /payments           # Simulate payment
-GET    /profile            # Fetch user profile
+| Method | Endpoint  | Description           |
+| ------ | --------- | --------------------- |
+| GET    | /movies   | Fetch all movies      |
+| POST   | /bookings | Create ticket booking |
+| POST   | /payments | Simulate payment      |
+| GET    | /profile  | Fetch user profile    |
 
-Complete documentation in /backend_nodejs/README.md and Postman Collection.
-
-
-## 🔐 Authentication Flow
-Request OTP → Sign Up/Login
-OTP Verification via backend
-JWT Token storage via FlutterSecureStorage
-All authenticated routes include Bearer Token in headers
+📖 More: /backend_nodejs/README.md
 
 
-## 🔐 Unique Decisions & Highlights
+## 🔐 Auth Flow (OTP + JWT)
+```plaintext
 
-- Chose `Provider` for simplicity and easier onboarding in internship scope
-- Used `Easy_Localization` with shared `.json` for clean multilingual support
-- Used `GoRouter` for declarative navigation and nested routing support
-- Notification system with count, mark-read, and list handling
-- **Real-world UI/UX** approach: splash → language → login → dashboard → modules
-- Domain-driven folder structure for scalable architecture (inspired by clean architecture)
-- Future-proofed by separating core logic into `data`, `domain`, and `features`
+1. Request OTP → /auth/request-otp
+2. Verify OTP   → /auth/verify-otp
+3. JWT Token stored → SecureStorage
+4. Authenticated requests → Bearer token in header
 
----
+🔐 Stateless, secure, scalable authentication flow.
+
+
+## 💡 Unique Engineering Decisions
+| 💡 Decision                         | ✅ Justification                    |
+| ----------------------------------- | ---------------------------------- |
+| `Provider` for state mgmt           | Lightweight, ideal for internships |
+| `easy_localization` + `.json`       | Simple, extendable i18n            |
+| `GoRouter` for navigation           | Clean, declarative routes          |
+| Firebase Push Notifications         | Real-time re-engagement            |
+| Modular `core/`, `data/`, `domain/` | Inspired by Clean Architecture     |
 
 
 ## 🔮 Future Enhancements
-
-- 💳 **Razorpay / Stripe payment gateway** integration
-- 🧑‍💼 **Admin dashboard** for movie/outreach/news management
-- 🌗 Dark mode toggle
-- 🔌 Real-time updates via Firebase/Socket.io
-- 📊 Booking analytics dashboard
-
+- 💳 Razorpay or Stripe Payment Gateway
+- 🧑‍💼 Admin dashboard (for movies/news management)
+- 🌗 Dark mode support
+- 🔌 Real-time bookings via WebSocket/Firebase
+- 📊 Booking analytics page
 
 
-🛠️ Developer Notes
-Designed using clean architecture principles
-Reusable widgets for booking cards, visitor forms, and cart logic
-Error handling via try-catch & toast UI feedback
-Maintains app state persistently
+## 🛠 Developer Notes
+- Reusable widgets across modules (cards, inputs, selectors)
+- Try-catch + toast feedback for API/UI failures
+- Clean separation of business logic and UI
+- Persistent session via token & language storage
 
 
-🙌 Contribution
-This project is a part of my internship submission and is actively maintained.
-Feel free to suggest enhancements via issues or PRs!
+## 🙌 Contributions
+🎯 This app was built as part of an internship and is maintained for learning & demo purposes.
+
+Feel free to fork, raise issues, or contribute PRs!
 
 
-👨‍💻 Author
-Developed by:
 
-Your Name
-📧 your.email@example.com
+## 👨‍💻 Author
+Vrund Leuva
+📧 vrundleuva3@gmail.com
 🔗 LinkedIn
 🔗 GitHub
 
 
-📜 License
-This project is under the MIT License – use freely with credit 🙏
+## 📜 License
+Released under the MIT License — use freely with proper attribution.
+- ✅ Secure your .env, API keys, and Firebase credentials before release.
+
+<p align="center"><strong>📱 TicketEase — Flutter with purpose. Real-world ready.</strong></p> ```

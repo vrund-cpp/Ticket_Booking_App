@@ -1,42 +1,40 @@
-# ⚙️ TicketEase Backend – RESTful API Server
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  
+┃           ⚙️ TICKETEASE BACKEND API           ┃  
+┃     Scalable REST backend with PostgreSQL     ┃  
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  
 
-> Node.js + Express + PostgreSQL + Prisma  
-> Secure, modular, and production-ready backend for TicketEase mobile app
+> “Build APIs like a product. Secure, documented, scalable.”  
+> — *TicketEase Engineering Philosophy*
 
 ---
 
-## ⚙️ Overview
+## 📘 Overview
 
-TicketEase Backend is a fully RESTful API server for handling:
+The **TicketEase Backend** powers all core features of the TicketEase app via a secure, modular, and scalable **Node.js + Express** REST API using **Prisma ORM** and **PostgreSQL**.
 
-- 🔐 OTP-based Authentication
-- 🎫 Ticket Bookings (movies, parking, entry, attractions)
-- 🔔 Notifications (CRUD + read count)
-- 👤 Profile management (view/edit)
-- 💳 Payment simulation
-- 🧩 Prisma-powered relational DB
+🔐 OTP Auth | 🎫 Bookings | 🔔 Notifications | 👤 Profile | 💳 Payment | 🧩 DB Integrity
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repo
-git clone https://github.com/your-username/ticketease.git
+# 📥 Clone the repository
+git clone https://github.com/vrund-cpp/Ticket_Booking_App
 cd backend_nodejs/
 
-# Install dependencies
+# 📦 Install dependencies
 npm install
 
-# Setup environment
+# ⚙️ Setup environment variables
 cp .env.example .env
-# Fill in DB credentials and secrets
+# Edit .env with DB credentials, email config, JWT secrets
 
-# Migrate & Seed DB
+# 🛠️ Migrate & Seed the DB
 npx prisma migrate dev
-node prisma/seed.js
+npx prisma db seed
 
-# Start server
+# 🚀 Start development server
 npm run dev
 
 ---
@@ -44,97 +42,125 @@ npm run dev
 ## 📁 Project Structure
 
 backend_nodejs/
-├── controllers/       # All business logic (auth, bookings, etc.)
-├── routes/            # Route-level declarations
-├── middleware/        # JWT verification, error handling
-├── prisma/
-│   ├── schema.prisma  # DB schema
-│   └── seed.js        # Demo data script
-├── .env.example       # Env vars template
-├── app.js             # Express app setup
-└── server.js          # Entry point
+├── controllers/        # Business logic for each feature
+├── routes/             # RESTful route definitions
+├── middleware/         # JWT Auth, error handlers
+├── prisma/             # DB schema + seed data
+│   ├── schema.prisma
+│   └── seed.js
+├── .env.example        # Sample env config
+├── app.js              # Express app init
+└── server.js           # Entry point
 
+---
 
-## 🌱 .env Example
-
-DATABASE_URL="postgresql://user:password@dpg-d1j5hmmr433s73fsgo3g-a.oregon-postgres.render.com/db_name"
-EMAIL_USER="tempuser@gmail.com"
-EMAIL_PASS= Gmail App Password  // not use actual gmail password
-JWT_SECRET= 128 characters jwt secret key
+## 🌱 .env Configuration
+```env
+DATABASE_URL="postgresql://user:password@host:port/db_name"
+EMAIL_USER="your_email@gmail.com"
+EMAIL_PASS="your_app_password"      # Use Gmail App Password, not main password
+JWT_SECRET="your_128_char_jwt_secret"
 JWT_EXPIRES_IN=7d
 PORT=3000
 
+---
 
 ## 🧾 API Endpoints
+| Method | Endpoint                       | 🔒 Auth | Description                   |
+| ------ | ------------------------------ | ------- | ----------------------------- |
+| POST   | `/auth/request-otp`            | ❌       | Request OTP via mobile/email  |
+| POST   | `/auth/signup`                 | ❌       | Signup & receive token        |
+| POST   | `/auth/verify-otp`             | ❌       | Verify OTP & get JWT          |
+| GET    | `/movies`                      | ✅       | List all movies               |
+| GET    | `/movies/latest`               | ✅       | Top 5 movies for dashboard    |
+| GET    | `/entry-tickets`               | ✅       | Entry ticket categories       |
+| GET    | `/attractions`                 | ✅       | Attraction list               |
+| GET    | `/parking-options`             | ✅       | Parking slots                 |
+| POST   | `/bookings`                    | ✅       | Create a booking              |
+| POST   | `/payments`                    | ✅       | Simulate payment flow         |
+| GET    | `/notifications`               | ✅       | List user notifications       |
+| GET    | `/notifications/count`         | ✅       | Get unread notification count |
+| PUT    | `/notifications/mark-read/:id` | ✅       | Mark one notification as read |
+| POST   | `/notifications/mark-all-read` | ✅       | Mark all notifications read   |
+| GET    | `/profile`                     | ✅       | View logged-in user profile   |
+| PUT    | `/profile`                     | ✅       | Update profile details        |
 
-| Method | Endpoint                      | Auth | Description                   |
-| ------ | ----------------------------- | ---- | ----------------------------- |
-| POST   | /auth/request-otp             | ❌    | Request OTP for login/signup  |
-| POST   | /auth/signup                  | ❌    | Signup and receive user token |
-| POST   | /auth/verify-otp              | ❌    | Verify OTP & receive JWT      |
-| GET    | /movies                       | ✅    | Fetch all movies              |
-| GET    | /movies/latest                | ✅    | Top 5 movies for dashboard    |
-| GET    | /entry-tickets                | ✅    | Get entry ticket categories   |
-| GET    | /attractions                  | ✅    | Fetch attractions             |
-| GET    | /parking-options              | ✅    | List parking slots            |
-| POST   | /bookings                     | ✅    | Create booking                |
-| POST   | /payments                     | ✅    | Simulate payment              |
-| GET    | /notifications                | ✅    | Get all notifications         |
-| GET    | /notifications/count          | ✅    | Get unread notification count |
-| PUT    | /notifications/mark-read/:id | ✅    | Mark single notification read |
-| POST   | /notifications/mark-all-read  | ✅    | Mark all notifications read   |
-| GET    | /profile                      | ✅    | View profile                  |
-| PUT    | /profile                      | ✅    | Edit profile                  |
 
+📖 Full API docs: TicketEase_API-docs.md
+📬 Postman Collection: TicketEase.postman_collection.json
 
-## 🧬 Prisma DB Schema
+---
+
+## 🧬 Prisma Schema (Sample)
+```prisma
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  mobile    String   @unique
-  bookings  Booking[]
-  notifications Notification[]}
+  id           String          @id @default(uuid())
+  name         String
+  mobile       String          @unique
+  bookings     Booking[]
+  notifications Notification[] 
+}
 
 model Booking {
-  id        String   @id @default(uuid())
-  userId    String
-  type      String
-  count     Int
-  amount    Float
-  user      User     @relation(fields: [userId], references: [id])}
+  id       String   @id @default(uuid())
+  userId   String
+  type     String
+  count    Int
+  amount   Float
+  user     User     @relation(fields: [userId], references: [id])
+}
 
 model Notification {
-  id      String  @id @default(uuid())
+  id      String   @id @default(uuid())
   userId  String
   message String
   isRead  Boolean
-  user    User    @relation(fields: [userId], references: [id])}
+  user    User     @relation(fields: [userId], references: [id])
+}
 
-Full schema: /prisma/schema.prisma
+📁 Full schema: prisma/schema.prisma
 
+---
+
+## ☁️ Hosting & Deployment
+| Component     | Platform                         |
+| ------------- | -------------------------------- |
+| 🌐 API Server | [Render.com](https://render.com) |
+| 🧮 Database   | Render PostgreSQL instance       |
+
+---
 
 ## 📤 Postman Collection
-✅ Includes success + failure test cases
-Import: TicketEase.postman_collection.json
-Use Bearer Token for protected routes
+### 📦 Ready-to-import TicketEase.postman_collection.json includes:
+- ✅ Success scenarios
+- ❌ Failure handling
+- 🔐 Bearer token auth flow
+- 🌐 Headers, payloads, and expected responses
 
+---
 
-## 🧠 Design Considerations
-Uses JWT middleware for secured routes
-Prisma ensures type-safe DB operations
-Modular controllers for scalability
-Logs errors gracefully
-Seed data enables demo mode
+### 🧠 Design Considerations
+| ✅ Design Choice              | 📌 Reason                      |
+| ---------------------------- | ------------------------------ |
+| JWT Auth + Middleware        | Stateless, scalable, secure    |
+| Prisma ORM                   | Type-safe DB operations        |
+| Modular controllers & routes | Easy to scale and test         |
+| Custom error middleware      | Clean error logs and responses |
+| Seed script                  | Demo data for instant testing  |
 
+---
 
 ## 👨‍💻 Developed By
-Your Name
-📧 your.email@example.com
+Vrund Leuva
+📧 vrundleuva3@gmail.com
 🔗 LinkedIn
 🔗 GitHub
 
 
 ## 📜 License
-Open-sourced under the MIT License
+- This project is open-sourced under the MIT License — feel free to fork, learn, and build from it.
+- Security Tip: Never expose .env files or real credentials in version control.
 
+
+<p align="center"><strong>🛠️ Clean Code | 🔒 Secure Auth | 🚀 Scalable API | 🎯 Real-world Ready</strong></p> <p align="center"><em>— TicketEase Backend Engine</em></p> ```
