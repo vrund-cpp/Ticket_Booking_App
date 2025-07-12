@@ -2,7 +2,7 @@
 
 const prisma = require('../utils/db');
 const { isValidEmail, isValidMobile } = require('../utils/validators');
-const { sendEmail } = require('../services/email.service');
+const { sendEmail } = require('../services/email.service').default;
 const { generateOtp, saveOtp, verifyOtp } = require('../services/otp.service');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
