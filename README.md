@@ -181,9 +181,9 @@ flutter run
 
 ## 🔗 Explore More
 - 📌 Download APK: [TicketEase_v1.0.apk](https://drive.google.com/file/d/1dbrTksYwGhjMJITEzEE0ZhC3tzcUrgl5/view?usp=sharing)
-- 📱 Frontend Guide: [frontend README.md](`frontend_flutter/README.md`)
-- ⚙️ Backend Guide: [backend README.md](`backend_nodejs/README.md`)
-- 🧪 Test Docs: [TESTING.md](`TESTING.md`)
+- 📱 Frontend Guide: [frontend README.md](frontend_flutter/README.md)
+- ⚙️ Backend Guide: [backend README.md](backend_nodejs/README.md)
+- 🧪 Test Docs: [TESTING.md](TESTING.md)
 
 ## 👨‍💻 Contact
 Developed by:
